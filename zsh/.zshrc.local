@@ -1,0 +1,86 @@
+# Filename:      /etc/skel/.zshrc
+# Purpose:       config file for zsh (z shell)
+# Authors:       (c) grml-team (grml.org)
+# Bug-Reports:   see http://grml.org/bugs/
+# License:       This file is licensed under the GPL v2 or any later version.
+################################################################################
+# Nowadays, grml's zsh setup lives in only *one* zshrc file.
+# That is the global one: /etc/zsh/zshrc (from grml-etc-core).
+# It is best to leave *this* file untouched and do personal changes to
+# your zsh setup via ${HOME}/.zshrc.local which is loaded at the end of
+# the global zshrc.
+#
+# That way, we enable people on other operating systems to use our
+# setup, too, just by copying our global zshrc to their ${HOME}/.zshrc.
+# Adjustments would still go to the .zshrc.local file.
+################################################################################
+
+
+bindkey -v
+
+## use the vi navigation keys (hjkl) besides cursor keys in menu completion
+bindkey -M menuselect 'h' vi-backward-char        # left
+bindkey -M menuselect 'k' vi-up-line-or-history   # up
+bindkey -M menuselect 'l' vi-forward-char         # right
+bindkey -M menuselect 'j' vi-down-line-or-history # bottom
+
+## set command prediction from history, see 'man 1 zshcontrib'
+is4 && zrcautoload predict-on && \
+zle -N predict-on         && \
+zle -N predict-off        && \
+bindkey "^X^Z" predict-on && \
+bindkey "^Z" predict-off
+
+#predict-on
+
+
+## Use a default width of 80 for manpages for more convenient reading
+export MANWIDTH=${MANWIDTH:-80}
+
+function ranger {
+  /usr/bin/ranger --choosedir=/tmp/chosen $@
+  if [ -f /tmp/chosen -a "$(cat /tmp/chosen)" != "$(pwd | tr -d "\n")" ]; then
+    cd "$(cat /tmp/chosen)"
+  fi
+  rm -f /tmp/chosen
+}
+bindkey -s "^O" '^qranger\n'
+
+function ranger1 {
+  /usr/bin/ranger --choosedir=/tmp/chosen $(grep "^1:" ~/.config/ranger/bookmarks | cut -c3-)
+  if [ -f /tmp/chosen -a "$(cat /tmp/chosen)" != "$(pwd | tr -d "\n")" ]; then
+    cd "$(cat /tmp/chosen)"
+  fi
+  rm -f /tmp/chosen
+}
+bindkey -s "^L" '^qranger1\n'
+
+if [ -z "$SCHROOT_USER" ]; then
+  export PROMPT="$PROMPT"
+else
+  export PROMPT="[32]$PROMPT"
+fi
+
+export http_proxy=`cat /home/conf/.current_proxy`
+export https_proxy=`cat /home/conf/.current_proxy`
+export ftp_proxy=`cat /home/conf/.current_proxy`
+export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+xsource "/home/conf/zsh-history-substring-search.zsh"
+
+# bind UP and DOWN arrow keys
+for keycode in '[' '0' 'O'; do
+  bindkey "^[${keycode}A" history-substring-search-up
+  bindkey "^[${keycode}B" history-substring-search-down
+done
+unset keycode
+
+# bind P and N for EMACS mode
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
+
+# bind k and j for VI mode
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+
+## END OF FILE #################################################################

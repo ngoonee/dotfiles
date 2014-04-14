@@ -1,0 +1,84 @@
+### Volume Control ###
+"/home/scripts/volcontrol down"
+    m:0x0 + c:122
+    XF86AudioLowerVolume
+"/home/scripts/volcontrol up"
+    m:0x0 + c:123
+    XF86AudioRaiseVolume
+"/home/scripts/volcontrol mute"
+    m:0x0 + c:121
+    XF86AudioMute
+"/home/scripts/volcontrol up"
+    m:0x19 + c:24
+    Shift+Alt+Mod2 + q
+"/home/scripts/volcontrol down"
+    m:0x19 + c:38
+    Shift+Alt+Mod2 + a
+"/home/scripts/volcontrol mute"
+    m:0x19 + c:39
+    Shift+Alt+Mod2 + s
+
+### Music Player ###
+"/home/scripts/audioplay"
+    m:0x0 + c:172
+    XF86AudioPlay
+"/home/scripts/audioprev"
+    m:0x0 + c:173
+    XF86AudioPrev
+"/home/scripts/audionext"
+    m:0x0 + c:171
+    XF86AudioNext
+"/home/scripts/audioplay"
+    m:0x19 + c:53
+    Shift+Alt+Mod2 + x
+"/home/scripts/audioprev"
+    m:0x19 + c:52
+    Shift+Alt+Mod2 + z
+"/home/scripts/audionext"
+    m:0x19 + c:54
+    Shift+Alt+Mod2 + c
+"/home/scripts/mpcnowplaying"
+    m:0x19 + c:32
+    Shift+Alt+Mod2 + o
+"/home/scripts/mpcnowplaying"
+    m:0x0 + c:174
+    XF86AudioStop
+
+
+"pavucontrol"
+    m:0x50 + c:55
+    Mod2+Mod4 + v
+"/home/scripts/urxvtc -e zsh -c 'tmx base'"
+    m:0x50 + c:27
+    Mod2+Mod4 + r
+"/home/scripts/paswitch"
+    m:0x19 + c:25
+    Shift+Alt+Mod2 + w
+"gmrun"
+    m:0x50 + c:36
+    Mod2+Mod4 + Return
+"scrot -e 'mv $f ~/screenshots/ 2>/dev/null'"
+    m:0x10 + c:107
+    Mod2 + Print
+# Doesn't work, giblib error
+#"scrot -s -e 'mv $f ~/screenshots/ 2>/dev/null'"
+    #m:0x11 + c:107
+    #Shift+Mod2 + Print
+"xscreensaver-command -activate"
+    m:0x50 + c:39
+    Mod2+Mod4 + s
+"/home/scripts/monswitch"
+    m:0x0 + c:235
+    XF86Display
+"sudo /home/scripts/keylight up"
+    m:0x0 + c:238
+    XF86KbdBrightnessUp
+"sudo /home/scripts/keylight down"
+    m:0x0 + c:237
+    XF86KbdBrightnessDown
+"/home/scripts/touchpad-toggle"
+    m:0x0 + c:199
+    XF86TouchpadToggle
+"keepassautotype"
+    m:0xc + c:38
+    Control+Alt + a

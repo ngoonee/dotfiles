@@ -1,0 +1,80 @@
+"hg6821
+
+loadplugins '\.(js|penta)$'
+group user
+hi Hint font-family: Verdana; font-size: 10px; font-weight: bold; color: white; background-color: red; border-color: ButtonShadow; border-width: 0px; border-style: solid; padding: 0px 1px 0px 1px;
+
+
+
+"map -count -modes=n -silent <C-Space> <count>:stylish<Space>toggle<Return>
+map -modes=n -silent <C-Space> -js <<EOF
+var popup = document.getElementById("stylish-popup");
+popup.openPopup();
+var newEvent=window.document.createEvent('KeyboardEvent');
+newEvent.initKeyEvent("keypress",true,true,null,false,false,false,false,38,0);
+popup.dispatchEvent(newEvent);
+newEvent.initKeyEvent("keypress",true,true,null,false,false,false,false,13,0);
+popup.dispatchEvent(newEvent);
+EOF
+
+
+
+set guioptions=rbsCn
+set hintkeys=asdfg;lkjh
+colorscheme desert
+
+
+" ---------------------------------------------------------------------
+" Proxy: {{{2
+command! -nargs=0 toggleproxy javascript toggle_proxy(<q-args>)
+command! reloadPAC -description "Reload the proxy auto-configuration [PAC] file" -nargs=0
+			\ -js Components.classes['@mozilla.org/network/protocol-proxy-service;1'].getService().reloadPAC();
+command! setPAC -description "Set the proxy auto-configuration [PAC] file" -nargs=1 -complete custom,'
+			\ function (context) {
+			\	var file = Components.classes["@mozilla.org/file/directory_service;1"].
+			\		getService(Components.interfaces.nsIProperties).
+			\		get("ProfD", Components.interfaces.nsIFile);
+			\	file.append("Proxy");
+			\	context.completions = [
+			\	[prefs.get("network.proxy.autoconfig_url"), "Default"],
+			\	[encodeURI("file:///" + getEnvironmentVariable("MOZ_PAC_PATH").replace(/\\/g, "/") + "/Proxy.pac"), ""],
+			\	[encodeURI("file:///" + getEnvironmentVariable("MOZ_PAC_PATH").replace(/\\/g, "/") + "/AutoProxy.pac"), ""],
+			\	[encodeURI("file:///" + file.path.replace(/\\/g, "/") + "/AutoProxy.pac"), ""]]
+			\ }'
+			\ -js prefs.set('network.proxy.autoconfig_url', args[0]); prefs.set('network.proxy.type', 2);
+command! setPAC2 -description "Set the proxy auto-configuration [PAC] file" -nargs=1
+			\ -complete custom,'[
+			\	[prefs.get("network.proxy.autoconfig_url"), "Default"],
+			\	[encodeURI("file:///" + getEnvironmentVariable("MOZ_PAC_PATH").replace(/\\/g, "/") + "/Proxy.pac"), ""],
+			\	[encodeURI("file:///" + getEnvironmentVariable("MOZ_PAC_PATH").replace(/\\/g, "/") + "/AutoProxy.pac"), ""],
+			\	[encodeURI("file:///" + getFirefoxShortcut("ProfD").replace(/\\/g, "/") + "/AutoProxy.pac"), ""]]'
+			\ -js prefs.set('network.proxy.autoconfig_url', args[0]); prefs.set('network.proxy.type', 2);
+command! setProxyHTTPPort -description "Set the manual proxy configuration for http/https proxy" -nargs=1
+			\ -complete custom,'[
+			\	[prefs.get("network.proxy.http_port"), "Default"],
+			\	[8000, "GAppProxy"],
+			\	[8087, "GoAgent"],
+			\	[8001, "GPass"],
+			\	[8118, "Polipo/Privoxy"],
+			\	[8888, "Telex"],
+			\	[8086, "WallProxy"],
+			\	[4001, "JAP"],
+			\	[3998, "PaperBus"],
+			\	[1984, "Puff"],
+			\	[8080, "Toonel"],
+			\	[9666, "Wu Jie"],
+			\	[8580, "Free Gate"]]'
+			\ -js prefs.set('network.proxy.http_port', parseInt(args[0])); prefs.set('network.proxy.http', "127.0.0.1"); prefs.set('network.proxy.type', 1); prefs.set('network.proxy.share_proxy_settings', true);
+command! setProxySocksPort -description "Set the manual proxy configuration for socks proxy" -nargs=1
+			\ -complete custom,'[
+			\	[prefs.get("network.proxy.socks_port"), "Default"],
+			\	[8080, "Plink"],
+			\	[7070, "ssh -D"],
+			\	[1080, "Tunnelier"],
+			\	[9050, "Tor"]]'
+			\ -js prefs.set('network.proxy.socks_port', parseInt(args[0])); prefs.set('network.proxy.http', ""); prefs.set('network.proxy.socks', "127.0.0.1"); prefs.set('network.proxy.type', 1); prefs.set('network.proxy.share_proxy_settings', false); prefs.set('network.proxy.share_proxy_settings', false);
+command foo -nargs=? -complete custom,'
+    \ function (context) context.completions = [["val1", "description1"], ["val2", "description2"]]'
+    \ :echo Useless  + <q-args>
+
+" vim: set ft=pentadactyl:
