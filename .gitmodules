@@ -10,3 +10,6 @@
 [submodule "vim/.vim/bundle/pep8"]
 	path = vim/.vim/bundle/pep8
 	url = https://github.com/vim-scripts/pep8.git
+[submodule "vim/.vim/bundle/supertab"]
+	path = vim/.vim/bundle/supertab
+	url = https://github.com/ervandew/supertab.git

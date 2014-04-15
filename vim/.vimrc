@@ -85,3 +85,8 @@ set textwidth=80
 set fo+=tcqo
 " Use freedesktop.org clipboard rather than xorg clipboard
 set clipboard=unnamedplus
+
+" Options for SuperTab and python
+au FileType python set omnifunc=pythoncomplete#Complete
+let g:SuperTabDefaultCompletionType = "context"
+set completeopt=menuone,longest,preview
