@@ -9,14 +9,14 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Monospace 9
+font = Deja Vu Sans Mono 10
 scrollback_lines = 1000
 search_wrap = true
 #icon_name = terminal
 #geometry = 640x480
 
 # 0.0: opaque, 1.0: transparent
-transparency = 0.3
+transparency = 0.1
 pseudo_transparency = false
 
 # "system", "on" or "off"
@@ -39,7 +39,7 @@ cursor_shape = block
 foreground = #dcdccc
 foreground_bold = #ffffff
 #foreground_dim = #888888
-background = #3f3f3f
+background = #0f0f0f
 #cursor = #dcdccc
 
 # if unset, will reverse foreground and background
