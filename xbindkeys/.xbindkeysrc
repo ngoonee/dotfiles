@@ -48,7 +48,8 @@
 "pavucontrol"
     m:0x50 + c:55
     Mod2+Mod4 + v
-"/home/scripts/urxvtc -e zsh -c 'tmx base'"
+#"/home/scripts/urxvtc -e zsh -c 'tmx base'"
+"termite -e 'tmx base'"
     m:0x50 + c:27
     Mod2+Mod4 + r
 "/home/scripts/paswitch"
