@@ -90,3 +90,8 @@ set clipboard=unnamedplus
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
+
+" Always show status line
+set laststatus=2
+" Path to powerline
+set rtp+=$HOME/.vim/bundle/powerline/powerline/bindings/vim
