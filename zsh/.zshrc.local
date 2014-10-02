@@ -85,4 +85,7 @@ bindkey -M vicmd 'j' history-substring-search-down
 # Use powerline
 . ~/.vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh
 
+# Simple 't' for todo.sh
+alias t='todo.sh'
+
 ## END OF FILE #################################################################
