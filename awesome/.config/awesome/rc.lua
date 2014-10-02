@@ -242,8 +242,8 @@ end
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-    -- awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
-    -- awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
+    awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
+    awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
     awful.key({ modkey,           }, "j",
@@ -501,3 +501,5 @@ run_once("/usr/bin/batti")
 run_once("/usr/bin/unagi")
 run_once("/usr/bin/blueman-applet")
 run_once("ario","-m","ario -m")
+run_once("bluedevil")
+run_once("touchegg")
