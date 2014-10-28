@@ -391,7 +391,7 @@ awful.rules.rules = {
     { rule = { name = "Pandemic - Wine desktop" },
       properties = { floating = true } },
     { rule = { class = "rdesktop" },
-      properties = { floating = false } },
+      properties = { fullscreen = true } },
     { rule = { name = "File Operation Progress" },
       properties = { floating = true } },
     { rule = { name = "MATLAB"},
