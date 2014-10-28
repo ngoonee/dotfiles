@@ -95,3 +95,5 @@ set completeopt=menuone,longest,preview
 set laststatus=2
 " Path to powerline
 set rtp+=$HOME/.vim/bundle/powerline/powerline/bindings/vim
+
+au FileType python set fo-=t
