@@ -13,9 +13,6 @@
 [submodule "vim/.vim/bundle/supertab"]
 	path = vim/.vim/bundle/supertab
 	url = https://github.com/ervandew/supertab.git
-[submodule "vim/.vim/bundle/powerline"]
-	path = vim/.vim/bundle/powerline
-	url = https://github.com/Lokaltog/powerline
 [submodule "vim/.vim/bundle/todo.txt-vim"]
 	path = vim/.vim/bundle/todo.txt-vim
 	url = https://github.com/freitass/todo.txt-vim.git
