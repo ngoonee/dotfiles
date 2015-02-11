@@ -31,9 +31,6 @@ zle -N predict-off        && \
 bindkey "^X^Z" predict-on && \
 bindkey "^Z" predict-off
 
-#predict-on
-
-
 ## Use a default width of 80 for manpages for more convenient reading
 export MANWIDTH=${MANWIDTH:-80}
 
@@ -83,7 +80,7 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
 # Use powerline
-. ~/.vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh
+. /usr/share/zsh/site-contrib/powerline.zsh
 
 # Simple 't' for todo.sh
 alias t='todo.sh'

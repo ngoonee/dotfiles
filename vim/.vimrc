@@ -92,8 +92,7 @@ let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
 
 " Always show status line
+set guifont=Inconsolata\ for\ Powerline\ 9
 set laststatus=2
-" Path to powerline
-set rtp+=$HOME/.vim/bundle/powerline/powerline/bindings/vim
 
 au FileType python set fo-=t
