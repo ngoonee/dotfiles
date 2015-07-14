@@ -1,18 +1,24 @@
 [submodule "vim/.vim/bundle/vim-pathogen"]
 	path = vim/.vim/bundle/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen.git
+    ignore = dirty
 [submodule "vim/.vim/bundle/vim-fugitive"]
 	path = vim/.vim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+    ignore = dirty
 [submodule "vim/.vim/bundle/vim-latex"]
 	path = vim/.vim/bundle/vim-latex
 	url = http://git.code.sf.net/p/vim-latex/vim-latex
+    ignore = dirty
 [submodule "vim/.vim/bundle/pep8"]
 	path = vim/.vim/bundle/pep8
 	url = https://github.com/vim-scripts/pep8.git
+    ignore = dirty
 [submodule "vim/.vim/bundle/supertab"]
 	path = vim/.vim/bundle/supertab
 	url = https://github.com/ervandew/supertab.git
+    ignore = dirty
 [submodule "vim/.vim/bundle/todo.txt-vim"]
 	path = vim/.vim/bundle/todo.txt-vim
 	url = https://github.com/freitass/todo.txt-vim.git
+    ignore = dirty
