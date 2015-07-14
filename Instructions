@@ -1,0 +1,63 @@
+Reminder to myself on how to use this. See links at the bottom for source
+material.
+
+** Links instead of directories **
+Use symbolic links to point folders/files to the real copiers in this directory
+tree. This can be easily handled using GNU stow, either run in this directory or
+run using the -d option.
+
+* Making a link *
+stow [folder-name]
+
+* Removing links *
+stow -D [folder-name]
+
+
+** Tracking/saving changes through git **
+Basically, any changes should be committed as per normal and pushed using
+git push origin master
+
+* Checking before commit *
+git status
+git diff [filename]
+
+* Staging *
+git add [file/foldername]
+
+* Committing *
+git commit -m "[some commit message]"
+
+* Undoing last commit *
+git reset HEAD~1 (does not undo changes, only changes pointer)
+ make whatever changes you want
+git add/commit
+
+
+** Vim plugins - git submodules **
+Vim plugins are linked via git submodules to upstream. For this to work, .vimrc
+must start with two calls to pathogen (see link [1])
+
+* Adding a new plugin *
+cd dotfiles/vim/.vim
+git submodule add http://github.com/[author]/[projectname].git bundle/[projectname]
+git add bundle/[projectname]
+git commit -m "Added this cool new project"
+(You may also want to edit .gitmodules to add ignore=dirty, see link [2] on how
+to ignore changes due to helptags etc.)
+
+* Upgrading a single plugin *
+cd dotfiles/vim/.vim/bundle/[projectname]
+git pull origin master
+
+* Upgrading all bundled plugins *
+git submodule foreach git pull origin master (This works even from ~/dotfiles)
+
+* Deleting a submodule *
+Remove it from .gitmodules
+Remove it from .git/config
+Run git rm --cached [path-to-module]
+
+
+Links:-
+[1] http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen/
+[2] http://www.nils-haldenwang.de/frameworks-and-tools/git/how-to-ignore-changes-in-git-submodules
