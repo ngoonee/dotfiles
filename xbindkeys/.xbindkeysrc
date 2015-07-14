@@ -69,6 +69,9 @@
     m:0x50 + c:39
     Mod2+Mod4 + s
 "/home/scripts/monswitch"
+    m:0x40 + c:33
+    Mod4 + p
+"/home/scripts/monswitch"
     m:0x0 + c:235
     XF86Display
 "sudo /home/scripts/keylight up"
@@ -77,9 +80,21 @@
 "sudo /home/scripts/keylight down"
     m:0x0 + c:237
     XF86KbdBrightnessDown
+"sudo /home/scripts/backlight up"
+    m:0x0 + c:233
+    XF86MonBrightnessUp
+"sudo /home/scripts/backlight down"
+    m:0x0 + c:232
+    XF86MonBrightnessDown
 "/home/scripts/touchpad-toggle"
     m:0x0 + c:199
     XF86TouchpadToggle
 "keepassautotype"
     m:0xc + c:38
     Control+Alt + a
+"/home/scripts/swipeleft"
+    m:0x50 + c:54
+    Mod2+Mod4 + c
+"/home/scripts/swiperight"
+    m:0x54 + c:22
+    Control+Mod2+Mod4 + BackSpace
