@@ -36,7 +36,7 @@ if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
   set background=dark
-  colorscheme ron
+  colorscheme jellybeans
 endif
 
 if has("autocmd")
@@ -92,7 +92,12 @@ let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
 
 " Always show status line
-set guifont=Inconsolata\ for\ Powerline\ 9
+set guifont=Inconsolata\ for\ Powerline\ 11
 set laststatus=2
+"
+" Fix the difficult-to-read default setting for diff text highlighting.  The
+" bang (!) is required since we are overwriting the DiffText setting. The highlighting
+" for "Todo" also looks nice (yellow) if you don't like the "MatchParen" colors.
+highlight! link DiffText MatchParen
 
 au FileType python set fo-=t
