@@ -487,7 +487,7 @@ function run_once(prg,arg_string,pname,screen)
 end
 
 run_once("/usr/bin/mpd ~/.config/mpd/mpd.conf")
-run_once("xbindkeys")
+run_once("sxhkd")
 run_once("/home/scripts/startconky")
 run_once("synapse","-s","synapse -s")
 run_once("batti","","/usr/bin/python2 /usr/bin/batti")
@@ -503,3 +503,4 @@ run_once("/usr/bin/bluedevil-monolithic")
 run_once("ario","-m","ario -m")
 run_once("bluedevil")
 run_once("touchegg")
+run_once("light-locker")
