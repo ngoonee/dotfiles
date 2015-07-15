@@ -86,11 +86,6 @@ set fo+=tcqo
 " Use freedesktop.org clipboard rather than xorg clipboard
 set clipboard=unnamedplus
 
-" Options for SuperTab and python
-au FileType python set omnifunc=pythoncomplete#Complete
-let g:SuperTabDefaultCompletionType = "context"
-set completeopt=menuone,longest,preview
-
 " Always show status line
 set guifont=Inconsolata\ for\ Powerline\ 11
 set laststatus=2
@@ -100,4 +95,14 @@ set laststatus=2
 " for "Todo" also looks nice (yellow) if you don't like the "MatchParen" colors.
 highlight! link DiffText MatchParen
 
+" Options for python
 au FileType python set fo-=t
+let g:neocomplete#enable_at_startup = 1
+au FileType python setlocal omnifunc=jedi#completions
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.python =  '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+" alternative pattern: '\h\w*\|[^. \t]\.\w*'
