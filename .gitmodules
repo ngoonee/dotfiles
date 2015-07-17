@@ -21,6 +21,12 @@
 [submodule "vim/.vim/bundle/neocomplete"]
 	path = vim/.vim/bundle/neocomplete
 	url = https://github.com/Shougo/neocomplete.git
+    ignore = dirty
 [submodule "vim/.vim/bundle/jedi-vim"]
 	path = vim/.vim/bundle/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git
+    ignore = dirty
+[submodule "vim/.vim/bundle/vim-ipython"]
+	path = vim/.vim/bundle/vim-ipython
+	url = https://github.com/ivanov/vim-ipython.git
+    ignore = dirty
