@@ -26,7 +26,3 @@
 	path = vim/.vim/bundle/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git
     ignore = dirty
-[submodule "vim/.vim/bundle/vim-ipython"]
-	path = vim/.vim/bundle/vim-ipython
-	url = https://github.com/ivanov/vim-ipython.git
-    ignore = dirty
