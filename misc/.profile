@@ -34,6 +34,9 @@ export WINEDLLOVERRIDES='winemenubuilder.exe=d'
 
 export PYTHONSTARTUP='/home/conf/pystartup'
 
+# Use VirtualEnvWrapper
+export WORKON_HOME=/home/data/Coding/python-virtualenvs
+
 vt=$(fgconsole 2>/dev/null)
 (( vt == 1 )) && exec startx -- vt$vt &> ~/.xlog
 unset vt
