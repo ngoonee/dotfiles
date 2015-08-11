@@ -123,6 +123,7 @@ augroup python_autocmds
     au FileType python highlight Excess ctermbg=LightGray guibg=LightBlue
     au FileType python match Excess /\%80v.*/
     au FileType python set nowrap
+    set foldmethod=indent foldlevelstart=99
 augroup END
 
 " Options for vim-slime
