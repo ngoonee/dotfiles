@@ -85,4 +85,8 @@ bindkey -M vicmd 'j' history-substring-search-down
 # Simple 't' for todo.sh
 alias t='todo.sh'
 
+# If not running interactively, do not do anything
+[[ $- != *i* ]] && return
+[[ -z "$TMUX" ]] && exec tmx base
+
 ## END OF FILE #################################################################
