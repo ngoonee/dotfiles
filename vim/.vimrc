@@ -65,6 +65,13 @@ if has("spell")
   set sps=best,10                    
 endif
 
+" Set the wildmenu options for completion in the command line
+set wildchar=<Tab> wildmenu wildmode=full
+" Colors for background of wildmenu
+highlight StatusLine ctermbg=16 ctermfg=255
+" Colors for actual current wildmenu selection
+highlight WildMenu ctermbg=19
+
 " Fix for utf-8 content
 set enc=utf-8
 set fileencoding=utf-8
