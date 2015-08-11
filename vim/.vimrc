@@ -71,6 +71,9 @@ set wildchar=<Tab> wildmenu wildmode=full
 highlight StatusLine ctermbg=16 ctermfg=255
 " Colors for actual current wildmenu selection
 highlight WildMenu ctermbg=19
+" wildchar for the menu - <Leader>b shows open tabs and allows selection
+set wildcharm=<C-z>
+nnoremap <Leader>b :buffer <C-z><S-Tab>
 
 " Fix for utf-8 content
 set enc=utf-8
