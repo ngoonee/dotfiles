@@ -1,0 +1,49 @@
+### Volume Control ###
+XF86Audio{RaiseVolume,LowerVolume,Mute}
+    /home/scripts/volcontrol {up,down,mute}
+shift + alt + {q,a,s}
+    /home/scripts/volcontrol {up,down,mute}
+shift + alt + v
+    pavucontrol
+shift + alt + w
+    /home/scripts/paswitch
+
+### Music Player ###
+XF86Audio{Play,Prev,Next}
+    /home/scripts/audio{play,prev,next}
+XF86AudioStop
+    /home/scripts/mpcnowplaying
+shift + alt + {x,z,c}
+    /home/scripts/audio{play,prev,next}
+shift + alt + o
+    /home/scripts/mpcnowplaying
+shift + alt + XF86Launch{1,2}
+    /home/scripts/audio{next,down}
+shift + alt + button2
+    /home/scripts/audioplay
+shift + alt + button{4,5}
+    /home/scripts/volcontrol {up,down}
+XF86Launch{1,2}
+    xdotool key Ctrl{+,+Shift+}Tab
+
+### Shortcuts ###
+super + t
+    st
+#    termite -e 'tmx base'
+Print
+    scrot -e 'mv $f ~/screenshots/ 2>/dev/null'
+#doesn't work, giblib error
+shift + Print
+    scrot -s -e 'mv $f ~/screenshots/ 2>/dev/null'
+XF86Display
+    /home/scripts/monswitch
+super + p
+    /home/scripts/monswitch
+XF86{Kbd,Mon}Brightness{Up,Down}
+    sudo /home/scripts/{key,back}light {up,down}
+XF86TouchpadToggle
+    /home/scripts/touchpad-toggle
+ctrl + alt + a
+    /home/scripts/keepassautotype
+XF86Calculator
+    light-locker-command -l
