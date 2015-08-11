@@ -129,5 +129,9 @@ augroup END
 let g:slime_target = "tmux"
 let g:slime_python_ipython = 1
 
+" Gundo options (undo tree)
+let g:gundo_prefer_python3 = 1
+nnoremap <F6> :GundoToggle<CR>
+
 " Enable opening new buffer without saving the old one
 set hidden

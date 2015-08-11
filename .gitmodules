@@ -42,3 +42,7 @@
 	path = vim/.vim/bundle/vim-virtualenv
 	url = https://github.com/jmcantrell/vim-virtualenv.git
     ignore = dirty
+[submodule "vim/.vim/bundle/gundo"]
+	path = vim/.vim/bundle/gundo
+	url = http://github.com/sjl/gundo.vim.git
+    ignore = dirty
