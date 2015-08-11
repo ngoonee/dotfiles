@@ -110,6 +110,9 @@ augroup python_autocmds
     endif
     let g:neocomplete#force_omni_input_patterns.python =  '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
     " alternative pattern: '\h\w*\|[^. \t]\.\w*'
+    au FileType python highlight Excess ctermbg=LightGray guibg=LightBlue
+    au FileType python match Excess /\%80v.*/
+    au FileType python set nowrap
 augroup END
 
 " Options for vim-slime
