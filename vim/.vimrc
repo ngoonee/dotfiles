@@ -110,3 +110,6 @@ let g:neocomplete#force_omni_input_patterns.python =  '\%([^. \t]\.\|^\s*@\|^\s*
 " Options for vim-slime
 let g:slime_target = "tmux"
 let g:slime_python_ipython = 1
+
+" Enable opening new buffer without saving the old one
+set hidden
