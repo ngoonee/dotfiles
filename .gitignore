@@ -1,3 +1,4 @@
 pentadactyl/.pentadactyl/info
 *.swp
 vim/.vim/.*
+vim/.vim/undodir

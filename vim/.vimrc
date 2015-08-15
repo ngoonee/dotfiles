@@ -120,7 +120,7 @@ augroup python_autocmds
     endif
     let g:neocomplete#force_omni_input_patterns.python =  '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
     " alternative pattern: '\h\w*\|[^. \t]\.\w*'
-    au FileType python highlight Excess ctermbg=LightGray guibg=LightBlue
+    au FileType python highlight Excess ctermbg=DarkGray guibg=Black
     au FileType python match Excess /\%80v.*/
     au FileType python set nowrap
     set foldmethod=indent foldlevelstart=99
@@ -133,6 +133,15 @@ let g:slime_python_ipython = 1
 " Gundo options (undo tree)
 let g:gundo_prefer_python3 = 1
 nnoremap <F6> :GundoToggle<CR>
+
+" Enable undo persistence
+set undodir=~/.vim/undodir
+set undofile
+set undolevels=1000 "maximum number of changes that can be undone
+set undoreload=10000 "maximum number of lines to save for undo on a buffer reload
+
+" Disable undo persistance for certain files
+au BufWritePre /tmp/* setlocal noundofile
 
 " Enable opening new buffer without saving the old one
 set hidden
