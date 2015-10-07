@@ -58,6 +58,17 @@ else
   export PROMPT="[32]$PROMPT"
 fi
 
+# Not sure if this negates the above. If it happens, here's a note saying htis is what's wrong
+function _update_ps1()
+{
+    prompt off
+    export PROMPT="$(~/dotfiles/powerline-zsh/powerline-zsh.py $?)"
+}
+precmd()
+{
+    _update_ps1
+}
+
 export http_proxy=`cat /home/conf/.current_proxy`
 export https_proxy=`cat /home/conf/.current_proxy`
 export ftp_proxy=`cat /home/conf/.current_proxy`

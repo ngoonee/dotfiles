@@ -46,3 +46,7 @@
 	path = vim/.vim/bundle/gundo
 	url = http://github.com/sjl/gundo.vim.git
     ignore = dirty
+[submodule "powerline-zsh"]
+	path = powerline-zsh
+	url = https://github.com/carlcarl/powerline-zsh.git
+    ignore = dirty
