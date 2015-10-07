@@ -66,6 +66,7 @@ function _update_ps1()
 }
 precmd()
 {
+    auto_workon
     _update_ps1
 }
 
@@ -98,6 +99,14 @@ alias t='todo.sh'
 
 # Use VirtualEnvWrapper
 source /usr/bin/virtualenvwrapper.sh
+
+function auto_workon()
+{
+    if [ -f .venv ]; then
+        test -e .venv && workon `cat .venv`
+    fi
+}
+
 
 # If not running interactively, do not do anything
 [[ $- != *i* ]] && return
