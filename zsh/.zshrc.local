@@ -62,7 +62,7 @@ fi
 function _update_ps1()
 {
     prompt off
-    export PROMPT="$(~/dotfiles/powerline-zsh/powerline-zsh.py $?)"
+    export PROMPT="$(pypy ~/dotfiles/powerline-zsh/powerline-zsh.py $?)"
 }
 precmd()
 {
