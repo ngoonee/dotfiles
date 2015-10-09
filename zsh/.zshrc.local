@@ -103,7 +103,9 @@ source /usr/bin/virtualenvwrapper.sh
 function auto_workon()
 {
     if [ -f .venv ]; then
-        test -e .venv && workon `cat .venv`
+        if [ ${VIRTUAL_ENV%`cat .venv`} = $VIRTUAL_ENV ]; then
+            workon `cat .venv`
+        fi
     fi
 }
 
