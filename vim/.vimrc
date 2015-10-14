@@ -110,6 +110,7 @@ highlight! link DiffText MatchParen
 
 " Enable neocomplete
 let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_auto_select = 1
 
 " Options for python
 augroup python_autocmds
@@ -118,11 +119,12 @@ augroup python_autocmds
     au FileType python setlocal omnifunc=jedi#completions
     let g:jedi#completions_enabled = 0
     let g:jedi#auto_vim_configuration = 0
+    let g:jedi#smart_auto_mappings = 1
     if !exists('g:neocomplete#force_omni_input_patterns')
         let g:neocomplete#force_omni_input_patterns = {}
     endif
     let g:neocomplete#force_omni_input_patterns.python =  '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-    " alternative pattern: '\h\w*\|[^. \t]\.\w*'
+    "let g:neocomplete#force_omni_input_patterns.python =  '\h\w*\|[^. \t]\.\w*'
     au FileType python highlight Excess ctermbg=DarkGray guibg=Black
     au FileType python match Excess /\%80v.*/
     au FileType python set nowrap
