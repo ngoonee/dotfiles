@@ -62,7 +62,8 @@ fi
 function _update_ps1()
 {
     prompt off
-    export PROMPT="$(pypy ~/dotfiles/powerline-zsh/powerline-zsh.py $?)"
+    # Use powerline
+    . /usr/share/zsh/site-contrib/powerline.zsh
 }
 precmd()
 {
@@ -91,8 +92,6 @@ bindkey -M emacs '^N' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
-# Use powerline
-. /usr/share/zsh/site-contrib/powerline.zsh
 
 # Simple 't' for todo.sh
 alias t='todo.sh'
