@@ -94,8 +94,7 @@ set shiftwidth=4 "default indentation spaces
 set textwidth=100
 " Formatting options ignore textwidth, instead just highlight whatever the
 " excess is. o is so that o/O within comments adds comments tag.
-set fo+=qo
-set fo-=tc
+set fo+=qotc
 highlight Excess ctermbg=DarkGray guibg=Black
 match Excess /\%100v.*/
 " Use freedesktop.org clipboard rather than xorg clipboard
@@ -117,7 +116,7 @@ let g:neocomplete#enable_auto_select = 1
 " Options for python
 augroup python_autocmds
     autocmd!
-    au FileType python set fo-=t
+    au FileType python set fo-=tc
     au FileType python setlocal omnifunc=jedi#completions
     let g:jedi#completions_enabled = 0
     let g:jedi#auto_vim_configuration = 0
