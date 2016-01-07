@@ -83,6 +83,8 @@ set fileencoding=utf-8
 filetype plugin indent on
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
+let g:Tex_MultipleCompileFormats='pdf, dvi'
+let g:Tex_DefaultTargetFormat='pdf'
 
 " General
 set nu " numbered lines on left
