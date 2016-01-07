@@ -48,4 +48,6 @@ map -modes=n -silent <C-Space> -javascript var popup = document.getElementById("
 set guioptions=rbsCnT
 set hintkeys=asdfg;lkjh
 
+js editor.defaultRegister="+"
+
 " vim: set ft=pentadactyl:
