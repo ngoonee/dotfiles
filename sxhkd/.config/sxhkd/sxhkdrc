@@ -47,3 +47,5 @@ ctrl + alt + a
     /home/scripts/keepassautotype
 XF86Calculator
     light-locker-command -l
+super + d
+    dmenu_run -i -b -l 10

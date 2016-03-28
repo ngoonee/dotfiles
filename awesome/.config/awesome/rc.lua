@@ -8,7 +8,7 @@ local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
-local naughty = require("naughty")
+--local naughty = require("naughty")
 local menubar = require("menubar")
 
 -- {{{ Error handling
@@ -38,7 +38,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+beautiful.init("/usr/share/awesome/themes/dust/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "/home/scripts/urxvtc"
@@ -190,7 +190,6 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
     left_layout:add(mylauncher)
-    left_layout:add(mytextclock)
     left_layout:add(myseparator)
     left_layout:add(mytaglist[s])
     left_layout:add(myseparator)
@@ -199,6 +198,7 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
@@ -486,10 +486,10 @@ function run_once(prg,arg_string,pname,screen)
     end
 end
 
-run_once("/usr/bin/mpd ~/.config/mpd/mpd.conf")
+--run_once("/usr/bin/mpd ~/.config/mpd/mpd.conf")
 run_once("sxhkd")
 run_once("/home/scripts/startconky")
-run_once("synapse","-s","synapse -s")
+--run_once("synapse","-s","synapse -s")
 --run_once("batti","","/usr/bin/python2 /usr/bin/batti")
 run_once("cbatticon")
 run_once("start-pulseaudio-x11")
@@ -498,10 +498,10 @@ run_once("/usr/bin/dvcs-autosync","","/usr/bin/python2 /usr/bin/dvcs-autosync")
 run_once("wmname","LG3D")
 --run_once("keepassx","-min -lock")
 --run_once("keepass","-minimize")
-run_once("/usr/bin/batti")
-run_once("/usr/bin/unagi")
-run_once("/usr/bin/bluedevil-monolithic")
+--run_once("/usr/bin/unagi")
+--run_once("/usr/bin/bluedevil-monolithic")
 run_once("ario","-m","ario -m")
-run_once("bluedevil")
-run_once("touchegg")
+--run_once("bluedevil")
 run_once("light-locker")
+run_once("touchegg")
+run_once("dunst")
