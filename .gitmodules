@@ -50,3 +50,6 @@
 	path = vim/.vim/bundle/vim-unimpaired
 	url = http://github.com/tpope/vim-unimpaired.git
     ignore = dirty
+[submodule "vim/.vim/bundle/YouCompleteMe"]
+	path = vim/.vim/bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe.git
