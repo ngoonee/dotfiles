@@ -1,0 +1,5 @@
+#!/bin/bash
+
+mount | grep "^/dev" | grep -vE "^/dev/sda|^/dev/sdb" | sort | uniq | while read line ; do
+    echo $line
+done

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+MAILLOCATION="/home/data/Profiles/OfflineIMAP"
+MAILS=`find $MAILLOCATION/personal/INBOX/{cur,new} -maxdepth 1 -type f -regex ".*:2,[^PRSTDF]*"`
+echo `echo $MAILS | wc -w` in Personal Inbox
+
+for FILE in $MAILS ; do
+  echo '  '`grep -he "^Subject:" "$FILE" | sed 's/^Subject: //' | sed 's/#//' | sed 's/*//' | head -n 1 | cut -b 1-$1`' '
+done
+
+#MAILS=`find $MAILLOCATION/work/INBOX/{cur,new} -maxdepth 1 -type f -regex ".*:2,[^PRSTDF]*"`
+#echo `echo $MAILS | wc -w` in Monash Inbox
+
+#for FILE in $MAILS ; do
+  #echo '  '`grep -he "^Subject:" "$FILE" | sed 's/^Subject: //' | sed 's/#//' | sed 's/*//' | head -n 1 | cut -b 1-$1`
+#done
+
+echo `find $MAILLOCATION/mailinglists/*/{cur,new} -maxdepth 1 -type f -regex ".*:2,[^PRSTDF]*" | wc -l` in Mailing lists
+#MAILS=`find /home/data/Profiles/OfflineIMAP/root/General/ML/{cur,new} -maxdepth 1 -type f -name *:2, | sed 's/Mailing Lists/Mailing_Lists/'`
+#MAILS=`find /home/data/Profiles/OfflineIMAP/root/General/ML/{cur,new} -maxdepth 1 -type f -name *:2,`
+#echo `echo $MAILS | wc -w` in Mailing lists
+
+#for FILE in $MAILS ; do
+#  FILE=`echo "$FILE" | sed 's/Mailing_Lists/Mailing\ Lists/'`
+#  echo '  '`grep -he "^Subject:" "$FILE" | sed 's/^Subject: //' | head -n 1 | cut -b 1-$1`
+#done
+
+#echo `find /home/data/Profiles/OfflineIMAP/personal/General/ML/ -maxdepth 3 -type f -name "*:2," | wc -l` in Mailing lists
+
+exit 0

@@ -1,0 +1,27 @@
+#!/bin/bash
+
+mount | grep -E ^/dev | grep -vE arch32 | grep -vE ,bind | grep -vE tmpfs | grep -vE gitsong/Songs | while read line ; do
+  device=`echo $line | awk '{ print $1 }' | sed 's/\/dev\///'`
+  mount=`echo $line | sed 's|.*on \(.*\) type.*|\1|'`
+  mountnospace=`echo $line | sed 's|.*on \(.*\) type.*|\1|' | sed 's/ /\\\ /g'`
+  if mount | grep "on ${mountnospace} type" > /dev/null ; then
+    echo '${font dejavusansmono:size=7}$color1${fs_free_perc '$mount'}% free on '$mount'$alignr${diskio '$device'}/s
+   $color3${fs_bar 14 '$mount'}
+   $color1${voffset -20}$alignr${fs_used '$mount'}/${fs_size '$mount'} $font'
+  fi
+done
+mount | grep -E ^/dev | grep -vE ,bind > /dev/null
+#df -l | grep -vE ^tmpfs\|^udev\|^varrun\|^varlock\|^overflow\|^lrm\|^Filesystem\|^none\|^shm\ | while read line ; do
+#    device=`echo $line | awk '{ print $1 }' | sed 's/\/dev\///'`
+#    mount=`echo $line |  sed 's|.*% \(.*\)|\1|'`
+#    mountnospace=`echo $line | sed 's|.*% \(.*\)|\1|' | sed 's/ /\\\ /g'`
+#    if mount | grep "on ${mountnospace} type" > /dev/null ; then
+#    echo '${font dejavusansmono:size=8}$color1${fs_free_perc '$mount'}% free on '$mount'$alignr${diskio '$device'}/s
+#   $color3${fs_bar 14 '$mount'}
+#   $color1${voffset -16} /dev/'$device'$alignr${fs_used '$mount'}/${fs_size '$mount'} $font'
+#    fi
+#done
+#df -l | grep -vE ^tmpfs\|^udev\|^varrun\|^varlock\|^overflow\|^Filesystem\|^none\|^shm\  > /dev/null
+if [ "$?" != "0" ]; then
+echo '${voffset -12}'
+fi

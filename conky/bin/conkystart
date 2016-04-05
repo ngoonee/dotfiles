@@ -1,0 +1,9 @@
+#! /bin/bash
+cur_x=$(xrandr | grep current | cut -d ' ' -f 8)
+pos=$(xrandr | grep LVDS1 | cut -d ' ' -f4)
+init_x=$(echo $pos | cut -d x -f 1)
+incr_x=$(echo $pos | cut -d + -f 2)
+x=$(($cur_x - $init_x - $incr_x))
+conky -c ~/.config/conky/bottombar.conf -x $x
+conky -c ~/.config/conky/topbar.conf
+exit 0

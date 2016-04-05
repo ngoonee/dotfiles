@@ -1,0 +1,23 @@
+#!/bin/bash
+
+SUCCESSPATH="/tmp/.offlineimapsuccessfulpersonal"
+WORKSUCCESSPATH="/tmp/.offlineimapsuccessfulwork"
+MLSUCCESSPATH="/tmp/.offlineimapsuccessfulml"
+
+if [ -e ${SUCCESSPATH} ]; then
+  echo '$alignr${color1}'Personal mail checked: `date -r $SUCCESSPATH +"%_I:%M%P, %a, %e %b"`'${color}'
+else
+  echo '$alignr${color1}'Personal mail not yet checked'${color}'
+fi
+#if [ -e ${WORKSUCCESSPATH} ]; then
+  #echo '$alignr${color1}'Monash mail checked: `date -r $WORKSUCCESSPATH +"%_I:%M%P, %a, %e %b"`'${color}'
+#else
+  #echo '$alignr${color1}'Monash mail not yet checked'${color}'
+#fi
+if [ -e ${MLSUCCESSPATH} ]; then
+  echo '$alignr${color1}'Mailing lists checked: `date -r $MLSUCCESSPATH +"%_I:%M%P, %a, %e %b"`'${color}'
+else
+  echo '$alignr${color1}'Mailing lists not yet checked'${color}'
+fi
+
+exit 0

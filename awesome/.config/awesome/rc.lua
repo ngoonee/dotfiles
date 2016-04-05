@@ -113,8 +113,6 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- {{{ Wibox
--- Create a textclock widget
-mytextclock = awful.widget.textclock.new(" %a %d %b, %I:%M:%S %p ", 1)
 
 -- Create a separator textbox
 myseparator = wibox.widget.textbox(" | ")
@@ -185,7 +183,11 @@ for s = 1, screen.count() do
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s })
+    if s == 1 then
+        mywibox[s] = awful.wibox({ position = "top", screen = s , width = 1120, align = 'right'})
+    else
+        mywibox[s] = awful.wibox({ position = "top", screen = s})
+    end
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
@@ -193,12 +195,15 @@ for s = 1, screen.count() do
     left_layout:add(myseparator)
     left_layout:add(mytaglist[s])
     left_layout:add(myseparator)
-    left_layout:add(mypromptbox[s])
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(mytextclock)
+    right_layout:add(mypromptbox[s])
+    right_layout:add(myseparator)
+    if s == 1 then
+        right_layout:add(wibox.widget.systray())
+        right_layout:add(myseparator)
+    end
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
@@ -209,6 +214,14 @@ for s = 1, screen.count() do
 
     mywibox[s]:set_widget(layout)
 end
+
+awful.wibox({ position = 'bottom', screen = 1, height = 21, width = 1, ontop= false})
+
+--test = awful.wibox({ position = 'left', screen = 1, width = 20})
+--testlayout = wibox.layout.fixed.vertical()
+--testtaglist = awful.widget.taglist(1, awful.widget.taglist.filter.all, nil, nil, nil, wibox.layout.fixed.vertical())
+--testlayout:add(testtaglist)
+--test:set_widget(testlayout)
 -- }}}
 
 -- {{{ Mouse bindings
@@ -488,7 +501,8 @@ end
 
 --run_once("/usr/bin/mpd ~/.config/mpd/mpd.conf")
 run_once("sxhkd")
-run_once("/home/scripts/startconky")
+run_once("killall", "conky")
+run_once("conkystart")
 --run_once("synapse","-s","synapse -s")
 --run_once("batti","","/usr/bin/python2 /usr/bin/batti")
 run_once("cbatticon")

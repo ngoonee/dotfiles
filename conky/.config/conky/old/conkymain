@@ -1,0 +1,90 @@
+background no
+use_xft yes
+xftfont DejaVu Sans:size=8
+xftalpha 1
+update_interval 1
+total_run_times 0
+own_window yes
+own_window_type override
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_argb_visual yes 
+own_window_argb_value 130
+double_buffer yes
+minimum_size 290 1300
+maximum_width 290
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders yes
+alignment top_left
+gap_x 20
+gap_y 40
+no_buffers yes
+uppercase no
+cpu_avg_samples 2
+net_avg_samples 1
+override_utf8_locale yes
+use_spacer left
+default_color white 
+default_shade_color red
+default_outline_color white
+color0 dimgray #changing variable colour
+color1 white #Variable name colour
+color2 DB5248 #Title colour
+color3 454545 #Bar colours
+color4 red #Error colour
+text_buffer_size 2400
+
+TEXT
+${color1}$alignc$sysname $kernel on $machine 
+${color2}Machine Information ${hr 2}${if_existing /sys/devices/system/cpu/cpu1}
+${color1}CPU Info: ${alignr}Intel Core2 Duo @ $color0$freq_g GHz
+${color1}CPU 1 Temp: ${color0}${execi 6 sensors | grep Core\ 0 | awk '{print $3}'} $alignr ${color1}CPU 2 Temp: ${color0}${execi 6 sensors | grep Core\ 1 | awk '{print $3}'}
+$color1${voffset -2}${cpugraph cpu1 25,140 000000 FF4500}  ${cpugraph cpu2 25,140 000000 FF4500}
+${voffset -33}$color${font dejavusansmono:size=15}$alignr${offset -199}${cpu cpu1}%$font
+${voffset -25}$color${font dejavusansmono:size=15}$alignr${offset -59}${cpu cpu2}%$font${voffset 5}$endif
+${color1}Uptime: $color0$uptime$alignr${color1}ACPI Temp: $color0${execi 6 sensors | grep temp1: | awk '{print $2}'}
+${if_existing /sys/bus/pci/drivers/nvidia}${voffset -7}$color1${stippled_hr 1}${voffset -4}
+${color1}GPU Info: ${alignr}nVidia 9300M @ $color0${execi 6 nvidia-settings -q GPUCurrentClockFreqs | grep Attribute|paste -s| cut -c58-60} MHz
+${color1}Using ${execi 60 nvidia-settings -q NVidiaDriverVersion | grep Attribute|paste -s| cut -c57-62} driver$alignr${color1}GPU Temp: $color0${execi 6 nvidia-settings -q GPUCoreTemp -t}° C${else}${voffset -15}$endif
+${if_existing /sys/class/power_supply/BAT0}$color3${battery_bar 12 BAT0}
+$color1${font dejavusansmono:size=8}${voffset -15} Power Supply: ${battery}$alignr$battery_time$font${else}${voffset -15}$endif
+${color2}Process Information ${hr 2}
+${color1}RAM: $color0$alignc $mem$color1 /$color0$memmax $alignr $memperc%
+${color1}Swap: $color0$alignc $swap$color1 /$color0$swapmax $alignr $swapperc%
+$color1${font dejavusansmono:size=7}Processes by Memory: $alignr CPU %    MEMORY 
+ ${color1}${top_mem name 1}$alignr${top_mem cpu 1}    ${top_mem mem_res 1}
+ ${top_mem name 2}$alignr${top_mem cpu 2}    ${top_mem mem_res 2}
+ ${top_mem name 3}$alignr${top_mem cpu 3}    ${top_mem mem_res 3}
+ ${top_mem name 4}$alignr${top_mem cpu 4}    ${top_mem mem_res 4}
+ ${top_mem name 5}$alignr${top_mem cpu 5}    ${top_mem mem_res 5}$font
+$color1${font dejavusansmono:size=7}Processes by CPU: $alignr CPU %    MEMORY 
+ ${color1}${top name 1}$alignr${top cpu 1}    ${top mem_res 1}
+ ${top name 2}$alignr${top cpu 2}    ${top mem_res 2}
+ ${top name 3}$alignr${top cpu 3}    ${top mem_res 3}
+ ${top name 4}$alignr${top cpu 4}    ${top mem_res 4}
+ ${top name 5}$alignr${top cpu 5}    ${top mem_res 5}$font
+$alignr${color1}$processes processes (${color0}$running_processes$color1 running)
+${color2}Hard Disc Information ${hr 2}
+${execpi 6 /home/scripts/conky/mediadrives}
+${voffset -7}
+Read: $diskio_read $alignr Write: $diskio_write
+${diskiograph_read 30,140}$alignr${diskiograph_write 30,140}
+${color2}Networking Information ${hr 2}
+${if_existing /proc/net/route wlp3s0}${color1}External IP: $color0$alignr${execi 600 cat /home/conf/my_ip }$color1 via wlp3s0
+${color1}Internal IP: $color0${alignr}${addr wlp3s0}
+${color1}SSID: $color0$alignr${wireless_essid wlp3s0}
+${color1}Wireless signal: $color0${alignr}${wireless_link_qual_perc wlp3s0}%
+${voffset -5}$color1${stippled_hr 2}${voffset -4}
+${color1}Down: $color0${totaldown wlp3s0} $alignr${color1}Up: $color0${totalup wlp3s0}
+$color1${voffset -2}${downspeedgraph wlp3s0 30,140 000000 FF4500}$alignr${upspeedgraph wlp3s0 30,140 000000 FF4500}
+${voffset -25}$color${font dejavusansmono:size=10}$alignr${offset -154}${downspeedf wlp3s0}kb/s$font
+${voffset -16}$color${font dejavusansmono:size=10}$alignr${offset -24}${upspeedf wlp3s0}kb/s$font${voffset 4}$else${if_existing /proc/net/route enp4s0}${color1}External IP: $color0$alignr${execi 600 cat /home/conf/my_ip }$color1 via enp4s0
+${color1}Internal IP: $color0${alignr}${addr enp4s0}
+${voffset -7}$color1${stippled_hr 1}${voffset -4}
+${color1}Down: $color0${totaldown enp4s0} $alignr${color1}Up: $color0${totalup enp4s0}
+$color1${voffset -2}${downspeedgraph enp4s0 30,140 8B4513 FF4500}$alignr${upspeedgraph enp4s0 30,140 8B4513 FF4500}
+${voffset -25}$color${font dejavusansmono:size=10}$alignr${offset -154}${downspeedf enp4s0}kb/s$font
+${voffset -16}$color${font dejavusansmono:size=10}$alignr${offset -24}${upspeedf enp4s0}kb/s$font${voffset 4}$else${color1}Networking disabled$endif$endif
+${color2}Connections${alignr}${color1}Inbound: ${tcp_portmon 1 32767 count}  Outbound: ${tcp_portmon 32768 61000 count}

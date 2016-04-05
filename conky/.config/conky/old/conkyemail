@@ -1,0 +1,41 @@
+background no
+use_xft yes
+xftfont DejaVu Sans:size=8
+xftalpha 1
+update_interval 5
+total_run_times 0
+own_window yes
+own_window_type override
+own_window_transparent no
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_argb_visual yes 
+own_window_argb_value 130
+double_buffer yes
+minimum_size 240 5
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders yes
+alignment top_left
+gap_x 690
+gap_y 40
+no_buffers yes
+uppercase no
+cpu_avg_samples 2
+net_avg_samples 1
+override_utf8_locale yes
+use_spacer left
+default_color white
+default_shade_color red
+default_outline_color white
+color0 dimgray #changing variable colour
+color1 white #Variable name colour
+color2 DB5248 #Title colour
+color3 454545 #Bar colours
+color4 red #Error colour
+text_buffer_size 2400
+
+TEXT
+${color2}E-mails ${hr 2}$color1
+${execpi 60 /home/scripts/conky/offlineimapsubjects 35}
+${execp /home/scripts/conky/checkofflineimap }
