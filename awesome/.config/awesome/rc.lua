@@ -38,7 +38,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/dust/theme.lua")
+beautiful.init("/home/ngoonee/.config/awesome/themes/dust/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "/home/scripts/urxvtc"
