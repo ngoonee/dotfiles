@@ -1,0 +1,39 @@
+#! /bin/bash
+
+syspath="/sys/class/backlight/intel_backlight"
+if [ $# == 0 ]; then
+    cat $syspath/brightness
+elif [ $# -ne 1 ]; then
+    echo 'Usage: backlight {up,down,$value}';
+    echo '       up - increase display backlight level';
+    echo '       down - decrease display backlight level';
+    echo '       $value - set display backlight to a fixed value';
+else
+    max=`cat $syspath/max_brightness`
+    current=`cat $syspath/brightness`
+    step=$(($max/10))
+    threshold=$((2*$step))
+    next=$max
+    if [[ $current -le $threshold ]]; then
+        step=$(($step/4))
+    fi
+    if [ $1 == 'up' ]; then
+        next=$(($current + $step))
+        if [[ $next -ge $max ]]; then
+            next=$max
+        fi
+    elif [ $1 == 'down' ]; then
+        next=$(($current - $step))
+        if [[ $next -le 45 ]]; then
+            next=45
+        fi
+    else
+        next=$1
+        if [[ $next -ge $max ]]; then
+            next=$max
+        elif [[ $next -le 45 ]]; then
+            next=45
+        fi
+    fi;
+    echo $next > $syspath/brightness
+fi;

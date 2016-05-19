@@ -1,0 +1,13 @@
+#Modify the script below to batch
+#process files, just replace the ffmpeg line
+
+
+#!/bin/sh
+mkdir 135
+mkdir 260
+for f in ./*.jpg;
+do
+  echo "Processig $f"
+  convert -size 135x135 "$f" -filter Sinc -resize 135x135 -quality 100 "135/$f"
+  convert -size 260x260 "$f" -filter Sinc -resize 260x260 -quality 100 "260/$f"
+done

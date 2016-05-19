@@ -1,0 +1,9 @@
+#!/bin/sh
+
+pacman -Qeq | grep -vx "$( pacman -Qmq )" > /tmp/explicit_list
+pacman -Qdq | grep -vx "$( pacman -Qmq )" > /tmp/depends_list
+pacman -Qmq > /tmp/foreign_list
+
+echo Check in /tmp for list of explicit, depends, and foreign packages
+
+exit 0

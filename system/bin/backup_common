@@ -1,0 +1,98 @@
+#!/bin/bash
+
+if [ "$(basename $0)" = "backup_common" ]; then
+  echo "Please run the backup script using the backup_uni/back_home symlinks"
+  exit 1
+elif [[ $EUID -ne 0 ]]; then
+  echo "You must be a root user" 2>&1
+  exit 1
+fi
+
+function process_warn {
+    if [[ $( pgrep -f $1 ) ]]; then
+        echo "$1 should not be running during backup, please exit it now." 2>&1
+    fi
+}
+
+function check_browsers {
+    # firefox
+    process_warn firefox
+    # chromium
+    process_warn chromium
+    # qutebrowser
+    process_warn qutebrowser
+    # opera
+    process_warn opera
+    # maxthon
+    process_warn maxthon
+}
+
+function disable_services {
+    echo -n | su ngoonee -c "tee /home/conf/my_ip"
+}
+
+function enable_services {
+    su ngoonee -c "networkgetip"
+}
+
+check_browsers
+disable_services
+sleep 1
+
+if [ "$(basename $0)" = "backup_home" ]; then
+  su ngoonee -c "rsync -rlptoD --exclude-from '/home/conf/excludehome' --progress --delete --modify-window=1 -e 'ssh -p 25008' /home/ alarm@bethsimchatadonai.noip.me:/mnt/WD3TB/oonee/home/"
+  su ngoonee -c "rsync -rlptoD --exclude-from '/home/conf/excludedata' --progress --delete --modify-window=1 -e 'ssh -p 25008' /home/data/ alarm@bethsimchatadonai.noip.me:/mnt/WD3TB/oonee/data/"
+  rsync -rlptoD --progress --delete --modify-window=1 -e 'ssh -p 25008' /etc/ root@bethsimchatadonai.noip.me:/mnt/WD3TB/oonee/etc/
+elif [ "$(basename $0)" = "backup_uni" ]; then
+  echo "Not yet done the uni backup commands"
+else
+  echo "Please run the backup script using the backup_uni/back_home symlinks"
+fi
+
+enable_services
+
+exit 0
+
+  if [ "$(basename $0)" = "backup_uni" ]; then
+      EXTERN_NTFS="/home/mounts/UNISTORE"
+      EXTERN_BTRFS="/home/mounts/UNISAVE"
+      echo "Starting backup of /home/data using rsync"
+      su ngoonee -c "rsync -q -a --exclude-from '/home/conf/excludedata' --progress --delete --modify-window=1 -b --backup-dir=${EXTERN_NTFS}/databackup/ /home/data/ ${EXTERN_NTFS}/data/"
+      echo "Starting backup of /home using rdiff-backup"
+      su ngoonee -c "rdiff-backup -v3 --exclude-globbing-filelist /home/conf/excludehome /home ${EXTERN_BTRFS}/home" 
+      echo "Starting backup of /etc using rdiff-backup"
+      rdiff-backup -v3 /etc ${EXTERN_BTRFS}/etc
+      echo "Starting duplicate backup of /home/data using rsync"
+      su ngoonee -c "rsync -q -a --exclude-from '/home/conf/excludedata' --progress --delete /home/data/ ${EXTERN_BTRFS}/data/"
+
+
+    #CONNECTIP=59.191.194.62
+    #su ngoonee -c "rdiff-backup -v3 --exclude-globbing-filelist /home/conf/excludehome --remote-schema 'ssh -p 1322 -C %s rdiff-backup --server' /home ngoonee@$CONNECTIP::/home/backup/home"
+    #su ngoonee -c "rdiff-backup -v3 --exclude-globbing-filelist /home/conf/excludehome /home /media/UNISAVE/home"
+    #echo "Starting backup of /etc using rdiff-backup"
+    #rdiff-backup -v3 --remote-schema 'ssh -p 1322 -C %s rdiff-backup --server' /etc root@$CONNECTIP::/home/backup/etc
+    #rdiff-backup -v3 /etc /media/UNISAVE/etc
+    #echo "Starting backup of /home using unison"
+    #su ngoonee -c "unison SSHHOME-ALL -auto -silent -batch"
+    #echo "Starting backup of /home/data using unison"
+    #su ngoonee -c "unison SSH-ALL -auto -silent -batch"
+    #echo "Starting backup of /home/data using rsync"
+    #su ngoonee -c "rsync -q -r -t --progress --delete --modify-window=1 -b --backup-dir=/media/UNISTORE/databackup/ /home/data/ /media/UNISTORE/data/"
+    #echo "Starting backup of /home/LinuxProg using rsync"
+    #su ngoonee -c "rsync -q -r -t -p -o -g --progress --delete -l -H -b --backup-dir=/media/UNISAVE/LinuxProgbackup/ /home/LinuxProg/ /media/UNISAVE/LinuxProg/"
+    #echo "Starting backup of /var/abs/local using rsync"
+    #su ngoonee -c "rsync -q -r -t -p -o -g --progress --delete -l -H -b --backup-dir=/media/UNISAVE/abslocalbackup/ /var/abs/local/ /media/UNISAVE/abslocal/"
+  elif [ "$(basename $0)" = "backup_home" ]; then
+      #EXTERN_NTFS="/home/mounts/OONEESTORE"
+      #EXTERN_BTRFS="/home/mounts/OONEESAVE"
+      EXTERN_NTFS="/home/mounts/BackupHome"
+      EXTERN_BTRFS="/home/mounts/BackupHome"
+      echo "Starting backup of /home/data using rsync"
+      su ngoonee -c "rsync -q -a --exclude-from '/home/conf/excludedata' --progress --delete --modify-window=1 -b --backup-dir=${EXTERN_NTFS}/databackup/ /home/data/ ${EXTERN_NTFS}/data/"
+      echo "Starting backup of /home using rdiff-backup"
+      su ngoonee -c "rdiff-backup -v3 --exclude-globbing-filelist /home/conf/excludehome /home ${EXTERN_BTRFS}/home" 
+      echo "Starting backup of /etc using rdiff-backup"
+      rdiff-backup -v3 /etc ${EXTERN_BTRFS}/etc
+  else
+    echo "Please run the backup script using the backup_uni/back_home symlinks"
+  fi

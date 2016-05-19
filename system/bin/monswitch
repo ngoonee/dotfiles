@@ -1,0 +1,74 @@
+#!/bin/bash
+#
+# This script toggles the extended monitor outputs if something is connected
+#
+
+# all available outputs
+OUTPUTS=$(xrandr |awk '$2 ~ /connected/ {print $1}')
+
+# your notebook LVDS monitor
+DEFAULT_OUTPUT=$(sed -ne 's/.*\(LVDS[^ ]*\).*/\1/p' <<<$OUTPUTS)
+
+# get info from xrandr
+XRANDR=`xrandr`
+
+EXECUTE=""
+PREEXECUTE=""
+
+declare -A ACTIVE
+
+for CURRENT in $OUTPUTS
+do
+  ACTIVE[$CURRENT]=False
+done
+
+SCANNING="none"
+for LINE in $XRANDR
+do
+  for CURRENT in $OUTPUTS
+  do
+    if [[ $LINE == *$CURRENT* ]]
+    then
+      SCANNING=$CURRENT
+    fi
+  done
+  if [[ $LINE == *\** ]]
+  then
+    ACTIVE[$SCANNING]=True
+  fi
+done
+
+PRE=False
+
+for CURRENT in $OUTPUTS
+do
+  if [[ $CURRENT != $DEFAULT_OUTPUT ]]
+  then
+    PREEXECUTE+="--output $CURRENT --off "
+  fi
+  if [[ $XRANDR == *$CURRENT\ connected*  ]] # is connected
+  then
+    if [[ $CURRENT == $DEFAULT_OUTPUT ]]
+    then
+      EXECUTE+=""
+    #elif [[ $XRANDR == *$CURRENT\ connected\ \(* ]] # is disabled
+    else
+      if [[ ${ACTIVE[$CURRENT]} == True ]]
+      then
+        PRE=True
+      fi
+      EXECUTE+="--output $CURRENT --auto --right-of $DEFAULT_OUTPUT "
+    fi
+  else # make sure disconnected outputs are off 
+    EXECUTE+="--output $CURRENT --off "
+  fi
+done
+
+if [[ $PRE == True ]]
+then
+  xrandr --output $DEFAULT_OUTPUT --primary --auto $PREEXECUTE
+fi
+echo xrandr --output $DEFAULT_OUTPUT --primary --auto $EXECUTE
+xrandr --output $DEFAULT_OUTPUT --primary --auto $EXECUTE
+
+#systemctl --user restart animatedbackground.service
