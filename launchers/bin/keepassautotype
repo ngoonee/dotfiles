@@ -1,0 +1,10 @@
+#! /bin/bash
+
+if [ -z $(pgrep -f "KeePass.exe") ] ; then
+    echo first
+    (sleep 3 && keepass --auto-type) &
+    keepass -wa-disable:1418 &
+else
+    echo second
+    keepass --auto-type
+fi

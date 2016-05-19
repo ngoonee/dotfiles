@@ -1,0 +1,12 @@
+#!/bin/sh
+
+#ARCH=$(uname -m)
+#if [ $ARCH == "x86_64" ]; then
+#    schroot -p -- $0
+#    exit 0
+#fi
+
+WINEDEBUG=-all env WINEPREFIX="/home/LinuxProg/wine/esword" wine "C:\Program Files\e-Sword\e-Sword.exe"
+#WINEDEBUG=-all WINEPREFIX=/home/LinuxProg/wine/esword wine "C:\Program Files\e-Sword\e-Sword.exe"
+
+exit 0

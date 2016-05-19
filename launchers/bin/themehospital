@@ -1,0 +1,5 @@
+#! /bin/bash
+
+cd /home/LinuxProg/dosbox
+
+dosbox -conf /home/LinuxProg/dosbox/themehospital.conf

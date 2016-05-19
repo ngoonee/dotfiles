@@ -1,0 +1,2 @@
+#!/bin/bash
+env GTK2_RC_FILES=/usr/share/themes/Adwaita/gtk-2.0/gtkrc.light /usr/bin/opensong

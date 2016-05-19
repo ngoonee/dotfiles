@@ -1,0 +1,3 @@
+#!/bin/sh
+source /home/data/Coding/python-virtualenvs/songprez2/bin/activate
+python /home/data/Coding/python/songprez/main.py desktop

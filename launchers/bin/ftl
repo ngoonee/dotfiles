@@ -1,0 +1,3 @@
+#!/bin/sh
+cd "/home/data/Games/Steam/steamapps/common/FTL Faster Than Light/"
+./FTL

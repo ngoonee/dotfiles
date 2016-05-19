@@ -1,0 +1,12 @@
+#!/bin/sh
+WINEDIR="/home/LinuxProg/wine"
+GAMEDIR="$WINEDIR/pandemic/drive_c/Windemic 1.58"
+
+cd "$GAMEDIR"
+
+PREFIX="env WINEDEBUG=-all WINEPREFIX=$WINEDIR/pandemic"
+POSTFIX="wine Windemic.exe"
+
+COMMAND2="$PREFIX $POSTFIX"
+
+`$COMMAND2`

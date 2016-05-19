@@ -1,0 +1,4 @@
+#! /bin/bash
+cd /home/LinuxProg
+/home/data/Apps/Matlab/bin/matlab -desktop
+

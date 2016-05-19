@@ -1,0 +1,3 @@
+#! /bin/bash
+cd /home/LinuxProg
+/home/LinuxProg/Labview/usr/local/natinst/LabVIEW-8.5/labview
