@@ -1,0 +1,8 @@
+#!/bin/bash
+# fixedip by ngoonee Nov 3 2014
+#
+systemctl stop netctl-ifplugd@enp4s0.service || true
+
+ip link set enp4s0 down
+ip link set enp4s0 up
+ip addr add 192.168.0.2/24 broadcast 192.168.0.255 dev enp4s0

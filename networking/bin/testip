@@ -1,0 +1,24 @@
+#!/bin/bash
+# cpshortcuts by ngoonee, Jan 09
+
+#NET=59.191.194.
+NET=192.168.8.
+#modify the vars as appropriate to your use-case
+SAVEDIR=/home/shortcuts/
+APPDIR=/usr/share/applications/
+
+for NUM in `seq 1 255`; do
+  ping -c 1 -w 1 -q $NET$NUM | grep -B 1 '1 received' | grep 'ping statistics' | sed 's/--- 59.191.194.//g' | sed 's/ping statistics ---//g'
+  #echo $NUM
+  #nmap -p22 $NET$NUM | grep 'open'
+done
+#Check APPDIR for broken links, delete them
+#for FILE in $(ls $APPDIR | grep .desktop); do
+#	if [ -h $APPDIR$FILE ]; then
+#		if [ ! -e $APPDIR$FILE ]; then
+#			echo $APPDIR$FILE is a broken symbolic link, deleting...
+#			rm $APPDIR$FILE
+#		fi
+#	fi
+#done
+

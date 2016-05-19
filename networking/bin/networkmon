@@ -1,0 +1,32 @@
+#! /bin/bash
+
+function stop_all {
+    systemctl --user stop offlineimap.timer
+    systemctl --user stop offlineimap.service
+    pkill -f dropbox
+    hubic stop
+    pkill -f hubic
+    pkill -f skype
+}
+
+while true
+do
+  if [[ -s /home/conf/my_ip ]]; then
+    stop_all
+    sleep 1
+    SSID=`iwgetid wlp3s0 --raw`
+    if [[ $SSID == "OonEeHotspot" ]] || [[ $SSID == "NgHuddleXS" ]]; then
+      dropbox &
+    else
+      dropbox &
+      systemctl --user start offlineimap.service &
+      systemctl --user start offlineimap.timer
+      skype &
+      hubic start
+      hubic-gtk &
+    fi
+  else
+    stop_all
+  fi
+  inotifywait -qqe close_write /home/conf/my_ip 
+done

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -s /home/conf/.current_proxy ]; then
+  export http_proxy=`cat /home/conf/.current_proxy`
+fi
+executable=`basename $0`
+if [ -z "$1" ]; then
+  /usr/bin/"$executable"
+else
+  /usr/bin/"$executable" "$1"
+fi
+exit 0

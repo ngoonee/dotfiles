@@ -1,0 +1,15 @@
+#!/bin/sh
+
+if [[ $EUID -ne 0 ]]; then
+  echo "You must be a root user" 2>&1
+  exit 1
+else
+  /etc/rc.d/dnsmasq stop
+  ifconfig wlp3s0 down
+  iwconfig wlp3s0 mode Ad-Hoc
+  ifconfig wlp3s0 up
+  iwconfig wlp3s0 ESSID NGADHOC
+  ifconfig wlp3s0 192.168.0.1
+  /etc/rc.d/dnsmasq start
+  iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE
+fi

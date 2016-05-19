@@ -1,0 +1,4 @@
+#!/bin/bash
+wget --timeout=10 -4qO - http://checkip.eurodyndns.org | grep "Current IP Address" | awk '{print $4}' > /home/conf/my_ip
+
+exit 0

@@ -1,0 +1,4 @@
+#!/bin/sh
+rm -R /home/ngoonee/.config/qutebrowser
+rm -R /home/ngoonee/.local/share/qutebrowser
+rm -R /home/ngoonee/.cache/qutebrowser
