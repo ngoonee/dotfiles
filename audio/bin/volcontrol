@@ -1,0 +1,74 @@
+#!/bin/sh
+
+getdefaultsinkname() {
+    pacmd stat | awk -F": " '/^Default sink name: /{print $2}'
+}
+
+getdefaultsinkvol() {
+    pacmd list-sinks |
+        awk '/^\s+name: /{indefault = $2 == "<'$(getdefaultsinkname)'>"}
+            /^\s+volume: / && indefault {print $5; exit}' |
+        awk -F"%" '{print $1}'
+}
+
+setdefaultsinkvol() {
+    pactl -- set-sink-volume $(getdefaultsinkname) $1
+}
+
+getdefaultsinkmute() {
+    pacmd list-sinks |
+        awk '/^\s+name: /{indefault = $2 == "<'$(getdefaultsinkname)'>"}
+            /^\s+muted: / && indefault {print $2; exit}'
+}
+
+toggledefaultsinkmute() {
+    pactl -- set-sink-mute $(getdefaultsinkname) toggle
+}
+
+if [ "$1" = "up" ] ; then
+    $(setdefaultsinkvol +5%)
+    vol=$(getdefaultsinkvol)
+  #vol=$(amixer -D pulse sset Master 5%+ | grep -m 1 "%" | cut -d "[" -f2| cut -d "%" -f1)
+else
+  if [ "$1" = "down" ] ; then
+    $(setdefaultsinkvol -5%)
+    vol=$(getdefaultsinkvol)
+    #vol=$(amixer -D pulse sset Master 5%- | grep -m 1 "%" | cut -d "[" -f2| cut -d "%" -f1)
+  else
+    if [ "$1" = "mute" ] ; then
+        $(toggledefaultsinkmute)
+      #vol=$(amixer -D pulse sset Master toggle | grep -m 1 "%" | cut -d "[" -f2| cut -d "%" -f1)
+    else
+      echo "No valid action defined."
+      echo "Usage: volcontrol <action> where <action> is one of up, down, or mute"
+      #vol=$(amixer -D pulse get Master | grep -m 1 "%" | cut -d "[" -f2| cut -d "%" -f1)
+    fi
+  fi
+fi
+vol=$(getdefaultsinkvol)
+icon_name="/usr/share/icons/gnome/256x256/status/stock_"
+#amixer -D pulse get Master | grep "\[on\]" > /dev/null
+muted=$(getdefaultsinkmute)
+#if [ $? -ne 0 ] || [ "$vol" = "0" ] ; then
+if [ "$muted" = "yes" ] || [ "$vol" = "0" ] ; then
+  icon_name="$icon_name"volume-mute.png
+  vol="(Mute) $vol"
+else
+  if [ "$vol" -lt "33" ]; then
+    icon_name="$icon_name"volume-min.png
+  else
+    if [ "$vol" -lt "67" ]; then
+      icon_name="$icon_name"volume-med.png
+    else
+      icon_name="$icon_name"volume-max.png
+    fi
+  fi
+fi
+#twmnc -i $icon_name -c "$vol"% --id 1984 -s 128
+dunstify -i $icon_name "$vol"% -r 1985
+#notify-send "$vol"% -i $icon_name -t 3
+#dbus-send --session --type=method_call --reply-timeout=10000 \
+  #--dest=org.freedesktop.Notifications /org/freedesktop/Notifications \
+  #org.freedesktop.Notifications.Notify  string:"vol_notification"  uint32:1 \
+  #string:$icon_name  string:"Volume"  string:"$vol"% \
+  #array:string:"" dict:string:string:"",""  int32:3000

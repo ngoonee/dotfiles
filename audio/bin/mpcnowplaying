@@ -1,0 +1,14 @@
+#/bin/bash
+COUNTER=9
+until [ $COUNTER -lt 1 ]; do
+  #twmnc -c "$(mpc | sed 's\&\and\')" -d 1
+  dunstify -t 1 "$(mpc | sed 's\&\and\')"  -r 1984
+  #dbus-send --session --type=method_call --reply-timeout=10000 \
+    #--dest=org.freedesktop.Notifications /org/freedesktop/Notifications \
+    #org.freedesktop.Notifications.Notify  string:"mpc"  uint32:1 \
+    #string:""  string:"Now Playing" \
+    #string:"$(mpc | sed 's\&\and\')" \
+    #array:string:"" dict:string:string:"",""  int32:1400
+  sleep 0.5s
+  let COUNTER-=1
+done
