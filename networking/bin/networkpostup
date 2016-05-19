@@ -22,11 +22,11 @@ if echo "$ip_addr" | grep -qs "192\.168\.37\..*" ; then
   echo UTAR Proxy Set Up
   # Note, for dropbox's sake needs to have http:// in front of the host
 elif echo "$ip_addr" | grep -qs "192\.168\.68\..*" ; then
-  su ngoonee -c "/home/apps/CyberoamLinuxClient/crclient -u noe -i enp4s0"
+  su ngoonee -c "crclient -u noe -i enp4s0"
 elif echo "$ip_addr" | grep -qs "192\.168\.18\..*" ; then
-  su ngoonee -c "/home/apps/CyberoamLinuxClient/crclient -u noe -i enp4s0"
+  su ngoonee -c "crclient -u noe -i enp4s0"
 elif echo "$ip_addr" | grep -qs "192\.168\.8\..*" ; then
-  su ngoonee -c "/home/apps/CyberoamLinuxClient/crclient -u noe -i enp4s0"
+  su ngoonee -c "crclient -u noe -i enp4s0"
 else
   # We're not
   echo -n > /home/conf/.current_proxy
