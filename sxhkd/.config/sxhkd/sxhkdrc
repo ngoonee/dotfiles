@@ -1,28 +1,28 @@
 ### Volume Control ###
 XF86Audio{RaiseVolume,LowerVolume,Mute}
-    /home/scripts/volcontrol {up,down,mute}
+    volcontrol {up,down,mute}
 shift + alt + {q,a,s}
-    /home/scripts/volcontrol {up,down,mute}
+    volcontrol {up,down,mute}
 shift + alt + v
     pavucontrol
 shift + alt + w
-    /home/scripts/paswitch
+    paswitch
 
 ### Music Player ###
 XF86Audio{Play,Prev,Next}
-    /home/scripts/audio{play,prev,next}
+    audio{play,prev,next}
 XF86AudioStop
-    /home/scripts/mpcnowplaying
+    mpcnowplaying
 shift + alt + {x,z,c}
-    /home/scripts/audio{play,prev,next}
+    audio{play,prev,next}
 shift + alt + o
-    /home/scripts/mpcnowplaying
+    mpcnowplaying
 shift + alt + XF86Launch{1,2}
-    /home/scripts/audio{next,down}
+    audio{next,down}
 shift + alt + button2
-    /home/scripts/audioplay
+    audioplay
 shift + alt + button{4,5}
-    /home/scripts/volcontrol {up,down}
+    volcontrol {up,down}
 XF86Launch{1,2}
     xdotool key Ctrl{+,+Shift+}Tab
 
@@ -36,15 +36,15 @@ Print
 shift + Print
     scrot -s -e 'mv $f ~/screenshots/ 2>/dev/null'
 XF86Display
-    /home/scripts/monswitch
+    monswitch
 super + p
-    /home/scripts/monswitch
+    monswitch
 XF86{Kbd,Mon}Brightness{Up,Down}
-    sudo /home/scripts/{key,back}light {up,down}
+    sudo {key,back}light {up,down}
 XF86TouchpadToggle
-    /home/scripts/touchpad-toggle
+    touchpad-toggle
 ctrl + alt + a
-    /home/scripts/keepassautotype
+    keepassautotype
 XF86Calculator
     light-locker-command -l
 super + d
