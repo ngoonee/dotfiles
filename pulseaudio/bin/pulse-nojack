@@ -1,0 +1,27 @@
+#!/bin/bash
+# ORIGINAL SCRIPT FROM: http://ubuntuforums.org/showthread.php?t=904379&highlight=bash+ping
+# edited by edmondt in: http://ubuntuforums.org/showthread.php?t=939183
+# edited by ngoonee, Feb 2009
+
+# Start pulseaudio if it hasn't already been started
+pulseaudio --start
+
+JACKSINKID=$(pactl list | grep -B 1 "Name: module-jack-sink" | grep Module | sed 's/[^0-9]//g')
+JACKSOURCEID=$(pactl list | grep -B 1 "Name: module-jack-source" | grep Module | sed 's/[^0-9]//g')
+if [ -e $JACKSINKID ]; then
+    echo JACK sinks/sources not loaded, proceeding.
+else
+    echo JACK sinks/sources are loaded, ID of JACK sink is $JACKSINKID, ID of JACK source is $JACKSOURCEID...
+    echo Unloading module $JACKSINKID and $JACKSOURCEID
+    pactl unload-module $JACKSINKID
+    pactl unload-module $JACKSOURCEID
+fi
+
+if [ $( pidof jackdbus ) ]; then
+    echo JACK is running, killing jackd process...
+    jack_control exit
+else
+    echo JACK is not running, nothing to be done.
+fi
+
+exit 0
