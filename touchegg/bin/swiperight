@@ -1,0 +1,9 @@
+#!/bin/sh
+
+WINTITLE=$(xdotool getwindowfocus getwindowname)
+if [[ $WINTITLE == *"Pentadactyl"* ]]; then
+    xdotool key Ctrl+Tab
+else
+    echo ""
+fi
+exit 0
