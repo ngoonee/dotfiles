@@ -15,7 +15,7 @@
 #fi
 
 IWBTGDIR="/home/data/Games/iwbtg"
-WINEDIR="/home/LinuxProg/wine"
+WINEDIR="/home/data/Apps/wine32"
 
 cd "$IWBTGDIR"
 
@@ -26,6 +26,6 @@ else
 fi
 
 #WINEDEBUG=-all WINEPREFIX=$WINEDIR/iwbtg $OSSCONVERTER wine "iwbtgbeta(fs).exe"
-WINEPREFIX=$WINEDIR/iwbtg $OSSCONVERTER wine "iwbtgbeta(fs).exe"
+WINEPREFIX=$WINEDIR $OSSCONVERTER wine "iwbtgbeta(fs).exe"
 
 exit 0

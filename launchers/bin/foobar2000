@@ -1,0 +1,18 @@
+#!/bin/sh
+WINEDIR="/home/data/Apps/wine32"
+GAMEDIR="$WINEDIR/drive_c/Program Files/foobar"
+
+cd "$GAMEDIR"
+
+PREFIX="env WINEDEBUG=-all WINEPREFIX=$WINEDIR"
+POSTFIX="wine foobar2000.exe"
+
+if [ "$(pidof pulseaudio)" ] ; then
+    OSSCONVERTER=padsp
+else
+    OSSCONVERTER=aoss
+fi
+
+COMMAND2="$PREFIX $OSSCONVERTER $POSTFIX"
+
+`$COMMAND2`
