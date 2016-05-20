@@ -7,12 +7,6 @@ cd "$GAMEDIR"
 PREFIX="env WINEDEBUG=-all WINEPREFIX=$WINEDIR"
 POSTFIX="wine foobar2000.exe"
 
-if [ "$(pidof pulseaudio)" ] ; then
-    OSSCONVERTER=padsp
-else
-    OSSCONVERTER=aoss
-fi
-
-COMMAND2="$PREFIX $OSSCONVERTER $POSTFIX"
+COMMAND2="$PREFIX $POSTFIX"
 
 `$COMMAND2`

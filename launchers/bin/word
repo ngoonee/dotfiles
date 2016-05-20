@@ -1,0 +1,12 @@
+#!/bin/sh
+WINEDIR="/home/data/Apps/MicrosoftOffice"
+GAMEDIR="$WINEDIR/drive_c/Program Files/Microsoft Office/Office14"
+
+cd "$GAMEDIR"
+
+PREFIX="env WINEDEBUG=-all WINEPREFIX=$WINEDIR"
+POSTFIX="wine WINWORD.EXE"
+
+COMMAND2="$PREFIX $POSTFIX"
+
+`$COMMAND2`

@@ -1,31 +1,10 @@
 #!/bin/sh
-#uncomment if launching from console session
-#sudo /etc/init.d/gdm stop
-#KDE use this instead
-#sudo /etc/init.d/kdm stop
-
-# Launches a new X session on display 3. If you don't have an Nvidia card
-# take out the "& nvidia-settings --load-config-only" part
-#X :3 -ac & nvidia-settings --load-config-only
-
-#ARCH=$(uname -m)
-#if [ $ARCH == "x86_64" ]; then
-#    schroot -p -- $0
-#    exit 0
-#fi
 
 IWBTGDIR="/home/data/Games/iwbtg"
 WINEDIR="/home/data/Apps/wine32"
 
 cd "$IWBTGDIR"
 
-if [ "$(pidof pulseaudio)" ] ; then
-    OSSCONVERTER=padsp
-else
-    OSSCONVERTER=aoss
-fi
-
-#WINEDEBUG=-all WINEPREFIX=$WINEDIR/iwbtg $OSSCONVERTER wine "iwbtgbeta(fs).exe"
-WINEPREFIX=$WINEDIR $OSSCONVERTER wine "iwbtgbeta(fs).exe"
+WINEPREFIX=$WINEDIR wine "iwbtgbeta(fs).exe"
 
 exit 0
