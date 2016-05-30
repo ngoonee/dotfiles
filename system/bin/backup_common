@@ -40,11 +40,16 @@ disable_services
 sleep 1
 
 if [ "$(basename $0)" = "backup_home" ]; then
-  su ngoonee -c "rsync -rlptoD --exclude-from '/home/conf/excludehome' --progress --delete --modify-window=1 -e 'ssh -p 25008' /home/ alarm@bethsimchatadonai.noip.me:/mnt/WD3TB/oonee/home/"
-  su ngoonee -c "rsync -rlptoD --exclude-from '/home/conf/excludedata' --progress --delete --modify-window=1 -e 'ssh -p 25008' /home/data/ alarm@bethsimchatadonai.noip.me:/mnt/WD3TB/oonee/data/"
   rsync -rlptoD --progress --delete --modify-window=1 -e 'ssh -p 25008' /etc/ root@bethsimchatadonai.noip.me:/mnt/WD3TB/oonee/etc/
+  su ngoonee -c "rsync -rlptoD --exclude-from '/home/conf/excludedata' --progress --delete --modify-window=1 -e 'ssh -p 25008' /home/data/ alarm@bethsimchatadonai.noip.me:/mnt/WD3TB/oonee/data/"
+  su ngoonee -c "rsync -rlptoD --exclude-from '/home/conf/excludehome' --progress --delete --modify-window=1 -e 'ssh -p 25008' /home/ alarm@bethsimchatadonai.noip.me:/mnt/WD3TB/oonee/home/"
 elif [ "$(basename $0)" = "backup_uni" ]; then
   echo "Not yet done the uni backup commands"
+elif [ "$(basename $0)" = "backup_test" ]; then
+  echo "Testing settings"
+  rsync -nrlptoD --progress --delete --modify-window=1 -e 'ssh -p 25008' /etc/ root@bethsimchatadonai.noip.me:/mnt/WD3TB/oonee/etc/
+  su ngoonee -c "rsync -nrlptoD --exclude-from '/home/conf/excludedata' --progress --delete --modify-window=1 -e 'ssh -p 25008' /home/data/ alarm@bethsimchatadonai.noip.me:/mnt/WD3TB/oonee/data/"
+  su ngoonee -c "rsync -nrlptoD --exclude-from '/home/conf/excludehome' --progress --delete --modify-window=1 -e 'ssh -p 25008' /home/ alarm@bethsimchatadonai.noip.me:/mnt/WD3TB/oonee/home/"
 else
   echo "Please run the backup script using the backup_uni/back_home symlinks"
 fi
