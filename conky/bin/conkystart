@@ -11,17 +11,29 @@ while read -r line; do
     init_y=$(echo $pos | cut -d x -f 2 | cut -d + -f 1)
     incr_x=$(echo $pos | cut -d + -f 2)
     right_x=$(($cur_x - $init_x - $incr_x))
+    #echo cur_x $cur_x
+    #echo line $line
+    #echo output $output
+    #echo pos $pos
+    #echo init_x $init_x
+    #echo init_y $init_y
+    #echo incr_x $incr_x
+    #echo right_x $right_x
     if [[ $output == LVDS1 ]]; then
-        conky -d -q -c ~/.config/conky/bottombar.conf -x $right_x
+        #conky -d -q -c ~/.config/conky/bottombar.conf -x $right_x
+        conky -d -q -c ~/.config/conky/bottombar.conf
         conky -d -q -c ~/.config/conky/topbar.conf
-        conky -d -q -c ~/.config/conky/bottomleftbar.conf -x $incr_x
+        #conky -d -q -c ~/.config/conky/bottomleftbar.conf -x $incr_x
+        conky -d -q -c ~/.config/conky/bottomleftbar.conf
     fi
     spacing_x=$(printf %.0f $(bc <<< "scale=0;$init_x * 0.55"))
     spacing_y=$(printf %.0f $(bc <<< "scale=0;$init_y / 8"))
+    #echo spacing_x $spacing_x
+    #echo spacing_y $spacing_y
     # Scale fonts according to the screen size
     ratio=$(bc <<< "scale=4;$init_x/1920")
     if [[ $output == LVDS1 ]]; then
-        conky -d -q -x $((right_x + spacing_x)) -y $spacing_y -c ~/.config/conky/clock.conf
+        conky -d -q -x $((spacing_x)) -y $spacing_y -c ~/.config/conky/clock.conf
         conky -d -q -x $((incr_x + spacing_x)) -y $spacing_y -c ~/.config/conky/date.conf
     else
         basefont=140
@@ -32,7 +44,8 @@ while read -r line; do
         newsmallfont=$(printf %.0f $(bc <<< "scale=0;$smallfont * $ratio"))
         newvoffset=$(printf %.0f $(bc <<< "scale=0;$voffset * $ratio"))
         newoffset=$(printf %.0f $(bc <<< "scale=0;$offset * $ratio"))
-        cat ~/.config/conky/clock.conf | sed "s|$basefont|$newbasefont|g ; s|$smallfont|$newsmallfont|g ; s|$voffset|$newvoffset|g ; s|$offset|$newoffset|g" | conky -d -q -x $((right_x + spacing_x)) -y $spacing_y -c /dev/stdin
+        #cat ~/.config/conky/clock.conf | sed "s|$basefont|$newbasefont|g ; s|$smallfont|$newsmallfont|g ; s|$voffset|$newvoffset|g ; s|$offset|$newoffset|g" | conky -d -q -x $((right_x + spacing_x)) -y $spacing_y -c /dev/stdin
+        cat ~/.config/conky/clock.conf | sed "s|$basefont|$newbasefont|g ; s|$smallfont|$newsmallfont|g ; s|$voffset|$newvoffset|g ; s|$offset|$newoffset|g" | conky -d -q -x $((-init_x+spacing_x)) -y $spacing_y -c /dev/stdin
         font=70
         plusoffset=20
         minusoffset=60
