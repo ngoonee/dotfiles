@@ -136,6 +136,7 @@ augroup END
 " Options for vim-slime
 let g:slime_target = "tmux"
 let g:slime_python_ipython = 1
+let g:slime_paste_file = "/tmp/.slime_paste"
 
 " Gundo options (undo tree)
 let g:gundo_prefer_python3 = 1
