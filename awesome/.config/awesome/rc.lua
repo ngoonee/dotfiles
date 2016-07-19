@@ -41,7 +41,7 @@ end
 beautiful.init("/home/ngoonee/.config/awesome/themes/dust/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "/home/scripts/urxvtc"
+terminal = "st"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -507,7 +507,7 @@ run_once("conkystart")
 --run_once("batti","","/usr/bin/python2 /usr/bin/batti")
 run_once("cbatticon")
 run_once("start-pulseaudio-x11")
-run_once("/home/scripts/networkmon","","/bin/bash /home/scripts/networkmon")
+run_once("networkmon","","/bin/bash /home/ngoonee/bin/networkmon")
 run_once("/usr/bin/dvcs-autosync","","/usr/bin/python2 /usr/bin/dvcs-autosync")
 run_once("wmname","LG3D")
 run_once("xset","s off")
