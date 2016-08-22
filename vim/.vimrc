@@ -93,8 +93,9 @@ set tabstop=4 " default space of a tab
 set shiftwidth=4 "default indentation spaces
 set textwidth=100
 " Formatting options ignore textwidth, instead just highlight whatever the
-" excess is. o is so that o/O within comments adds comments tag.
-set fo+=qotc
+" excess is. o is so that o/O within comments adds comments tag. r is so that
+" hitting 'enter' continues a comment
+set fo+=qotcr
 highlight Excess ctermbg=DarkGray guibg=Black
 match Excess /\%100v.*/
 " Use freedesktop.org clipboard rather than xorg clipboard
