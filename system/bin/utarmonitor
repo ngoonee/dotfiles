@@ -1,4 +1,4 @@
 #!/bin/sh
 xrandr --newmode "1366x768_59.8" 85.00 1368 1440 1576 1784 768 771 781 798 -hsync +vsync
 xrandr --addmode VGA1 1366x768_59.8
-xrandr --output LVDS1 --auto --output VGA1 --mode 1366x768_59.8 --rotate normal --right-of LVDS1
+xrandr --output LVDS1 --auto --output VGA1 --mode 1366x768_59.8 --rotate normal --left-of LVDS1
