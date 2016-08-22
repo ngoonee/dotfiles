@@ -1,9 +1,7 @@
 #! /bin/bash
 cur_x=$(xrandr | grep current | cut -d ' ' -f 8)
 laptop_pos=$(xrandr | grep LVDS1 | cut -d ' ' -f4)
-laptop_init_x=$(echo $laptop_pos | cut -d x -f 1)
-laptop_incr_x=$(echo $laptop_pos | cut -d + -f 2)
-laptop_right_x=$(($cur_x - $laptop_init_x - $laptop_incr_x))
+laptop_right_edge=$(echo $laptop_pos | cut -d + -f 2)
 while read -r line; do
     output=$(echo $line | cut -d ' ' -f1)
     pos=$(echo $line | sed 's| primary||' | cut -d ' ' -f3)
@@ -21,7 +19,7 @@ while read -r line; do
     #echo right_x $right_x
     if [[ $output == LVDS1 ]]; then
         #conky -d -q -c ~/.config/conky/bottombar.conf -x $right_x
-        conky -d -q -c ~/.config/conky/bottombar.conf
+        conky -d -q -c ~/.config/conky/bottombar.conf -x $incr_x
         conky -d -q -c ~/.config/conky/topbar.conf
         #conky -d -q -c ~/.config/conky/bottomleftbar.conf -x $incr_x
         conky -d -q -c ~/.config/conky/bottomleftbar.conf
@@ -33,8 +31,8 @@ while read -r line; do
     # Scale fonts according to the screen size
     ratio=$(bc <<< "scale=4;$init_x/1920")
     if [[ $output == LVDS1 ]]; then
-        conky -d -q -x $((spacing_x)) -y $spacing_y -c ~/.config/conky/clock.conf
-        conky -d -q -x $((incr_x + spacing_x)) -y $spacing_y -c ~/.config/conky/date.conf
+        conky -d -q -x $((incr_x + spacing_x)) -y $spacing_y -c ~/.config/conky/clock.conf
+        conky -d -q -x $((spacing_x)) -y $spacing_y -c ~/.config/conky/date.conf
     else
         basefont=140
         smallfont=70
@@ -45,14 +43,14 @@ while read -r line; do
         newvoffset=$(printf %.0f $(bc <<< "scale=0;$voffset * $ratio"))
         newoffset=$(printf %.0f $(bc <<< "scale=0;$offset * $ratio"))
         #cat ~/.config/conky/clock.conf | sed "s|$basefont|$newbasefont|g ; s|$smallfont|$newsmallfont|g ; s|$voffset|$newvoffset|g ; s|$offset|$newoffset|g" | conky -d -q -x $((right_x + spacing_x)) -y $spacing_y -c /dev/stdin
-        cat ~/.config/conky/clock.conf | sed "s|$basefont|$newbasefont|g ; s|$smallfont|$newsmallfont|g ; s|$voffset|$newvoffset|g ; s|$offset|$newoffset|g" | conky -d -q -x $((-init_x+spacing_x)) -y $spacing_y -c /dev/stdin
+        cat ~/.config/conky/clock.conf | sed "s|$basefont|$newbasefont|g ; s|$smallfont|$newsmallfont|g ; s|$voffset|$newvoffset|g ; s|$offset|$newoffset|g" | conky -d -q -x $((laptop_right_edge+laptop_right_edge-init_x+right_x+spacing_x)) -y $spacing_y -c /dev/stdin
         font=70
         plusoffset=20
         minusoffset=60
         newfont=$(printf %.0f $(bc <<< "scale=0;$font * $ratio"))
         newplusoffset=$(printf %.0f $(bc <<< "scale=0;$plusoffset * $ratio"))
         newminusoffset=$(printf %.0f $(bc <<< "scale=0;$minusoffset * $ratio"))
-        cat ~/.config/conky/date.conf | sed "s|$font|$newfont|g ; s|$plusoffset|$newplusoffset|g ; s|$minusoffset|$newminusoffset|g" | conky -d -q -x $((incr_x + spacing_x)) -y $spacing_y -c /dev/stdin
+        cat ~/.config/conky/date.conf | sed "s|$font|$newfont|g ; s|$plusoffset|$newplusoffset|g ; s|$minusoffset|$newminusoffset|g" | conky -d -q -x $((-laptop_right_edge+incr_x+spacing_x)) -y $spacing_y -c /dev/stdin
     fi
 done <<< "$(xrandr | grep " connected" | grep mm)"
 exit 0
