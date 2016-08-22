@@ -14,7 +14,7 @@ do
 #  ffmpeg -i "$f" -ab 128k -map_meta_data "${f}.mp3":"$f" "${f}.mp3"
   #ffmpeg -i "$f" -ab 192k "${f/.m4a}.mp3"
 #  ffmpeg -i "$f" "${f}.flac"
-  #convert -density 512 "$f" "${f/.pdf}.png"
+  #convert -verbose -quality 100 -density 150 "$f" "${f/.pdf}.png"
 
 done
 
