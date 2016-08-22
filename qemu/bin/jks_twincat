@@ -1,0 +1,20 @@
+#!/bin/bash
+
+rm /home/virtualdisks/JKS32bit.img.snap
+
+qemu-img create \
+    -o backing_file=/home/data/VirtualDisks/JKS32bit.img,backing_fmt=raw \
+    -f qcow2 \
+    /home/virtualdisks/JKS32bit.img.snap
+
+qemu-system-i386 \
+    -vga qxl \
+    -m 2G \
+    -enable-kvm \
+    -machine type=pc,accel=kvm \
+    -cpu core2duo \
+    -usbdevice tablet \
+    -netdev bridge,id=net0,br=br0 -device e1000-82545em,netdev=net0 \
+    -drive file=/home/virtualdisks/JKS32bit.img.snap \
+    #-spice port=5930,disable-ticketing -chardev spicevmc,id=vdagent,name=vdagent \
+    #-cdrom /usr/share/spice-guest-tools/spice-guest-tools.iso \
