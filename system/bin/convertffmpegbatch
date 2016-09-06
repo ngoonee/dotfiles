@@ -15,6 +15,7 @@ do
   #ffmpeg -i "$f" -ab 192k "${f/.m4a}.mp3"
 #  ffmpeg -i "$f" "${f}.flac"
   #convert -verbose -quality 100 -density 150 "$f" "${f/.pdf}.png"
+  #ffmpeg -i "$f" -qscale 30 -ab 192k -vf scale=320:-1 "${f}.mp4"
 
 done
 

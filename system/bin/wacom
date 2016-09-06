@@ -1,0 +1,31 @@
+#! /bin/bash
+
+device="Wacom Intuos4 4x6"
+stylus="$device Pen stylus"
+eraser="$device Pen eraser"
+cursor="$device Pen cursor"
+pad="$device Pad pad"
+
+STATUS=/tmp/wacomtoggle
+
+if [ ! -e $STATUS ]; then
+    touch $STATUS
+    xsetwacom --set "$stylus" MapToOutput "LVDS1"
+    xsetwacom --set "$eraser" MapToOutput "LVDS1"
+    xsetwacom --set "$cursor" MapToOutput "LVDS1"
+    xsetwacom --set "$pad" MapToOutput "LVDS1"
+else
+    rm $STATUS
+    screen=$(xrandr | grep " connected " | awk '{print $1}' | grep -v "LVDS")
+    xsetwacom --set "$stylus" MapToOutput "$screen"
+    xsetwacom --set "$eraser" MapToOutput "$screen"
+    xsetwacom --set "$cursor" MapToOutput "$screen"
+    xsetwacom --set "$pad" MapToOutput "$screen"
+fi
+
+xsetwacom set "$pad" Button 2 "key ctrl"
+xsetwacom set "$pad" Button 3 "key shift"
+xsetwacom set "$pad" Button 8 "key alt"
+xsetwacom set "$pad" Button 9 "key ctrl"
+xsetwacom set "$pad" Button 10 "key ctrl z"
+xsetwacom set "$pad" Button 11 "key ctrl shift z"
