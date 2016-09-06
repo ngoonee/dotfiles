@@ -1,3 +1,3 @@
 .include /etc/pulse/default.pa
-load-module module-ladspa-sink sink_name=crossfeed master=alsa_output.pci-0000_00_1b.0.analog-stereo plugin=bs2b label=bs2b control=700,4.5
-set-default-sink crossfeed
+# load-module module-ladspa-sink sink_name=crossfeed master=alsa_output.pci-0000_00_1b.0.analog-stereo plugin=bs2b label=bs2b control=700,4.5
+# set-default-sink crossfeed
