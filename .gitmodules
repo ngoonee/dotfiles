@@ -58,3 +58,7 @@
 	path = vim/.vim/bundle/vim-obsession
 	url = http://github.com/tpope/vim-obsession.git
     ignore = dirty
+[submodule "vim/.vim/bundle/vim-tmux-navigator"]
+	path = vim/.vim/bundle/vim-tmux-navigator
+	url = http://github.com/christoomey/vim-tmux-navigator.git
+    ignore = dirty
