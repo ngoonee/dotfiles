@@ -21,6 +21,13 @@ if echo "$ip_addr" | grep -qs "192\.168\.37\..*" ; then
   ln -sf /home/conf/proxy.pac.utar /home/conf/proxy.pac
   echo UTAR Proxy Set Up
   # Note, for dropbox's sake needs to have http:// in front of the host
+elif echo "$ip_addr" | grep -qs "192\.168\.21\..*" ; then
+  # We're in UTAR
+  systemctl start cntlm.service || true &
+  echo http://127.0.0.1:3128 > /home/conf/.current_proxy
+  ln -sf /home/conf/proxy.pac.utar /home/conf/proxy.pac
+  echo UTAR Proxy Set Up
+  # Note, for dropbox's sake needs to have http:// in front of the host
 elif echo "$ip_addr" | grep -qs "192\.168\.68\..*" ; then
   su ngoonee -c "/home/ngoonee/bin/crclient -u noe -i enp4s0"
 elif echo "$ip_addr" | grep -qs "192\.168\.18\..*" ; then
