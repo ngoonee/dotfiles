@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0')
+id=`xinput list | awk '$5 ~ /Touchpad/ {print $6}' |sed 's/id=//'`
+current=`xinput list-props $id | awk '$2 ~ /Enabled/ {print $4}'`
+xinput set-prop $id 128 $((1-current))
