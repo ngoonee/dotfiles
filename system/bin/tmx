@@ -49,11 +49,11 @@ else
         # to share windows
         tmux new-session -d -t $base_session -s $session_id
         # Create a new window in that session
-        if [ -z $2 ]; then
-            tmux new-window
-        else
-            tmux new-window $additional_arguments
-        fi
+        #if [ -z $2 ]; then
+            #tmux new-window
+        #else
+            #tmux new-window $additional_arguments
+        #fi
         # Attach to the new session
         tmux attach-session -t $session_id
         # When we detach from it, kill the session
