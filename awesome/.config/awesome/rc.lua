@@ -399,6 +399,10 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "Ardour" },
       properties = { floating = true } },
+    { rule = { class = "Pencil" },
+      properties = { floating = false,
+                     maximized_vertical = false,
+                     maximized_horizontal = false} },
     { rule = { class = "Gnumeric" },
       properties = { floating = false } },
     { rule = { name = "civ5 - Wine desktop" },
@@ -407,11 +411,14 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "rdesktop" },
       properties = { fullscreen = true } },
+    { rule = { class = "python2" },
+      properties = { floating = true } },
     { rule = { name = "File Operation Progress" },
       properties = { floating = true } },
     { rule = { name = "MATLAB"},
-      properties = { maximized_vertical = true,
-                     maximized_horizontal = true} },
+      properties = { floating = false,
+                     maximized_vertical = false,
+                     maximized_horizontal = false} },
     { rule = { name = "Presentation Helper" },
       properties = { floating = true } },
     --{ rule = { name = "Presentation"},
@@ -523,6 +530,6 @@ run_once("ario","-m","ario -m")
 --run_once("bluedevil")
 run_once("blueman-applet")
 run_once("light-locker")
-run_once("easystroke")
+--run_once("easystroke")
 run_once("dunst")
 run_once("libreoffice", "--quickstart --nologo --nodefault")
