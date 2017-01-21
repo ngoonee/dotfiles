@@ -8,3 +8,5 @@
 	ui = auto
 [push]
 	default = simple
+[alias]
+    tree = log --graph --decorate --pretty=oneline --decorate --abbrev-commit
