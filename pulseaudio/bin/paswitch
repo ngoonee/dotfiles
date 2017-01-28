@@ -28,8 +28,8 @@ for CARD in $cards; do
   fi
   if [ $CARD == $scindex ]; then # Choose the next card as default
     PICKNEXTCARD=1
-  elif [ $CARD == 0 ]; then
-    PICKNEXTCARD=1
+  #elif [ $CARD == 0 ]; then
+    #PICKNEXTCARD=1
   fi
   count=$((count+1))
 done
