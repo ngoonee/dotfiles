@@ -77,6 +77,12 @@ export ftp_proxy=`cat /home/conf/.current_proxy`
 export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
 xsource "/home/conf/zsh-history-substring-search.zsh"
 
+# For python-for-android
+export ANDROIDSDK="/home/ngoonee/.buildozer/android/platform/android-sdk-20"
+export ANDROIDNDK="/home/ngoonee/.buildozer/android/platform/android-ndk-r9c"
+export ANDROIDAPI="19"
+export ANDROIDNDKVER="r9c"
+
 # bind UP and DOWN arrow keys
 for keycode in '[' '0' 'O'; do
   bindkey "^[${keycode}A" history-substring-search-up

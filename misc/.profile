@@ -22,8 +22,8 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "/home/scripts" ] ; then
-    PATH="/home/scripts:$PATH"
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
 fi
 
 #export MATLAB_JAVA=/opt/java/jre
