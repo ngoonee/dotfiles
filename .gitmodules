@@ -62,3 +62,7 @@
 	path = vim/.vim/bundle/vim-beancount
 	url = https://github.com/nathangrigg/vim-beancount.git
     ignore = dirty
+[submodule "vim/.vim/bundle/vim-flake8"]
+	path = vim/.vim/bundle/vim-flake8
+	url = http://github.com/nvie/vim-flake8.git
+    ignore = dirty
