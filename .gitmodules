@@ -66,3 +66,7 @@
 	path = vim/.vim/bundle/vim-latex
 	url = http://github.com/vim-latex/vim-latex.git
     ignore = dirty
+[submodule "vim/.vim/bundle/vim-orgmode"]
+	path = vim/.vim/bundle/vim-orgmode
+	url = http://github.com/jceb/vim-orgmode
+    ignore = dirty
