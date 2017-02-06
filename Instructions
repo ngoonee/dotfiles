@@ -56,6 +56,8 @@ git submodule foreach git pull origin master (This works even from ~/dotfiles)
 Remove it from .gitmodules
 Remove it from .git/config
 Run git rm --cached [path-to-module]
+Run git rm -rf [path-to-module]
+Remove it from .git/modules/vim/.vim/bundle/[projectname]
 
 
 Links:-
