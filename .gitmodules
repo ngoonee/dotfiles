@@ -10,10 +10,6 @@
 	path = vim/.vim/bundle/vim-latex
 	url = http://git.code.sf.net/p/vim-latex/vim-latex
     ignore = dirty
-[submodule "vim/.vim/bundle/pep8"]
-	path = vim/.vim/bundle/pep8
-	url = https://github.com/vim-scripts/pep8.git
-    ignore = dirty
 [submodule "vim/.vim/bundle/todo.txt-vim"]
 	path = vim/.vim/bundle/todo.txt-vim
 	url = https://github.com/freitass/todo.txt-vim.git
@@ -65,3 +61,4 @@
 [submodule "vim/.vim/bundle/vim-beancount"]
 	path = vim/.vim/bundle/vim-beancount
 	url = https://github.com/nathangrigg/vim-beancount.git
+    ignore = dirty
