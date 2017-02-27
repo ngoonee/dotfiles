@@ -155,4 +155,7 @@ au BufWritePre /tmp/* setlocal noundofile
 " Enable opening new buffer without saving the old one
 set hidden
 
+" Beancount alignment marker
+let g:beancount_separator_col=66
+
 let g:ycm_path_to_python_interpreter = '/usr/bin/python'
