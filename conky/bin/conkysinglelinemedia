@@ -1,5 +1,8 @@
 #!/bin/bash
 
-mount | grep "^/dev" | grep -vE "^/dev/sda|^/dev/sdb" | sort | uniq | while read line ; do
+mount | grep "^/dev" | grep -vE "^/dev/sda|^/dev/sdb" | sort | uniq --check-chars=0 | while read line ; do
+    device=`echo $line | awk '{ print $1 }' | sed 's/\/dev\///'`
+    mount=`echo $line | sed 's|.*on \(.*\) type.*|\1|'`
+    mountnospace=`echo $line | sed 's|.*on \(.*\) type.*|\1|' | sed 's/ /\\\ /g'`
     echo $line
 done
