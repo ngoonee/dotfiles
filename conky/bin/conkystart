@@ -1,6 +1,6 @@
 #! /bin/bash
 cur_x=$(xrandr | grep current | cut -d ' ' -f 8)
-laptop_pos=$(xrandr | grep LVDS1 | cut -d ' ' -f4)
+laptop_pos=$(xrandr | grep LVDS-1 | cut -d ' ' -f4)
 laptop_right_edge=$(echo $laptop_pos | cut -d + -f 2)
 while read -r line; do
     output=$(echo $line | cut -d ' ' -f1)
@@ -17,7 +17,7 @@ while read -r line; do
     #echo init_y $init_y
     #echo incr_x $incr_x
     #echo right_x $right_x
-    if [[ $output == LVDS1 ]]; then
+    if [[ $output == LVDS-1 ]]; then
         #conky -d -q -c ~/.config/conky/bottombar.conf -x $right_x
         conky -d -q -c ~/.config/conky/bottombar.conf -x $incr_x
         conky -d -q -c ~/.config/conky/topbar.conf
@@ -30,7 +30,7 @@ while read -r line; do
     #echo spacing_y $spacing_y
     # Scale fonts according to the screen size
     ratio=$(bc <<< "scale=4;$init_x/1920")
-    if [[ $output == LVDS1 ]]; then
+    if [[ $output == LVDS-1 ]]; then
         conky -d -q -x $((incr_x + spacing_x)) -y $spacing_y -c ~/.config/conky/clock.conf
         conky -d -q -x $((spacing_x)) -y $spacing_y -c ~/.config/conky/date.conf
     else
