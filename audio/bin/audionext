@@ -2,17 +2,22 @@
 #echo 'KeyStrRelease XF86AudioNext KeyStrPress Alt_L KeyStrPress Shift_L KeyStrPress c KeyStrRelease c KeyStrRelease Shift_L KeyStrRelease Alt_L' | xmacroplay :0
 ps -e | grep quodlibet > /dev/null
 if [[ "$?" -eq 0 ]]; then
-  quodlibet --next
+    quodlibet --next
 else
-  ps -e | grep smplayer > /dev/null
-  if [[ "$?" -eq 0 ]]; then
-    smplayer -send-action play_next
-  else
-    ps -e | grep exaile > /dev/null
+    ps -e | grep smplayer > /dev/null
     if [[ "$?" -eq 0 ]]; then
-      exaile --next
+        smplayer -send-action play_next
     else
-      mpc next
+        ps -e | grep exaile > /dev/null
+        if [[ "$?" -eq 0 ]]; then
+            exaile --next
+        else
+            ps -e | grep spotify > /dev/null
+            if [[ "$?" -eq 0 ]]; then
+                playerctl next
+            else
+                mpc next
+            fi
+        fi
     fi
-  fi
 fi

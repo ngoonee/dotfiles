@@ -2,17 +2,22 @@
 #echo 'KeyStrRelease XF86AudioPlay KeyStrPress Alt_L KeyStrPress Shift_L KeyStrPress x KeyStrRelease x KeyStrRelease Shift_L KeyStrRelease Alt_L' | xmacroplay :0
 ps -e | grep quodlibet > /dev/null
 if [[ "$?" -eq 0 ]]; then
-  quodlibet --play-pause
+    quodlibet --play-pause
 else
-  ps -e | grep smplayer > /dev/null
-  if [[ "$?" -eq 0 ]]; then
-    smplayer -send-action play_or_pause
-  else
-    ps -e | grep exaile > /dev/null
+    ps -e | grep smplayer > /dev/null
     if [[ "$?" -eq 0 ]]; then
-      exaile --play-pause
+        smplayer -send-action play_or_pause
     else
-      mpc toggle
+        ps -e | grep exaile > /dev/null
+        if [[ "$?" -eq 0 ]]; then
+            exaile --play-pause
+        else
+            ps -e | grep spotify > /dev/null
+            if [[ "$?" -eq 0 ]]; then
+                playerctl play-pause
+            else
+                mpc toggle
+            fi
+        fi
     fi
-  fi
 fi
