@@ -1,6 +1,6 @@
 #!/bin/sh
-WINEDIR="/home/data/Apps/MicrosoftOffice"
-GAMEDIR="$WINEDIR/drive_c/Program Files/Microsoft Office/Office14"
+WINEDIR="/home/data/Apps/MicrosoftOffice2013"
+GAMEDIR="$WINEDIR/drive_c/Program Files/Microsoft Office/Office15"
 
 cd "$GAMEDIR"
 
