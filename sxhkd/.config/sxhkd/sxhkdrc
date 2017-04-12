@@ -28,7 +28,7 @@ XF86Launch{1,2}
 
 ### Shortcuts ###
 super + t
-    st
+    st -e tmx base
 #    termite -e 'tmx base'
 Print
     scrot -e 'mv $f ~/screenshots/ 2>/dev/null'
