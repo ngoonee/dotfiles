@@ -48,6 +48,7 @@ ctrl + alt + a
 XF86Calculator
     light-locker-command -l
 super + d
-    dmenu_run -i -b -l 10
+    rofi -show combi
+    #dmenu_run -i -b -l 10
 super + e
     emacsclient -c -n -e '(switch-to-buffer nil)'
