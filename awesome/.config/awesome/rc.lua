@@ -6,6 +6,7 @@ require("awful.autofocus")
 local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
+local revelation = require("revelation")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
@@ -41,6 +42,9 @@ end
 beautiful.init(awful.util.get_themes_dir() .. "dust/theme.lua")
 beautiful.notification_font = "DejaVu Sans 16"
 beautiful.notification_opacity = 50
+
+-- Start revelation
+revelation.init()
 
 -- This is used later as the default terminal and editor to run.
 terminal = "st"
@@ -363,8 +367,7 @@ clientkeys = awful.util.table.join(
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
-    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
-              {description = "move to screen", group = "client"}),
+    awful.key({ modkey,           }, "o",      revelation),
     awful.key({ modkey, "Shift"   }, "u",      function (c) c:move_to_screen()               end,
               {description = "move to screen", group = "client"}),
     awful.key({ modkey, "Shift"   }, "i",      function (c) c:move_to_screen()               end,
@@ -618,3 +621,4 @@ run_once("light-locker")
 --run_once("easystroke")
 run_once("dunst")
 run_once("libreoffice", "--quickstart --nologo --nodefault")
+run_once("libinput-gestures-setup", "start")
