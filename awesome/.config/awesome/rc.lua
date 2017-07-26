@@ -7,7 +7,7 @@ local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
---local naughty = require("naughty")
+local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
@@ -39,6 +39,8 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(awful.util.get_themes_dir() .. "dust/theme.lua")
+beautiful.notification_font = "DejaVu Sans 16"
+beautiful.notification_opacity = 50
 
 -- This is used later as the default terminal and editor to run.
 terminal = "st"
