@@ -24,10 +24,10 @@ else
     xsetwacom --set "$pad" MapToOutput "$screen"
 fi
 
-xsetwacom set "$pad" Button 1 "key F1"
-xsetwacom set "$pad" Button 2 "key alt"
-xsetwacom set "$pad" Button 3 "key ctrl F6"
-xsetwacom set "$pad" Button 8 "key shift"
+xsetwacom set "$pad" Button 1 "key ctrl F6"
+xsetwacom set "$pad" Button 2 "key +alt"
+xsetwacom set "$pad" Button 3 "key +ctrl"
+xsetwacom set "$pad" Button 8 "key +shift"
 xsetwacom set "$pad" Button 9 "key shift +"
 xsetwacom set "$pad" Button 10 "key key -"
 xsetwacom set "$pad" Button 11 "key ctrl z"
