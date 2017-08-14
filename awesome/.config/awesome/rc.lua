@@ -598,7 +598,6 @@ end
 
 --run_once("/usr/bin/mpd ~/.config/mpd/mpd.conf")
 run_once("sxhkd")
-run_once("killall", "conky")
 run_once("conkystart")
 --run_once("synapse","-s","synapse -s")
 --run_once("batti","","/usr/bin/python2 /usr/bin/batti")

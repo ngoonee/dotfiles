@@ -1,4 +1,5 @@
 #! /bin/bash
+killall conky
 cur_x=$(xrandr | grep current | cut -d ' ' -f 8)
 laptop_pos=$(xrandr | grep LVDS1 | cut -d ' ' -f4)
 laptop_right_edge=$(echo $laptop_pos | cut -d + -f 2)
