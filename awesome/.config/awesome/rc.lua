@@ -9,7 +9,6 @@ local beautiful = require("beautiful")
 local revelation = require("revelation")
 -- Notification library
 local naughty = require("naughty")
-local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
 -- {{{ Error handling
@@ -93,31 +92,6 @@ local function client_menu_toggle_fn()
     end
 end
 -- }}}
-
--- {{{ Menu
--- Create a launcher widget and a main menu
-myawesomemenu = {
-   { "hotkeys", function() return false, hotkeys_popup.show_help end},
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end}
-}
-
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
-                                  }
-                        })
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
-
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
-
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
@@ -229,7 +203,6 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
             s.mypromptbox,
             myseparator,
             wibox.widget.systray(),
@@ -242,7 +215,6 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -271,18 +243,12 @@ globalkeys = awful.util.table.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
-              {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
               {description = "swap with next client by index", group = "client"}),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
               {description = "swap with previous client by index", group = "client"}),
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
-              {description = "focus the next screen", group = "screen"}),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
-              {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", function () awful.screen.focus_bydirection("left") end,
               {description = "focus the left screen", group = "screen"}),
     awful.key({ modkey,           }, "i", function () awful.screen.focus_bydirection("right") end,
@@ -322,17 +288,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
 
-    awful.key({ modkey, "Control" }, "n",
-              function ()
-                  local c = awful.client.restore()
-                  -- Focus restored client
-                  if c then
-                      client.focus = c
-                      c:raise()
-                  end
-              end,
-              {description = "restore minimized", group = "client"}),
-
     -- Prompt
     awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
               {description = "run prompt", group = "launcher"}),
@@ -346,10 +301,7 @@ globalkeys = awful.util.table.join(
                     history_path = awful.util.get_cache_dir() .. "/history_eval"
                   }
               end,
-              {description = "lua execute prompt", group = "awesome"}),
-    -- Menubar
-    awful.key({ modkey, "Control" }, "q", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "lua execute prompt", group = "awesome"})
 )
 
 clientkeys = awful.util.table.join(
@@ -360,8 +312,6 @@ clientkeys = awful.util.table.join(
         end,
         {description = "toggle fullscreen", group = "client"}),
     awful.key({ modkey, "Shift"     }, "c",      function (c) c:kill()                         end,
-              {description = "close", group = "client"}),
-    awful.key({ modkey,         }, "F4",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
@@ -374,13 +324,6 @@ clientkeys = awful.util.table.join(
               {description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
-    awful.key({ modkey,           }, "n",
-        function (c)
-            -- The client currently has the input focus, so it cannot be
-            -- minimized, since minimized clients can't have the focus.
-            c.minimized = true
-        end ,
-        {description = "minimize", group = "client"}),
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized = not c.maximized
@@ -596,11 +539,8 @@ function run_once(prg,arg_string,pname,screen)
     end
 end
 
---run_once("/usr/bin/mpd ~/.config/mpd/mpd.conf")
 run_once("sxhkd")
 run_once("conkystart")
---run_once("synapse","-s","synapse -s")
---run_once("batti","","/usr/bin/python2 /usr/bin/batti")
 run_once("cbatticon")
 run_once("start-pulseaudio-x11")
 run_once("networkmon","","/bin/bash /home/ngoonee/bin/networkmon")
@@ -608,15 +548,9 @@ run_once("/usr/bin/dvcs-autosync","","/usr/bin/python2 /usr/bin/dvcs-autosync")
 run_once("wmname","LG3D")
 run_once("xset","s off")
 run_once("xset","-dpms")
---run_once("keepassx","-min -lock")
---run_once("keepass","-minimize")
---run_once("/usr/bin/unagi")
 run_once("/usr/bin/compton", "-b")
---run_once("/usr/bin/bluedevil-monolithic")
 run_once("ario","-m","ario -m")
---run_once("bluedevil")
 run_once("blueman-applet")
---run_once("light-locker")
 --run_once("easystroke")
 run_once("dunst")
 run_once("libreoffice", "--quickstart --nologo --nodefault")
