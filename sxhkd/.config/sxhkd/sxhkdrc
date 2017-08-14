@@ -1,11 +1,11 @@
 ### Volume Control ###
 XF86Audio{RaiseVolume,LowerVolume,Mute}
     volcontrol {up,down,mute}
-shift + alt + {q,a,s}
+shift + super + {q,a,s}
     volcontrol {up,down,mute}
-shift + alt + v
+shift + super + v
     pavucontrol
-shift + alt + w
+shift + super + w
     paswitch
 
 ### Music Player ###
@@ -13,15 +13,15 @@ XF86Audio{Play,Prev,Next}
     audio{play,prev,next}
 XF86AudioStop
     mpcnowplaying
-shift + alt + {x,z,c}
+shift + super + {x,z,c}
     audio{play,prev,next}
-shift + alt + o
+shift + super + o
     mpcnowplaying
-shift + alt + XF86Launch{1,2}
+shift + super + XF86Launch{1,2}
     audio{next,down}
-shift + alt + button2
+shift + super + button2
     audioplay
-shift + alt + button{4,5}
+shift + super + button{4,5}
     volcontrol {up,down}
 XF86Launch{1,2}
     xdotool key Ctrl{+,+Shift+}Tab
@@ -29,12 +29,10 @@ XF86Launch{1,2}
 ### Shortcuts ###
 super + t
     st -e tmx base
-#    termite -e 'tmx base'
-Print
-    scrot -e 'mv $f ~/screenshots/ 2>/dev/null'
-#doesn't work, giblib error
-shift + Print
+@Print
     scrot -s -e 'mv $f ~/screenshots/ 2>/dev/null'
+shift + Print
+    scrot -e 'mv $f ~/screenshots/ 2>/dev/null'
 XF86Display
     monswitch
 super + p
@@ -43,12 +41,9 @@ XF86{Kbd,Mon}Brightness{Up,Down}
     sudo {key,back}light {up,down}
 XF86TouchpadToggle
     touchpad-toggle
-ctrl + alt + a
+ctrl + super + a
     keepassautotype
-XF86Calculator
-    light-locker-command -l
 super + d
     rofi -show combi
-    #dmenu_run -i -b -l 10
 super + e
     emacsclient -c -n -e '(switch-to-buffer nil)'
