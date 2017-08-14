@@ -27,7 +27,7 @@ XF86Launch{1,2}
     xdotool key Ctrl{+,+Shift+}Tab
 
 ### Shortcuts ###
-super + t
+super + g
     st -e tmx base
 @Print
     scrot -s -e 'mv $f ~/screenshots/ 2>/dev/null'
@@ -47,3 +47,15 @@ super + d
     rofi -show combi
 super + e
     emacsclient -c -n -e '(switch-to-buffer nil)'
+super + a
+    xte "keyup Super_L" "keyup a" "keydown Control_L" "key a" "keyup Control_L" "keydown Super_L"
+super + x
+    xte "keyup Super_L" "keyup x" "keydown Control_L" "key x" "keyup Control_L" "keydown Super_L"
+super + c
+    xte "keyup Super_L" "keyup c" "keydown Control_L" "key c" "keyup Control_L" "keydown Super_L"
+super + v
+    xte "keyup Super_L" "keyup v" "keydown Control_L" "key v" "keyup Control_L" "keydown Super_L"
+super + w
+    xte "keyup Super_L" "keyup w" "keydown Control_L" "key w" "keyup Control_L" "keydown Super_L"
+super + t
+    xte "keyup Super_L" "keyup t" "keydown Control_L" "key t" "keyup Control_L" "keydown Super_L"
