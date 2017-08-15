@@ -256,10 +256,6 @@ globalkeys = awful.util.table.join(
               {description = "focus the left screen", group = "screen"}),
     awful.key({ modkey,           }, "i", function () awful.screen.focus_bydirection("right") end,
               {description = "focus the right screen", group = "screen"}),
-    awful.key({ modkey, "Shift"   }, "u",      function (c) c:move_to_screen()               end,
-              {description = "move to screen", group = "screen"}),
-    awful.key({ modkey, "Shift"   }, "i",      function (c) c:move_to_screen()               end,
-              {description = "move to screen", group = "screen"}),
     awful.key({ modkey,           }, "Tab",
         function ()
             awful.client.focus.history.previous()
@@ -324,6 +320,10 @@ clientkeys = awful.util.table.join(
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
+    awful.key({ modkey, "Shift"   }, "u",      function (c) c:move_to_screen()               end,
+              {description = "move to screen", group = "screen"}),
+    awful.key({ modkey, "Shift"   }, "i",      function (c) c:move_to_screen()               end,
+              {description = "move to screen", group = "screen"}),
     awful.key({ modkey,           }, "o",      revelation),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
