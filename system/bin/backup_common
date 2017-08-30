@@ -40,9 +40,9 @@ disable_services
 sleep 1
 
 if [ "$(basename $0)" = "backup_home" ]; then
-  rsync -rlptoD --progress --delete --modify-window=1 -e 'ssh -p 25008' /etc/ bethsimchatadonai.noip.me:/mnt/WD3TB/oonee/etc/
-  su ngoonee -c "rsync -rlptoD --exclude-from '/home/conf/excludedata' --progress --delete --modify-window=1 -e 'ssh -p 25008' /home/data/ bethsimchatadonai.noip.me:/mnt/WD3TB/oonee/data/"
-  su ngoonee -c "rsync -rlptoD --exclude-from '/home/conf/excludehome' --progress --delete --modify-window=1 -e 'ssh -p 25008' /home/ bethsimchatadonai.noip.me:/mnt/WD3TB/oonee/home/"
+  rsync -rlptoD --progress --delete --modify-window=1 -e 'ssh -p 25008' /etc/ home_router:/mnt/WD3TB/oonee/etc/
+  su ngoonee -c "rsync -rlptoD --exclude-from '/home/conf/excludedata' --progress --delete --modify-window=1 -e 'ssh -p 25008' /home/data/ home_router:/mnt/WD3TB/oonee/data/"
+  su ngoonee -c "rsync -rlptoD --exclude-from '/home/conf/excludehome' --progress --delete --modify-window=1 -e 'ssh -p 25008' /home/ home_router:/mnt/WD3TB/oonee/home/"
 elif [ "$(basename $0)" = "backup_uni" ]; then
   BASE="192.168.37.88:/mnt/UNIBACKUP"
   BASE="/home/mounts/UniBackup"
@@ -57,9 +57,9 @@ elif [ "$(basename $0)" = "backup_uni" ]; then
   su ngoonee -c "rsync -rlptoD --exclude-from '/home/conf/excludehome' --no-i-r --info=progress2 --delete --modify-window=1 /home/ ${BASE}/home/"
 elif [ "$(basename $0)" = "backup_test" ]; then
   echo "Testing settings"
-  rsync -nrlptoD --progress --delete --modify-window=1 -e 'ssh -p 25008' /etc/ bethsimchatadonai.noip.me:/mnt/WD3TB/oonee/etc/
-  su ngoonee -c "rsync -nrlptoD --exclude-from '/home/conf/excludedata' --progress --delete --modify-window=1 -e 'ssh -p 25008' /home/data/ bethsimchatadonai.noip.me:/mnt/WD3TB/oonee/data/"
-  su ngoonee -c "rsync -nrlptoD --exclude-from '/home/conf/excludehome' --progress --delete --modify-window=1 -e 'ssh -p 25008' /home/ bethsimchatadonai.noip.me:/mnt/WD3TB/oonee/home/"
+  rsync -nrlptoD --progress --delete --modify-window=1 -e 'ssh -p 25008' /etc/ home_router:/mnt/WD3TB/oonee/etc/
+  su ngoonee -c "rsync -nrlptoD --exclude-from '/home/conf/excludedata' --progress --delete --modify-window=1 -e 'ssh -p 25008' /home/data/ home_router:/mnt/WD3TB/oonee/data/"
+  su ngoonee -c "rsync -nrlptoD --exclude-from '/home/conf/excludehome' --progress --delete --modify-window=1 -e 'ssh -p 25008' /home/ home_router:/mnt/WD3TB/oonee/home/"
 else
   echo "Please run the backup script using the backup_uni/back_home symlinks"
 fi
