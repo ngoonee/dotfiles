@@ -47,6 +47,6 @@ super + d
     rofi -show combi
 super + e
     emacsclient -c -n -e '(switch-to-buffer nil)'
-super + {a, x, c, v, w, t, z, b}
-    key={a,x,c,v,w,t,z,b}; \
+super + {a, x, c, v, w, t, z, b, s}
+    key={a,x,c,v,w,t,z,b,s}; \
     xte "keyup Super_L" "keyup ${key}" "keydown Control_L" "key ${key}" "keyup Control_L" "keydown Super_L"
