@@ -3,7 +3,7 @@ cd /home/LinuxProg
 export MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre
 export LD_PRELOAD=/usr/lib/libstdc++.so
 export LD_LIBRARY_PATH=/usr/lib/xorg/modules/dri/
-mkdir /tmp/matlab
+mkdir -p /tmp/matlab
 export MATLAB_LOG_DIR=/tmp/matlab
 /home/data/Apps/Matlab2017/bin/matlab -desktop
 
