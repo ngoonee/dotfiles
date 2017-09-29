@@ -185,16 +185,16 @@ theme.mpd = lain.widget.mpd({
 
 -- ALSA volume
 local volicon = wibox.widget.imagebox()
-theme.volume = lain.widget.alsabar({
+theme.volume = lain.widget.pulsebar({
     --togglechannel = "IEC958,3",
     notification_preset = { font = "Monospace 12", fg = theme.fg_normal },
     settings = function()
-        local index, perc = "", tonumber(volume_now.level) or 0
+        local index, perc = "", tonumber(volume_now.left) or 0
 
         if volume_now.status == "off" then
             index = "volmutedblocked"
         else
-            if perc <= 5 then
+            if perc <= 5 or volume_now.muted == "yes" then
                 index = "volmuted"
             elseif perc <= 25 then
                 index = "vollow"
@@ -210,22 +210,22 @@ theme.volume = lain.widget.alsabar({
 })
 volicon:buttons(awful.util.table.join (
           awful.button({}, 1, function()
-            awful.spawn.with_shell(string.format("%s -e alsamixer", awful.util.terminal))
+            awful.spawn("pavucontrol")
           end),
           awful.button({}, 2, function()
-            awful.spawn(string.format("%s set %s 100%%", theme.volume.cmd, theme.volume.channel))
+            awful.spawn(string.format("pactl set-sink-volume %d 100%%", theme.volume.device))
             theme.volume.notify()
           end),
           awful.button({}, 3, function()
-            awful.spawn(string.format("%s set %s toggle", theme.volume.cmd, theme.volume.togglechannel or theme.volume.channel))
+            awful.spawn(string.format("pactl set-sink-mute %d toggle", theme.volume.device))
             theme.volume.notify()
           end),
           awful.button({}, 4, function()
-            awful.spawn(string.format("%s set %s 1%%+", theme.volume.cmd, theme.volume.channel))
+            awful.spawn(string.format("pactl set-sink-volume %d +1%%", theme.volume.device))
             theme.volume.notify()
           end),
           awful.button({}, 5, function()
-            awful.spawn(string.format("%s set %s 1%%-", theme.volume.cmd, theme.volume.channel))
+            awful.spawn(string.format("pactl set-sink-volume %d -1%%", theme.volume.device))
             theme.volume.notify()
           end)
 ))
@@ -332,6 +332,15 @@ local barcolor2 = gears.color({
 
 local dockshape = function(cr, width, height)
     gears.shape.partially_rounded_rect(cr, width, height, false, true, true, false, 6)
+end
+
+function theme.optional_mpd(s)
+  if s.index == 1 then
+    retval = wibox.widget { nil, nil, theme.mpd.widget, layout = wibox.layout.align.horizontal }
+  else
+    retval = wibox.widget.textbox(" ")
+  end
+  return retval
 end
 
 function theme.vertical_wibox(s)
@@ -453,7 +462,7 @@ function theme.at_screen_connect(s)
         },
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            wibox.widget { nil, nil, theme.mpd.widget, layout = wibox.layout.align.horizontal },
+            theme.optional_mpd(s),
             rspace0,
             theme.weather.icon,
             theme.weather.widget,
