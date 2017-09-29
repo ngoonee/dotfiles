@@ -18,13 +18,13 @@ while read -r line; do
     #echo init_y $init_y
     #echo incr_x $incr_x
     #echo right_x $right_x
-    if [[ $output == LVDS1 ]]; then
+    #if [[ $output == LVDS1 ]]; then
         #conky -d -q -c ~/.config/conky/bottombar.conf -x $right_x
-        conky -d -q -c ~/.config/conky/bottombar.conf -x $incr_x
-        conky -d -q -c ~/.config/conky/topbar.conf
+        #conky -d -q -c ~/.config/conky/bottombar.conf -x $incr_x
+        #conky -d -q -c ~/.config/conky/topbar.conf
         #conky -d -q -c ~/.config/conky/bottomleftbar.conf -x $incr_x
-        conky -d -q -c ~/.config/conky/bottomleftbar.conf
-    fi
+        #conky -d -q -c ~/.config/conky/bottomleftbar.conf
+    #fi
     spacing_x=$(printf %.0f $(bc <<< "scale=0;$init_x * 0.55"))
     spacing_y=$(printf %.0f $(bc <<< "scale=0;$init_y / 8"))
     #echo spacing_x $spacing_x
