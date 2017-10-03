@@ -12,7 +12,7 @@ local wibox = require("wibox")
 
 local math, string, tag, tonumber, type, os = math, string, tag, tonumber, type, os
 
-local theme                                     = {}
+theme                                           = {}
 theme.default_dir                               = require("awful.util").get_themes_dir() .. "default"
 theme.icon_dir                                  = os.getenv("HOME") .. "/.config/awesome/themes/vertex/icons"
 theme.wallpaper                                 = os.getenv("HOME") .. "/.config/awesome/themes/vertex/wall.png"

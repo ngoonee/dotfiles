@@ -64,8 +64,9 @@ else
     fi
   fi
 fi
+echo 'theme.volume.notify()' | awesome-client
 #twmnc -i $icon_name -c "$vol"% --id 1984 -s 128
-dunstify -i $icon_name "$vol"% -r 1985
+#dunstify -i $icon_name "$vol"% -r 1985
 #notify-send "$vol"% -i $icon_name -t 3
 #dbus-send --session --type=method_call --reply-timeout=10000 \
   #--dest=org.freedesktop.Notifications /org/freedesktop/Notifications \
