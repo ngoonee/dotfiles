@@ -1,0 +1,15 @@
+#!/bin/sh
+# Update routers
+scp -o ConnectTimeout=5 ~/.ssh/authorized_keys home_router:/home/root/.ssh/authorized_keys
+scp -o ConnectTimeout=5 ~/.ssh/authorized_keys home_router:/mnt/WD3TB/ssh/authorized_keys
+scp -o ConnectTimeout=5 ~/.ssh/authorized_keys usj2_router:/home/root/.ssh/authorized_keys
+scp -o ConnectTimeout=5 ~/.ssh/authorized_keys usj2_router:/mnt/NG3TB/ssh/authorized_keys
+# Update both pis
+ssh -o ConnectTimeout=5 home_pi "cd ~/dotfiles; git pull"
+ssh -o ConnectTimeout=5 tunnel_to_office_pi ". ~/.profile; cd ~/dotfiles; bash -c 'git pull'"
+ssh -o ConnectTimeout=5 office_pi ". ~/.profile; cd ~/dotfiles; bash -c 'git pull'"
+ssh -o ConnectTimeout=5 tunnel_to_home_pi "cd ~/dotfiles; git pull"
+# Update work machines
+scp -o ConnectTimeout=5 ~/.ssh/authorized_keys_work jks_debian:/home/noe/.ssh/authorized_keys
+scp -o ConnectTimeout=5 ~/.ssh/authorized_keys_work jks_owncloud:/home/jks/.ssh/authorized_keys
+scp -o ConnectTimeout=5 ~/.ssh/authorized_keys_work utarinventory:/home/utar/.ssh/authorized_keys
