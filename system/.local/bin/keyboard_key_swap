@@ -4,4 +4,5 @@ DISPLAY=":0.0"
 HOME=/home/ngoonee
 XAUTHORITY=$HOME/.Xauthority
 export DISPLAY HOME XAUTHORITY
-setxkbmap -option altwin:swap_alt_win
+setxkbmap -device 18 -option altwin:swap_alt_win
+setxkbmap -device 19 -option altwin:swap_alt_win
