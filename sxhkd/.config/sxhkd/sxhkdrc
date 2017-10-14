@@ -5,8 +5,6 @@ shift + super + {q,a,s}
     volcontrol {up,down,mute}
 shift + super + v
     pavucontrol
-shift + super + w
-    paswitch
 
 ### Music Player ###
 XF86Audio{Play,Prev,Next}
