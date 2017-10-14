@@ -16,7 +16,6 @@ theme                                           = {}
 theme.default_dir                               = require("awful.util").get_themes_dir() .. "default"
 theme.icon_dir                                  = os.getenv("HOME") .. "/.config/awesome/themes/vertex/icons"
 theme.wallpaper                                 = os.getenv("HOME") .. "/.config/awesome/themes/vertex/wall.png"
-theme.wallpaper = "/home/data/storage/desktop_screensaver/Christian/praise-Lord-stringed-instruments-wallpaper_1920x1200.jpg"
 theme.font                                      = "Roboto Bold 10"
 theme.taglist_font                              = "FontAwesome 17"
 theme.fg_normal                                 = "#FFFFFF"
@@ -111,7 +110,7 @@ local markup = lain.util.markup
 
 -- Clock
 --os.setlocale(os.getenv("LANG")) -- to localize the clock
-local mytextclock = wibox.widget.textclock(markup("#FFFFFF", "%a %d %b, %r"))
+local mytextclock = wibox.widget.textclock(markup("#FFFFFF", "%a %d %b, %r"), 1)
 mytextclock.font = theme.font
 lain.widget.calendar({
     attach_to = { mytextclock },
@@ -404,6 +403,56 @@ function theme.vertical_wibox(s)
     end)
 end
 
+--{{ Asynchronous disk I/O watcher
+-- based on vicious.widget.dio
+local unit = { ["s"] = 1, ["kb"] = 2, ["mb"] = 2048 }
+local time_unit = { ["ms"] = 1, ["s"] = 1000 }
+local disk_stats, disk_time = {}, 0
+
+-- format units to one decimal point (vicious style)
+local function uformat(array, key, value, unit)
+    for u, v in pairs(unit) do
+        array["{"..key.."_"..u.."}"] = string.format("%.1f", value/v)
+    end
+    return array
+end
+
+local dio = awful.widget.watch(
+    { awful.util.shell, "-c", "cat /proc/diskstats" },
+    2, -- refresh timeout
+    function(widget, stdout)
+        local disk_lines, disk_usage = {}, {}
+        local interval = os.difftime(os.time(), disk_time)
+        if interval == 0 then interval = 1 end
+        for line in stdout:gmatch("[^\r\n]+") do
+            local device, read, write, iotime =
+            line:match("([^%s]+) %d+ %d+ (%d+) %d+ %d+ %d+ (%d+) %d+ %d+ (%d+)")
+
+            local last_stats = disk_stats[device] or { read, write, iotime }
+
+            -- Check for overflows and counter resets (> 2^32)
+            if read < last_stats[1] or write < last_stats[2] then
+                last_stats[1], last_stats[2], last_stats[3] = read, write, iotime
+            end
+
+            -- Diskstats are absolute, substract our last reading
+            -- * divide by timediff because we don't know the timer value
+            read = (read - last_stats[1]) / interval
+            write = (write - last_stats[2]) / interval
+            iotime = (iotime - last_stats[3]) / interval
+
+            -- Calculate and store I/O
+            uformat(disk_usage, device.." read",  read,  unit)
+            uformat(disk_usage, device.." write", write, unit)
+            uformat(disk_usage, device.." total", read + write, unit)
+            uformat(disk_usage, device.." iotime", iotime, time_unit)
+        end
+
+        -- Customise here
+        widget:set_text("sda read_mb "..disk_usage["{sda total_kb}"])
+    end
+)
+-- }}
 
 function theme.at_screen_connect(s)
     -- If wallpaper is a function, call it with the screen
@@ -466,6 +515,8 @@ function theme.at_screen_connect(s)
             rspace0,
             theme.weather.icon,
             theme.weather.widget,
+            rspace1,
+            dio,
             rspace1,
             wificon,
             rspace0,
