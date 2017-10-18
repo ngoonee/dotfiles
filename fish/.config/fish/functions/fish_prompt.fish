@@ -1,3 +1,4 @@
+# Defined in /tmp/fish.o7MggH/fish_prompt.fish @ line 2
 function fish_prompt --description 'Write out the prompt'
 	if not set -q __fish_git_prompt_show_informative_status
         set -g __fish_git_prompt_show_informative_status 1
@@ -82,6 +83,10 @@ function fish_prompt --description 'Write out the prompt'
     set_color normal
 
     printf '%s ' (__fish_vcs_prompt)
+
+    if set -q VIRTUAL_ENV
+        echo -n -s (set_color -b blue white) "(" (basename "$VIRTUAL_ENV") ")" (set_color normal) " "
+    end
 
     if not test $last_status -eq 0
         set_color $fish_color_error
