@@ -35,7 +35,12 @@ export WINEDLLOVERRIDES='winemenubuilder.exe=d'
 export PYTHONSTARTUP='/home/conf/pystartup'
 
 # Use VirtualEnvWrapper
-export WORKON_HOME=/home/data/Coding/python-virtualenvs
+export VIRTUALFISH_HOME=~/Documents/Code/venvs
+
+export http_proxy="http://127.0.0.1:3128"
+export https_proxy="http://127.0.0.1:3128"
+export ftp_proxy="http://127.0.0.1:3128"
+export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
 
 vt=$(fgconsole 2>/dev/null)
 (( vt == 1 )) && exec startx -- vt$vt &> ~/.xlog
