@@ -62,3 +62,11 @@
 	path = vim/.vim/bundle/vim-orgmode
 	url = http://github.com/jceb/vim-orgmode
     ignore = dirty
+[submodule "tmux/.tmux/plugins/tmux-resurrect"]
+	path = tmux/.tmux/plugins/tmux-resurrect
+	url = https://github.com/tmux-plugins/tmux-resurrect
+    ignore = dirty
+[submodule "tmux/.tmux/plugins/tmux-continuum"]
+	path = tmux/.tmux/plugins/tmux-continuum
+	url = https://github.com/tmux-plugins/tmux-continuum
+    ignore = dirty
