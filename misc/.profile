@@ -35,7 +35,7 @@ export WINEDLLOVERRIDES='winemenubuilder.exe=d'
 export PYTHONSTARTUP='/home/conf/pystartup'
 
 # Use VirtualEnvWrapper
-export VIRTUALFISH_HOME=~/Documents/Code/venvs
+export VIRTUALFISH_HOME=~/Files/Code/venvs
 
 export http_proxy="http://127.0.0.1:3128"
 export https_proxy="http://127.0.0.1:3128"

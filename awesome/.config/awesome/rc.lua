@@ -55,7 +55,16 @@ local function run_once(cmd_arr)
         awful.spawn.with_shell(string.format("pgrep -u $USER -x %s > /dev/null || (%s)", findme, cmd))
     end
 end
-
+run_once({
+    "sxhkd",
+    "unclutter -root",
+    "wmname LG3D",
+    "/usr/bin/compton", "-b",
+    "blueman-applet",
+    "emacs --daemon",
+    "nm-applet",
+}) -- entries must be comma-separated
+--[[
 run_once({
     "sxhkd",
     "conkystart",
@@ -75,6 +84,7 @@ run_once({
     "libinput-gestures-setup start",
 }) -- entries must be comma-separated
 
+]]--
 -- }}}
 
 -- {{{ Variable definitions
