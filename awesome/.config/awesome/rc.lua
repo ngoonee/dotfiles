@@ -63,6 +63,7 @@ run_once({
     "blueman-applet",
     "emacs --daemon",
     "nm-applet",
+    "dropbox",
 }) -- entries must be comma-separated
 --[[
 run_once({
@@ -91,7 +92,7 @@ run_once({
 local chosen_theme = "vertex-custom"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
-local terminal     = "st -e tmx base"
+local terminal     = "xterm"
 local editor       = os.getenv("EDITOR") or "nano"
 local guieditor   = "gvim"
 local browser      = "firefox"
