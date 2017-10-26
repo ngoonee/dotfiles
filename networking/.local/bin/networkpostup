@@ -29,21 +29,21 @@ elif echo "$ip_addr" | grep -qs "192\.168\.21\..*" ; then
   echo UTAR Proxy Set Up
   # Note, for dropbox's sake needs to have http:// in front of the host
 elif echo "$ip_addr" | grep -qs "192\.168\.68\..*" ; then
+  systemctl start squid.service || true &
   su ngoonee -c "/home/ngoonee/.local/bin/crclient -u noe -i enp4s0"
 elif echo "$ip_addr" | grep -qs "192\.168\.18\..*" ; then
+  systemctl start squid.service || true &
   su ngoonee -c "/home/ngoonee/.local/bin/crclient -u noe -i enp4s0"
 elif echo "$ip_addr" | grep -qs "192\.168\.8\..*" ; then
+  systemctl start squid.service || true &
   su ngoonee -c "/home/ngoonee/.local/bin/crclient -u noe -i enp4s0"
 else
   # We're not
   echo -n > /home/conf/.current_proxy
   ln -sf /home/conf/proxy.pac.direct /home/conf/proxy.pac
   echo Disabling proxy
+  systemctl start squid.service || true &
 fi
-
-export http_proxy=`cat /home/conf/.current_proxy`
-export https_proxy=`cat /home/conf/.current_proxy`
-export ftp_proxy=`cat /home/conf/.current_proxy`
 
 systemctl start ntpd.service || true &
 wget --timeout=10 -4qO - http://checkip.eurodyndns.org | grep "Current IP Address" | awk '{print $4}' | su ngoonee -c "tee /home/conf/my_ip" || true &
