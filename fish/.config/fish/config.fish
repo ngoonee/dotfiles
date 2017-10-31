@@ -26,7 +26,7 @@ function tmux_directory_title
     if [ "$PWD" != "$LPWD" ]
         set LPWD "$PWD"
         set INPUT $PWD
-        set SUBSTRING (eval echo $INPUT| awk '{ print substr( $0, length($0) - 19, length($0) ) }')
+        set SUBSTRING (string escape $INPUT)
         tmux rename-window "..$SUBSTRING"
     end
 end
