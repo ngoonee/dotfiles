@@ -11,10 +11,10 @@ local awful = require("awful")
 local wibox = require("wibox")
 local os    = { getenv = os.getenv }
 
-local theme                                     = {}
+theme                                           = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-dark"
 theme.wallpaper                                 = theme.dir .. "/wall.png"
-theme.font                                      = "xos4 Terminus 11"
+theme.font                                      = "xos4 Terminus 12"
 theme.fg_normal                                 = "#DDDDFF"
 theme.fg_focus                                  = "#EA6F81"
 theme.fg_urgent                                 = "#CC9393"
@@ -183,6 +183,7 @@ local cpu = lain.widget.cpu({
 -- Coretemp
 local tempicon = wibox.widget.imagebox(theme.widget_temp)
 local temp = lain.widget.temp({
+    tempfile = "/sys/devices/virtual/thermal/thermal_zone1/temp",
     settings = function()
         widget:set_markup(markup.font(theme.font, " " .. coretemp_now .. "°C "))
     end
@@ -224,25 +225,33 @@ local bat = lain.widget.bat({
 
 -- ALSA volume
 local volicon = wibox.widget.imagebox(theme.widget_vol)
-theme.volume = lain.widget.alsa({
+theme.volume_text = lain.widget.pulse({
     settings = function()
-        if volume_now.status == "off" then
-            volicon:set_image(theme.widget_vol_mute)
-        elseif tonumber(volume_now.level) == 0 then
-            volicon:set_image(theme.widget_vol_no)
-        elseif tonumber(volume_now.level) <= 50 then
-            volicon:set_image(theme.widget_vol_low)
-        else
-            volicon:set_image(theme.widget_vol)
-        end
+      local perc = tonumber(volume_now.left) or 0
+      if volume_now.status == "off" then
+        volicon:set_image(theme.widget_vol_mute)
+      elseif perc == 0 then
+        volicon:set_image(theme.widget_vol_no)
+      elseif perc <= 50 then
+        volicon:set_image(theme.widget_vol_low)
+      else
+        volicon:set_image(theme.widget_vol)
+      end
 
-        widget:set_markup(markup.font(theme.font, " " .. volume_now.level .. "% "))
+      widget:set_markup(markup.font(theme.font, " " .. perc .. "% "))
+    end
+})
+theme.volume = lain.widget.pulsebar({
+    notification_preset = { font = "Monospace 12", fg = theme.fg_normal },
+    settings = function()
+      theme.volume_text.update()
     end
 })
 
 -- Net
 local neticon = wibox.widget.imagebox(theme.widget_net)
 local net = lain.widget.net({
+    units = 1024^2,
     settings = function()
         widget:set_markup(markup.font(theme.font,
                           markup("#7AC82E", " " .. net_now.received)
@@ -302,14 +311,12 @@ function theme.at_screen_connect(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            arrl_ld,
-            wibox.container.background(mpdicon, theme.bg_focus),
-            wibox.container.background(theme.mpd.widget, theme.bg_focus),
-            arrl_dl,
-            wibox.widget.systray(),
+            spr,
+            mpdicon,
+            theme.mpd.widget,
             arrl_ld,
             wibox.container.background(volicon, theme.bg_focus),
-            wibox.container.background(theme.volume.widget, theme.bg_focus),
+            wibox.container.background(theme.volume_text.widget, theme.bg_focus),
             arrl_dl,
             memicon,
             mem.widget,
@@ -329,6 +336,7 @@ function theme.at_screen_connect(s)
             wibox.container.background(neticon, theme.bg_focus),
             wibox.container.background(net.widget, theme.bg_focus),
             arrl_dl,
+            wibox.widget.systray(),
             clock,
             spr,
             arrl_ld,

@@ -89,7 +89,7 @@ run_once({
 -- }}}
 
 -- {{{ Variable definitions
-local chosen_theme = "vertex-custom"
+local chosen_theme = "powerarrow-dark-custom"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "xterm"
