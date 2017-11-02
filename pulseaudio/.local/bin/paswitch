@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 # paswitch 2011-02-02 by Ng Oon-Ee <ngoonee.talk@gmail.com>
 # I can't remember where I found this script, can't locate the original author.
 # Please inform me if you know, so that I can give proper attribution.
@@ -44,8 +44,8 @@ done
 # NOTE: This is the most likely thing to break in future, the awk lines may need playing around with
 nextscdesc=$(pacmd list-sinks | awk '$1 == "device.description" {print substr($0,5+length($1 $2))}' \
                          | sed 's|"||g' | awk -F"," 'NR==v1{print$0}' v1=$((nextind+1))) 
-#notify-send "Default sound-card changed to $nextscdesc"
-dunstify "Default sound card is now" "$nextscdesc" -r 1986
+notify-send "Default sound-card changed to $nextscdesc"
+#dunstify "Default sound card is now" "$nextscdesc" -r 1986
 #dbus-send --session --type=method_call --reply-timeout=10000 \
   #--dest=org.freedesktop.Notifications /org/freedesktop/Notifications \
   #org.freedesktop.Notifications.Notify  string:"paswitch"  uint32:1 \
