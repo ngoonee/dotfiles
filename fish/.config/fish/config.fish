@@ -32,4 +32,4 @@ function tmux_directory_title
 end
 
 # Use virtualfish
-eval (python -m virtualfish auto_activation)
+eval (/usr/bin/python -m virtualfish auto_activation)
