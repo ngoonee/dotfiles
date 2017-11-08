@@ -6,8 +6,9 @@
 # all available outputs
 OUTPUTS=$(xrandr |awk '$2 ~ /connected/ {print $1}')
 
-# your notebook LVDS monitor
-DEFAULT_OUTPUT=$(sed -ne 's/.*\(LVDS[^ ]*\).*/\1/p' <<<$OUTPUTS)
+# your notebook eDP monitor
+#DEFAULT_OUTPUT=$(sed -ne 's/.*\(eDP[^ ]*\).*/\1/p' <<<$OUTPUTS)
+DEFAULT_OUTPUT=$(xrandr | awk '$3 ~ /primary/ ${print $1}')
 
 # get info from xrandr
 XRANDR=`xrandr`
