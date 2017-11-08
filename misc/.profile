@@ -8,39 +8,18 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
 #export MATLAB_JAVA=/opt/java/jre
-
-export STEREO_FOLDER="/home/data/UniversityWork/Masters-StereoVision/"
+#export STEREO_FOLDER="/home/data/UniversityWork/Masters-StereoVision/"
 export EDITOR="/usr/bin/vim"
 export WINEDLLOVERRIDES='winemenubuilder.exe=d'
-
-export PYTHONSTARTUP='/home/conf/pystartup'
-
+#export PYTHONSTARTUP='/home/conf/pystartup'
 # Use VirtualEnvWrapper
 export VIRTUALFISH_HOME=~/Files/Code/venvs
-
-export http_proxy="http://127.0.0.1:3128"
-export https_proxy="http://127.0.0.1:3128"
-export ftp_proxy="http://127.0.0.1:3128"
-export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
 
 vt=$(fgconsole 2>/dev/null)
 (( vt == 1 )) && exec startx -- vt$vt &> ~/.xlog
