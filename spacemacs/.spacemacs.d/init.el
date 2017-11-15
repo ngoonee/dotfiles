@@ -65,6 +65,8 @@ This function should only modify configuration layer settings."
      xkcd
      javascript
      nlinum
+     (spacemacs-layouts :variables
+                        layouts-enable-autosave t)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
