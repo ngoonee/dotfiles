@@ -27,4 +27,6 @@ unset vt
 
 setxkbmap -option altwin:swap_alt_win
 
-xhost +local:
+if which xhost >/dev/null 2>&1; then
+    xhost +local:
+fi
