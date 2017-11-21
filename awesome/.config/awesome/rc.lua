@@ -63,7 +63,6 @@ run_once({
     "blueman-applet",
     "emacs --daemon",
     "nm-applet",
-    "dropbox",
 }) -- entries must be comma-separated
 --[[
 run_once({

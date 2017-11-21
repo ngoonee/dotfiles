@@ -1,0 +1,28 @@
+/.googleearth
+/.cache
+/.thumbnails
+/.log
+/*.log
+/.bash_history
+/.lesshst
+/.xsession*
+/.translog.*.log
+/.config/chromium/SingletonSocket
+/.config/chromium/*/Application\ Cache
+/.config/chromium/*/File\ System
+/.config/chromium/*/IndexedDB
+/.config/chromium/*/Service\ Worker/CacheStorage
+/.emacs.d/.cache
+/.local/share/Aspyr/Sid\ Meier\'s\ Civilization 5/cache
+/Desktop
+/vimbackups
+/.local/share/Steam
+/.nv/
+/.dropbox
+/.dropbox-dist
+/.buildozer
+/.skype
+/Dropbox/.dropbox.cache/
+/virtualdisks
+/Unsorted
+/Downloads

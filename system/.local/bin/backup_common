@@ -28,11 +28,11 @@ function check_browsers {
 }
 
 function disable_services {
-    echo -n | su ngoonee -c "tee /home/conf/my_ip"
+    systemctl stop dropbox@ngoonee
 }
 
 function enable_services {
-    su ngoonee -c "networkgetip"
+    systemctl start dropbox@ngoonee
 }
 
 check_browsers
@@ -41,8 +41,7 @@ sleep 1
 
 if [ "$(basename $0)" = "backup_home" ]; then
   rsync -rlptoD --progress --delete --log-file=/tmp/backuprootlog --modify-window=1 -e 'ssh -p 25008' /etc/ home_router:/mnt/WD3TB/oonee/etc/
-  su ngoonee -c "rsync -rlptoD --exclude-from '/home/conf/excludedata' --progress --delete --log-file=/tmp/backupdatalog --modify-window=1 -e 'ssh -p 25008' /home/data/ home_router:/mnt/WD3TB/oonee/data/"
-  su ngoonee -c "rsync -rlptoD --exclude-from '/home/conf/excludehome' --progress --delete --log-file=/tmp/backuphomelog --modify-window=1 -e 'ssh -p 25008' /home/ home_router:/mnt/WD3TB/oonee/home/"
+  su ngoonee -c "rsync -rlptoD --exclude-from '/home/ngoonee/.local/conf/excludehome' --progress --delete --log-file=/tmp/backupdatalog --modify-window=1 -e 'ssh -p 25008' /home/ngoonee/ home_router:/mnt/WD3TB/oonee/ngoonee/"
 elif [ "$(basename $0)" = "backup_uni" ]; then
   BASE="192.168.37.88:/mnt/UNIBACKUP"
   BASE="/home/mounts/UniBackup"
@@ -58,8 +57,7 @@ elif [ "$(basename $0)" = "backup_uni" ]; then
 elif [ "$(basename $0)" = "backup_test" ]; then
   echo "Testing settings"
   rsync -nrlptoD --progress --delete --log-file=/tmp/backuprootlog --modify-window=1 -e 'ssh -p 25008' /etc/ home_router:/mnt/WD3TB/oonee/etc/
-  su ngoonee -c "rsync -nrlptoD --exclude-from '/home/conf/excludedata' --progress --delete --log-file=/tmp/backupdatalog --modify-window=1 -e 'ssh -p 25008' /home/data/ home_router:/mnt/WD3TB/oonee/data/"
-  su ngoonee -c "rsync -nrlptoD --exclude-from '/home/conf/excludehome' --progress --delete --log-file=/tmp/backuphomelog --modify-window=1 -e 'ssh -p 25008' /home/ home_router:/mnt/WD3TB/oonee/home/"
+  su ngoonee -c "rsync -nrlptoD --exclude-from '/home/ngoonee/.local/conf/excludehome' --progress --delete --log-file=/tmp/backupdatalog --modify-window=1 -e 'ssh -p 25008' /home/ngoonee/ home_router:/mnt/WD3TB/oonee/ngoonee/"
 else
   echo "Please run the backup script using the backup_uni/back_home symlinks"
 fi
