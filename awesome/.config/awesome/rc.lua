@@ -61,7 +61,6 @@ run_once({
     "wmname LG3D",
     "/usr/bin/compton", "-b",
     "blueman-applet",
-    "emacs --daemon",
     "nm-applet",
 }) -- entries must be comma-separated
 --[[
