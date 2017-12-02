@@ -1,6 +1,6 @@
 #!/bin/sh
-WINEDIR="/home/data/Apps/wine64"
-GAMEDIR="$WINEDIR/drive_c/Windemic 1.60"
+WINEDIR="/home/ngoonee/Files/Code/wine/Windemic"
+GAMEDIR="$WINEDIR/drive_c/Program Files/Windemic 1.61"
 
 cd "$GAMEDIR"
 
