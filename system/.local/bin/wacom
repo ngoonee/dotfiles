@@ -7,17 +7,19 @@ stylus="$device Pen stylus"
 #cursor="$device Pen cursor"
 pad="$device Pad pad"
 
+DEFAULT_OUTPUT=$(xrandr | awk '$3 ~ /primary/ {print $1}')
+
 STATUS=/tmp/wacomtoggle
 
 if [ ! -e $STATUS ]; then
     touch $STATUS
-    xsetwacom --set "$stylus" MapToOutput "LVDS1"
-    #xsetwacom --set "$eraser" MapToOutput "LVDS1"
-    #xsetwacom --set "$cursor" MapToOutput "LVDS1"
-    xsetwacom --set "$pad" MapToOutput "LVDS1"
+    xsetwacom --set "$stylus" MapToOutput "$DEFAULT_OUTPUT"
+    #xsetwacom --set "$eraser" MapToOutput "$DEFAULT_OUTPUT"
+    #xsetwacom --set "$cursor" MapToOutput "$DEFAULT_OUTPUT"
+    xsetwacom --set "$pad" MapToOutput "$DEFAULT_OUTPUT"
 else
     rm $STATUS
-    screen=$(xrandr | grep " connected " | awk '{print $1}' | grep -v "LVDS")
+    screen=$(xrandr | grep " connected " | awk '{print $1}' | grep -v "$DEFAULT_OUTPUT")
     xsetwacom --set "$stylus" MapToOutput "$screen"
     #xsetwacom --set "$eraser" MapToOutput "$screen"
     #xsetwacom --set "$cursor" MapToOutput "$screen"
