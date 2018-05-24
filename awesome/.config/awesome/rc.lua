@@ -62,6 +62,7 @@ run_once({
     "/usr/bin/compton", "-b",
     "blueman-applet",
     "nm-applet",
+    "xset" "dpms 30",
 }) -- entries must be comma-separated
 --[[
 run_once({
