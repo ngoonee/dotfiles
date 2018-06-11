@@ -59,10 +59,10 @@ run_once({
     "sxhkd",
     "unclutter -root",
     "wmname LG3D",
-    "/usr/bin/compton", "-b",
     "blueman-applet",
     "nm-applet",
     "xset", "dpms 30",
+    "light-locker",
 }) -- entries must be comma-separated
 --[[
 run_once({
