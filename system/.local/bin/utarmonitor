@@ -1,8 +1,9 @@
 #!/bin/sh
+EXTOUTPUT=$(xrandr |awk '/^DP-[1-2] connected/ {print $1}')
 # cvt 1280 1024 to get the modeline
 xrandr --newmode "1366x768_59.8" 85.00 1368 1440 1576 1784 768 771 781 798 -hsync +vsync
 #xrandr --newmode "1280x1024_59.99"  109.00  1280 1368 1496 1712  1024 1027 1034 1063 -hsync +vsync
-xrandr --addmode VGA1 1366x768_59.8
-#xrandr --addmode VGA1 1280x1024_59.99
-xrandr --output LVDS1 --auto --output VGA1 --mode 1366x768_59.8 --rotate normal --left-of LVDS1
-#xrandr --output LVDS1 --mode 1280x1024 --output VGA1 --mode 1280x1024_59.99 --same-as LVDS1
+xrandr --addmode $EXTOUTPUT 1366x768_59.8
+#xrandr --addmode DP-2 1280x1024_59.99
+xrandr --output eDP-1 --auto --output $EXTOUTPUT --mode 1366x768_59.8 --rotate normal --left-of eDP-1
+#xrandr --output eDP-1 --mode 1280x1024 --output DP-2 --mode 1280x1024_59.99 --same-as eDP-1
