@@ -276,24 +276,26 @@ globalkeys = awful.util.table.join(
         function()
             awful.client.focus.global_bydirection("down")
             if client.focus then client.focus:raise() end
-        end),
+        end,
+        {description = "focus the next client below", group = "client"}),
     awful.key({ modkey }, "k",
         function()
             awful.client.focus.global_bydirection("up")
             if client.focus then client.focus:raise() end
-        end),
+        end,
+        {description = "focus the next client above", group = "client"}),
     awful.key({ modkey }, "h",
         function()
             awful.client.focus.global_bydirection("left")
             if client.focus then client.focus:raise() end
-        end),
+        end,
+        {description = "focus the next client on left", group = "client"}),
     awful.key({ modkey }, "l",
         function()
             awful.client.focus.global_bydirection("right")
             if client.focus then client.focus:raise() end
-        end),
-    awful.key({ modkey,           }, "w", function () awful.util.mymainmenu:show() end,
-              {description = "show main menu", group = "awesome"}),
+        end,
+        {description = "focus the next client on right", group = "client"}),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.global_bydirection("down") end,
@@ -351,6 +353,8 @@ globalkeys = awful.util.table.join(
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Control" }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
+    awful.key({ modkey,           }, "\\", naughty.destroy_all_notifications,
+              {description = "clear notifications", group = "awesome"}),
 
     awful.key({ modkey,           }, "]",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
