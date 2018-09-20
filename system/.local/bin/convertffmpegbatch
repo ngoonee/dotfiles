@@ -1,12 +1,12 @@
+#!/bin/sh
 #Modify the script below to batch
 #process files, just replace the ffmpeg line
 
 
-#!/bin/sh
-for f in ./*.mp4;
+for f in ./*/*.pdf;
 do
   echo "Processing $f"
-  ffmpeg -i "$f" -qscale 0 -ab 192k "${f/.mp4}.mpg"
+  #ffmpeg -i "$f" -qscale 0 -ab 192k "${f/.mp4}.mpg"
 #  ffmpeg -i "$f" -sameq -aspect 4:3 -vcodec libxvid -ab 128k "${f}.avi"
 #  ffmpeg -i "$f" -sameq -vf "aspect=4:3" -vcodec libxvid -ab 128k "${f}.avi"
   #ffmpeg -i "$f" -sameq  -ab 160k "${f/.m4a}.mp3"
@@ -14,7 +14,11 @@ do
 #  ffmpeg -i "$f" -ab 128k -map_meta_data "${f}.mp3":"$f" "${f}.mp3"
   #ffmpeg -i "$f" -ab 192k "${f/.m4a}.mp3"
 #  ffmpeg -i "$f" "${f}.flac"
-  #convert -verbose -quality 100 -density 150 "$f" "${f/.pdf}.png"
+  if [ -e "${f/.pdf}.png" ] ; then
+    echo "Already processed"
+  else
+    convert -verbose -quality 100 -density 150 "$f" "${f/.pdf}.png"
+  fi
   #ffmpeg -i "$f" -qscale 30 -ab 192k -vf scale=320:-1 "${f}.mp4"
 
 done
