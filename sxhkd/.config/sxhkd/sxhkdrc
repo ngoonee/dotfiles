@@ -28,7 +28,7 @@ XF86Launch{1,2}
 
 ### Shortcuts ###
 super + g
-    xterm
+    termite
 @Print
     scrot -s -e 'mv $f ~/screenshots/ 2>/dev/null'
 shift + Print
