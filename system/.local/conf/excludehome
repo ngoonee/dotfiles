@@ -1,29 +1,26 @@
-/.googleearth
-/.cache
-/.thumbnails
-/.log
-/*.log
-/.bash_history
-/.lesshst
-/.xsession*
-/.translog.*.log
-/.config/chromium/SingletonSocket
-/.config/chromium/*/Application\ Cache
-/.config/chromium/*/File\ System
-/.config/chromium/*/IndexedDB
-/.config/chromium/*/Service\ Worker/CacheStorage
-/.emacs.d/.cache
-/.local/share/Aspyr/Sid\ Meier\'s\ Civilization 5/cache
-/Desktop
-/vimbackups
-/.local/share/Steam
-/.nv/
-/.dropbox
-/.dropbox-dist
-/.buildozer
-/.skype
-/.wine
-/Dropbox/.dropbox.cache/
-/virtualdisks
-/Unsorted
-/Downloads
+/home/ngoonee/.googleearth
+/home/ngoonee/.cache
+/home/ngoonee/.thumbnails
+/home/ngoonee/.log
+/home/ngoonee/*.log
+/home/ngoonee/.bash_history
+/home/ngoonee/.lesshst
+/home/ngoonee/.xsession*
+/home/ngoonee/.translog.*.log
+/home/ngoonee/.config/chromium
+/home/ngoonee/.emacs.d/.cache
+/home/ngoonee/.emacs.d/elpa
+/home/ngoonee/.local/share/Aspyr/Sid\ Meier\'s\ Civilization 5/cache
+/home/ngoonee/Desktop
+/home/ngoonee/vimbackups
+/home/ngoonee/.local/share/Steam
+/home/ngoonee/.nv/
+/home/ngoonee/.dropbox
+/home/ngoonee/.dropbox-dist
+/home/ngoonee/.buildozer
+/home/ngoonee/.skype
+/home/ngoonee/.wine
+/home/ngoonee/Dropbox/.dropbox.cache/
+/home/ngoonee/virtualdisks
+/home/ngoonee/Unsorted
+/home/ngoonee/Downloads

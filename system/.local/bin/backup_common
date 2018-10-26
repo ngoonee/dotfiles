@@ -29,19 +29,61 @@ function check_browsers {
 
 function disable_services {
     systemctl stop dropbox@ngoonee
+    systemctl stop nextcloud-client@ngoonee
 }
 
 function enable_services {
     systemctl start dropbox@ngoonee
+    systemctl start nextcloud-client@ngoonee
 }
 
 check_browsers
 disable_services
 sleep 1
 
+export BORG_PASSPHRASE=5qmQNoZPravcNjeTp07kbUcS
 if [ "$(basename $0)" = "backup_home" ]; then
-  rsync -rlptoD --progress --delete --log-file=/tmp/backuprootlog --modify-window=1 -e 'ssh -p 25008' /etc/ home_router:/mnt/WD3TB/oonee/etc/
-  su ngoonee -c "rsync -rlptoD --exclude-from '/home/ngoonee/.local/conf/excludehome' --progress --delete --log-file=/tmp/backupdatalog --modify-window=1 -e 'ssh -p 25008' /home/ngoonee/ home_router:/mnt/WD3TB/oonee/ngoonee/"
+    echo "Backing up Envy"
+    echo "Backing up /etc"
+    borg create -s -p borg@home_laptop:/mnt/WD3TB/repos/envy::{hostname}-etc-{now} /etc
+    echo "Bacing up /home/ngoonee"
+    su ngoonee -c "borg create -s -p --exclude-from /home/ngoonee/.local/conf/excludehome borg@home_laptop:/mnt/WD3TB/repos/envy::{hostname}-home-{now} /home/ngoonee"
+elif [ "$(basename $0)" = "backup_test" ]; then
+    echo "Testing backup of /etc"
+    borg create -n --list borg@home_laptop:/mnt/WD3TB/repos/envy::{hostname}-etc-{now} /etc
+    echo "Testing backup of /home/ngoonee"
+    su ngoonee -c "borg create -n --list --exclude-from /home/ngoonee/.local/conf/excludehome borg@home_laptop:/mnt/WD3TB/repos/envy::{hostname}-home-{now} /home/ngoonee"
+elif [ "$(basename $0)" = "backup_uni" ]; then
+    echo "Not implemented yet"
+elif [ "$(basename $0)" = "backup_asus" ]; then
+    echo "Backing up ASUS"
+    echo "Backing up /etc"
+    borg create -s -p borg@home_laptop:/mnt/WD3TB/repos/asus::{hostname}-etc-{now} /etc
+    echo "Turn on maintenance mode"
+    sudo -u http php /usr/share/webapps/nextcloud/occ maintenance:mode --on
+    echo "Syncing the data"
+    borg create -s -p borg@home_laptop:/mnt/WD3TB/repos/asus::{hostname}-nextcloud-data-{now} /var/nextcloud/data
+    echo "Syncing the config"
+    borg create -s -p borg@home_laptop:/mnt/WD3TB/repos/asus::{hostname}-nextcloud-config-{now} /etc/webapps/nextcloud/config
+    echo "Dumping PostgreSQL"
+    pg_dump nextcloud -h localhost -U nextcloud -f /var/nextcloud/nextcloud-dbbackup.bak
+    echo " Syncing the SQL backup"
+    borg create -s -p borg@home_laptop:/mnt/WD3TB/repos/asus::{hostname}-nextcloud-db-{now} /var/nextcloud/nextcloud-dbbackup.bak
+    echo "Turn off maintenance mode"
+    sudo -u http php /usr/share/webapps/nextcloud/occ maintenance:mode --off
+else
+    echo "Please run the backup script using the backup_uni/back_home symlinks"
+fi
+
+enable_services
+
+exit 0
+
+sleep 1
+
+if [ "$(basename $0)" = "backup_home" ]; then
+  rsync -rlptoD --progress --delete --log-file=/tmp/backuprootlog --modify-window=1 -e 'ssh -p 16484' /etc/ home_laptop_for_backup:/mnt/WD3TB/oonee/etc/
+  su ngoonee -c "rsync -rlptoD --exclude-from '/home/ngoonee/.local/conf/excludehome' --progress --delete --log-file=/tmp/backupdatalog --modify-window=1 -e 'ssh -p 16484' /home/ngoonee/ home_laptop_for_backup:/mnt/WD3TB/oonee/ngoonee/"
 elif [ "$(basename $0)" = "backup_uni" ]; then
   BASE="192.168.37.88:/mnt/UNIBACKUP"
   BASE="/home/mounts/UniBackup"
@@ -56,56 +98,10 @@ elif [ "$(basename $0)" = "backup_uni" ]; then
   su ngoonee -c "rsync -rlptoD --exclude-from '/home/conf/excludehome' --no-i-r --info=progress2 --delete --modify-window=1 /home/ ${BASE}/home/"
 elif [ "$(basename $0)" = "backup_test" ]; then
   echo "Testing settings"
-  rsync -nrlptoD --progress --delete --log-file=/tmp/backuprootlog --modify-window=1 -e 'ssh -p 25008' /etc/ home_router:/mnt/WD3TB/oonee/etc/
-  su ngoonee -c "rsync -nrlptoD --exclude-from '/home/ngoonee/.local/conf/excludehome' --progress --delete --log-file=/tmp/backupdatalog --modify-window=1 -e 'ssh -p 25008' /home/ngoonee/ home_router:/mnt/WD3TB/oonee/ngoonee/"
+  rsync -nrlptoD --progress --delete --log-file=/tmp/backuprootlog --modify-window=1 -e 'ssh -p 16484' /etc/ home_laptop:/mnt/WD3TB/oonee/etc/
+  su ngoonee -c "rsync -nrlptoD --exclude-from '/home/ngoonee/.local/conf/excludehome' --progress  --delete --log-file=/tmp/backupdatalog --modify-window=1 -e 'ssh -p 16484' /home/ngoonee/  home_laptop:/mnt/WD3TB/oonee/ngoonee/"
 else
   echo "Please run the backup script using the backup_uni/back_home symlinks"
 fi
 
 enable_services
-
-exit 0
-
-  if [ "$(basename $0)" = "backup_uni" ]; then
-      EXTERN_NTFS="/home/mounts/UNISTORE"
-      EXTERN_BTRFS="/home/mounts/UNISAVE"
-      echo "Starting backup of /home/data using rsync"
-      su ngoonee -c "rsync -q -a --exclude-from '/home/conf/excludedata' --progress --delete --modify-window=1 -b --backup-dir=${EXTERN_NTFS}/databackup/ /home/data/ ${EXTERN_NTFS}/data/"
-      echo "Starting backup of /home using rdiff-backup"
-      su ngoonee -c "rdiff-backup -v3 --exclude-globbing-filelist /home/conf/excludehome /home ${EXTERN_BTRFS}/home" 
-      echo "Starting backup of /etc using rdiff-backup"
-      rdiff-backup -v3 /etc ${EXTERN_BTRFS}/etc
-      echo "Starting duplicate backup of /home/data using rsync"
-      su ngoonee -c "rsync -q -a --exclude-from '/home/conf/excludedata' --progress --delete /home/data/ ${EXTERN_BTRFS}/data/"
-
-
-    #CONNECTIP=59.191.194.62
-    #su ngoonee -c "rdiff-backup -v3 --exclude-globbing-filelist /home/conf/excludehome --remote-schema 'ssh -p 1322 -C %s rdiff-backup --server' /home ngoonee@$CONNECTIP::/home/backup/home"
-    #su ngoonee -c "rdiff-backup -v3 --exclude-globbing-filelist /home/conf/excludehome /home /media/UNISAVE/home"
-    #echo "Starting backup of /etc using rdiff-backup"
-    #rdiff-backup -v3 --remote-schema 'ssh -p 1322 -C %s rdiff-backup --server' /etc root@$CONNECTIP::/home/backup/etc
-    #rdiff-backup -v3 /etc /media/UNISAVE/etc
-    #echo "Starting backup of /home using unison"
-    #su ngoonee -c "unison SSHHOME-ALL -auto -silent -batch"
-    #echo "Starting backup of /home/data using unison"
-    #su ngoonee -c "unison SSH-ALL -auto -silent -batch"
-    #echo "Starting backup of /home/data using rsync"
-    #su ngoonee -c "rsync -q -r -t --progress --delete --modify-window=1 -b --backup-dir=/media/UNISTORE/databackup/ /home/data/ /media/UNISTORE/data/"
-    #echo "Starting backup of /home/LinuxProg using rsync"
-    #su ngoonee -c "rsync -q -r -t -p -o -g --progress --delete -l -H -b --backup-dir=/media/UNISAVE/LinuxProgbackup/ /home/LinuxProg/ /media/UNISAVE/LinuxProg/"
-    #echo "Starting backup of /var/abs/local using rsync"
-    #su ngoonee -c "rsync -q -r -t -p -o -g --progress --delete -l -H -b --backup-dir=/media/UNISAVE/abslocalbackup/ /var/abs/local/ /media/UNISAVE/abslocal/"
-  elif [ "$(basename $0)" = "backup_home" ]; then
-      #EXTERN_NTFS="/home/mounts/OONEESTORE"
-      #EXTERN_BTRFS="/home/mounts/OONEESAVE"
-      EXTERN_NTFS="/home/mounts/BackupHome"
-      EXTERN_BTRFS="/home/mounts/BackupHome"
-      echo "Starting backup of /home/data using rsync"
-      su ngoonee -c "rsync -q -a --exclude-from '/home/conf/excludedata' --progress --delete --modify-window=1 -b --backup-dir=${EXTERN_NTFS}/databackup/ /home/data/ ${EXTERN_NTFS}/data/"
-      echo "Starting backup of /home using rdiff-backup"
-      su ngoonee -c "rdiff-backup -v3 --exclude-globbing-filelist /home/conf/excludehome /home ${EXTERN_BTRFS}/home" 
-      echo "Starting backup of /etc using rdiff-backup"
-      rdiff-backup -v3 /etc ${EXTERN_BTRFS}/etc
-  else
-    echo "Please run the backup script using the backup_uni/back_home symlinks"
-  fi
