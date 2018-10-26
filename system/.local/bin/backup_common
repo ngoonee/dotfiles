@@ -38,20 +38,23 @@ function enable_services {
 }
 
 check_browsers
-disable_services
-sleep 1
+if [ "$(basename $0)" = "backup_home" ]; then
+    disable_services
+    sleep 1
+fi
 
 export BORG_PASSPHRASE=5qmQNoZPravcNjeTp07kbUcS
 if [ "$(basename $0)" = "backup_home" ]; then
     echo "Backing up Envy"
     echo "Backing up /etc"
     borg create -s -p borg@home_laptop:/mnt/WD3TB/repos/envy::{hostname}-etc-{now} /etc
-    echo "Bacing up /home/ngoonee"
+    echo "Backing up /home/ngoonee"
     su ngoonee -c "borg create -s -p --exclude-from /home/ngoonee/.local/conf/excludehome borg@home_laptop:/mnt/WD3TB/repos/envy::{hostname}-home-{now} /home/ngoonee"
-elif [ "$(basename $0)" = "backup_test" ]; then
-    echo "Testing backup of /etc"
+elif [ "$(basename $0)" = "backup_home_test" ]; then
+    echo "Testing Backing up Envy"
+    echo "Testing Backing up /etc"
     borg create -n --list borg@home_laptop:/mnt/WD3TB/repos/envy::{hostname}-etc-{now} /etc
-    echo "Testing backup of /home/ngoonee"
+    echo "Testing Backing up /home/ngoonee"
     su ngoonee -c "borg create -n --list --exclude-from /home/ngoonee/.local/conf/excludehome borg@home_laptop:/mnt/WD3TB/repos/envy::{hostname}-home-{now} /home/ngoonee"
 elif [ "$(basename $0)" = "backup_uni" ]; then
     echo "Not implemented yet"
@@ -71,11 +74,29 @@ elif [ "$(basename $0)" = "backup_asus" ]; then
     borg create -s -p borg@home_laptop:/mnt/WD3TB/repos/asus::{hostname}-nextcloud-db-{now} /var/nextcloud/nextcloud-dbbackup.bak
     echo "Turn off maintenance mode"
     sudo -u http php /usr/share/webapps/nextcloud/occ maintenance:mode --off
+elif [ "$(basename $0)" = "backup_asus_test" ]; then
+    echo "Testing Backing up ASUS"
+    echo "Testing Backing up /etc"
+    borg create -n --list borg@home_laptop:/mnt/WD3TB/repos/asus::{hostname}-etc-{now} /etc
+    echo "Turn on maintenance mode"
+    sudo -u http php /usr/share/webapps/nextcloud/occ maintenance:mode --on
+    echo "Testing Syncing the data"
+    borg create -n --list borg@home_laptop:/mnt/WD3TB/repos/asus::{hostname}-nextcloud-data-{now} /var/nextcloud/data
+    echo "Testing Syncing the config"
+    borg create -n --list borg@home_laptop:/mnt/WD3TB/repos/asus::{hostname}-nextcloud-config-{now} /etc/webapps/nextcloud/config
+    echo "Dumping PostgreSQL"
+    pg_dump nextcloud -h localhost -U nextcloud -f /var/nextcloud/nextcloud-dbbackup.bak
+    echo "Testing Syncing the SQL backup"
+    borg create -n --list borg@home_laptop:/mnt/WD3TB/repos/asus::{hostname}-nextcloud-db-{now} /var/nextcloud/nextcloud-dbbackup.bak
+    echo "Turn off maintenance mode"
+    sudo -u http php /usr/share/webapps/nextcloud/occ maintenance:mode --off
 else
-    echo "Please run the backup script using the backup_uni/back_home symlinks"
+    echo "Please run the backup script using the appropriate symlinks"
 fi
 
-enable_services
+if [ "$(basename $0)" = "backup_home" ]; then
+    enable_services
+fi
 
 exit 0
 
