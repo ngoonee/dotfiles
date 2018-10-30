@@ -57,7 +57,7 @@ if [ "$(basename $0)" = "backup_home" ]; then
     echo "Pruning old archives"
     for PREFIX in etc home-Archive home-dotfiles home-Dropbox home-Files home-Unsorted home-.netrc home-.fonts; do
         echo "Pruning $PREFIX"
-        borg prune -s --list --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
+        borg prune -s --list --keep-within 2d keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
     done
 elif [ "$(basename $0)" = "backup_home_test" ]; then
     export BORG_REPO='home_laptop:/mnt/WD3TB/repos/envy'
@@ -72,7 +72,7 @@ elif [ "$(basename $0)" = "backup_home_test" ]; then
     echo "Testing Pruning old archives"
     for PREFIX in etc home-Archive home-dotfiles home-Dropbox home-Files home-Unsorted home-.netrc home-.fonts; do
         echo "Testing Pruning $PREFIX"
-        borg prune -n -v --list --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
+        borg prune -n -v --list --keep-within 2d keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
     done
 elif [ "$(basename $0)" = "backup_uni" ]; then
     echo "Not implemented yet"
@@ -96,7 +96,7 @@ elif [ "$(basename $0)" = "backup_asus" ]; then
     echo "Pruning old archives"
     for PREFIX in etc nextcloud-data nextcloud-config nextcloud-db; do
         echo "Pruning $PREFIX"
-        borg prune -s --list --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
+        borg prune -s --list --keep-within 2d keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
     done
 elif [ "$(basename $0)" = "backup_asus_test" ]; then
     export BORG_REPO='home_laptop:/mnt/WD3TB/repos/asus'
@@ -118,7 +118,7 @@ elif [ "$(basename $0)" = "backup_asus_test" ]; then
     echo "Testing Pruning old archives"
     for PREFIX in etc nextcloud-data nextcloud-config nextcloud-db; do
         echo "Testing Pruning $PREFIX"
-        borg prune -n -v --list --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
+        borg prune -n -v --list --keep-within 2d keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
     done
 else
     echo "Please run the backup script using the appropriate symlinks"
