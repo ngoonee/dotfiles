@@ -50,21 +50,29 @@ if [ "$(basename $0)" = "backup_home" ]; then
     echo "Backing up /etc"
     borg create -s -p ::etc-{now:%Y-%m-%d-%H-%M} /etc
     # paclist and pacman -Slq aurrepo to backup list of packages
-    #borg create -s -p --exclude-from /home/ngoonee/.local/conf/excludehome ::home-{now:%Y-%m-%d-%H-%M} /home/ngoonee
     for DIR in Archive dotfiles Dropbox Files Unsorted .netrc .fonts; do
         echo "Backing up /home/ngoonee/$DIR"
         borg create -s -p ::home-$DIR-{now:%Y-%m-%d-%H-%M} /home/ngoonee/$DIR
     done
+    echo "Pruning old archives"
+    for PREFIX in etc home-Archive home-dotfiles home-Dropbox home-Files home-Unsorted home-.netrc home-.fonts; do
+        echo "Pruning $PREFIX"
+        borg prune -s --list --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
+    done
 elif [ "$(basename $0)" = "backup_home_test" ]; then
     export BORG_REPO='home_laptop:/mnt/WD3TB/repos/envy'
-    echo "Backing up Envy"
-    echo "Backing up /etc"
+    echo "Testing Backing up Envy"
+    echo "Testing Backing up /etc"
     borg create -n --list --filter=AME ::etc-{now:%Y-%m-%d-%H-%M} /etc
     # paclist and pacman -Slq aurrepo to backup list of packages
-    #borg create -n --list --filter=AME --exclude-from /home/ngoonee/.local/conf/excludehome ::home-{now:%Y-%m-%d-%H-%M} /home/ngoonee
     for DIR in Archive dotfiles Dropbox Files Unsorted .netrc .fonts; do
-        echo "Backing up /home/ngoonee/$DIR"
+        echo "Testing Backing up /home/ngoonee/$DIR"
         borg create -n --list --filter=AME ::home-$DIR-{now:%Y-%m-%d-%H-%M} /home/ngoonee/$DIR
+    done
+    echo "Testing Pruning old archives"
+    for PREFIX in etc home-Archive home-dotfiles home-Dropbox home-Files home-Unsorted home-.netrc home-.fonts; do
+        echo "Testing Pruning $PREFIX"
+        borg prune -n -v --list --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
     done
 elif [ "$(basename $0)" = "backup_uni" ]; then
     echo "Not implemented yet"
@@ -85,6 +93,11 @@ elif [ "$(basename $0)" = "backup_asus" ]; then
     borg create -s -p ::nextcloud-db-{now:%Y-%m-%d-%H-%M} /var/nextcloud/nextcloud-dbbackup.bak
     echo "Turn off maintenance mode"
     sudo -u http php /usr/share/webapps/nextcloud/occ maintenance:mode --off
+    echo "Pruning old archives"
+    for PREFIX in etc nextcloud-data nextcloud-config nextcloud-db; do
+        echo "Pruning $PREFIX"
+        borg prune -s --list --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
+    done
 elif [ "$(basename $0)" = "backup_asus_test" ]; then
     export BORG_REPO='home_laptop:/mnt/WD3TB/repos/asus'
     echo "Testing Backing up ASUS"
@@ -102,6 +115,11 @@ elif [ "$(basename $0)" = "backup_asus_test" ]; then
     borg create -n --list --filter=AME ::nextcloud-db-{now:%Y-%m-%d-%H-%M} /var/nextcloud/nextcloud-dbbackup.bak
     echo "Turn off maintenance mode"
     sudo -u http php /usr/share/webapps/nextcloud/occ maintenance:mode --off
+    echo "Testing Pruning old archives"
+    for PREFIX in etc nextcloud-data nextcloud-config nextcloud-db; do
+        echo "Testing Pruning $PREFIX"
+        borg prune -n -v --list --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
+    done
 else
     echo "Please run the backup script using the appropriate symlinks"
 fi
