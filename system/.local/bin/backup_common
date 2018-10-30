@@ -37,7 +37,7 @@ function enable_services {
     systemctl start nextcloud-client@ngoonee
 }
 
-check_browsers
+#check_browsers
 if [ "$(basename $0)" = "backup_home" ]; then
     disable_services
     sleep 1
