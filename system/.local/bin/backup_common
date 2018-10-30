@@ -47,47 +47,55 @@ export BORG_PASSPHRASE=5qmQNoZPravcNjeTp07kbUcS
 if [ "$(basename $0)" = "backup_home" ]; then
     echo "Backing up Envy"
     echo "Backing up /etc"
-    borg create -s -p borg@home_laptop:/mnt/WD3TB/repos/envy::{hostname}-etc-{now} /etc
-    echo "Backing up /home/ngoonee"
-    su ngoonee -c "borg create -s -p --exclude-from /home/ngoonee/.local/conf/excludehome borg@home_laptop:/mnt/WD3TB/repos/envy::{hostname}-home-{now} /home/ngoonee"
+    borg create -s -p borg@home_laptop:/mnt/WD3TB/repos/envy::etc-{now} /etc
+    # paclist and pacman -Slq aurrepo to backup list of packages
+    #borg create -s -p --exclude-from /home/ngoonee/.local/conf/excludehome borg@home_laptop:/mnt/WD3TB/repos/envy::home-{now} /home/ngoonee
+    for DIR in Archive dotfiles Dropbox Files Unsorted .netrc .fonts; do
+        echo "Backing up /home/ngoonee/$DIR"
+        borg create -s -p borg@home_laptop:/mnt/WD3TB/repos/envy::home-$DIR-{now} /home/ngoonee/$DIR
+    done
 elif [ "$(basename $0)" = "backup_home_test" ]; then
-    echo "Testing Backing up Envy"
-    echo "Testing Backing up /etc"
-    borg create -n --list borg@home_laptop:/mnt/WD3TB/repos/envy::{hostname}-etc-{now} /etc
-    echo "Testing Backing up /home/ngoonee"
-    su ngoonee -c "borg create -n --list --exclude-from /home/ngoonee/.local/conf/excludehome borg@home_laptop:/mnt/WD3TB/repos/envy::{hostname}-home-{now} /home/ngoonee"
+    echo "Backing up Envy"
+    echo "Backing up /etc"
+    borg create -n --list --filter=AME borg@home_laptop:/mnt/WD3TB/repos/envy::etc-{now} /etc
+    # paclist and pacman -Slq aurrepo to backup list of packages
+    #borg create -n --list --filter=AME --exclude-from /home/ngoonee/.local/conf/excludehome borg@home_laptop:/mnt/WD3TB/repos/envy::home-{now} /home/ngoonee
+    for DIR in Archive dotfiles Dropbox Files Unsorted .netrc .fonts; do
+        echo "Backing up /home/ngoonee/$DIR"
+        borg create -n --list --filter=AME borg@home_laptop:/mnt/WD3TB/repos/envy::home-$DIR-{now} /home/ngoonee/$DIR
+    done
 elif [ "$(basename $0)" = "backup_uni" ]; then
     echo "Not implemented yet"
 elif [ "$(basename $0)" = "backup_asus" ]; then
     echo "Backing up ASUS"
     echo "Backing up /etc"
-    borg create -s -p borg@home_laptop:/mnt/WD3TB/repos/asus::{hostname}-etc-{now} /etc
+    borg create -s -p borg@home_laptop:/mnt/WD3TB/repos/asus::etc-{now} /etc
     echo "Turn on maintenance mode"
     sudo -u http php /usr/share/webapps/nextcloud/occ maintenance:mode --on
     echo "Syncing the data"
-    borg create -s -p borg@home_laptop:/mnt/WD3TB/repos/asus::{hostname}-nextcloud-data-{now} /var/nextcloud/data
+    borg create -s -p borg@home_laptop:/mnt/WD3TB/repos/asus::nextcloud-data-{now} /var/nextcloud/data
     echo "Syncing the config"
-    borg create -s -p borg@home_laptop:/mnt/WD3TB/repos/asus::{hostname}-nextcloud-config-{now} /etc/webapps/nextcloud/config
+    borg create -s -p borg@home_laptop:/mnt/WD3TB/repos/asus::nextcloud-config-{now} /etc/webapps/nextcloud/config
     echo "Dumping PostgreSQL"
     pg_dump nextcloud -h localhost -U nextcloud -f /var/nextcloud/nextcloud-dbbackup.bak
-    echo " Syncing the SQL backup"
-    borg create -s -p borg@home_laptop:/mnt/WD3TB/repos/asus::{hostname}-nextcloud-db-{now} /var/nextcloud/nextcloud-dbbackup.bak
+    echo "Syncing the SQL backup"
+    borg create -s -p borg@home_laptop:/mnt/WD3TB/repos/asus::nextcloud-db-{now} /var/nextcloud/nextcloud-dbbackup.bak
     echo "Turn off maintenance mode"
     sudo -u http php /usr/share/webapps/nextcloud/occ maintenance:mode --off
 elif [ "$(basename $0)" = "backup_asus_test" ]; then
     echo "Testing Backing up ASUS"
     echo "Testing Backing up /etc"
-    borg create -n --list borg@home_laptop:/mnt/WD3TB/repos/asus::{hostname}-etc-{now} /etc
+    borg create -n --list --filter=AME borg@home_laptop:/mnt/WD3TB/repos/asus::etc-{now} /etc
     echo "Turn on maintenance mode"
     sudo -u http php /usr/share/webapps/nextcloud/occ maintenance:mode --on
     echo "Testing Syncing the data"
-    borg create -n --list borg@home_laptop:/mnt/WD3TB/repos/asus::{hostname}-nextcloud-data-{now} /var/nextcloud/data
+    borg create -n --list --filter=AME borg@home_laptop:/mnt/WD3TB/repos/asus::nextcloud-data-{now} /var/nextcloud/data
     echo "Testing Syncing the config"
-    borg create -n --list borg@home_laptop:/mnt/WD3TB/repos/asus::{hostname}-nextcloud-config-{now} /etc/webapps/nextcloud/config
+    borg create -n --list --filter=AME borg@home_laptop:/mnt/WD3TB/repos/asus::nextcloud-config-{now} /etc/webapps/nextcloud/config
     echo "Dumping PostgreSQL"
     pg_dump nextcloud -h localhost -U nextcloud -f /var/nextcloud/nextcloud-dbbackup.bak
     echo "Testing Syncing the SQL backup"
-    borg create -n --list borg@home_laptop:/mnt/WD3TB/repos/asus::{hostname}-nextcloud-db-{now} /var/nextcloud/nextcloud-dbbackup.bak
+    borg create -n --list --filter=AME borg@home_laptop:/mnt/WD3TB/repos/asus::nextcloud-db-{now} /var/nextcloud/nextcloud-dbbackup.bak
     echo "Turn off maintenance mode"
     sudo -u http php /usr/share/webapps/nextcloud/occ maintenance:mode --off
 else
