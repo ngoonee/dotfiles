@@ -1,9 +1,0 @@
-#!/bin/bash
-# densowireless by ngoonee Dec 2 2014
-#
-
-iw dev wlp3s0 interface add wlan0 type station
-ip link set dev wlan0 address dc:85:de:52:b6:09
-#ip link set wlan0 up
-#wpa_supplicant -D nl80211,wext -i wlan0 -c <(wpa_passphrase "JKS_DENSO" "densoJKS")
-/usr/lib/network/network start JKS_DENSO
