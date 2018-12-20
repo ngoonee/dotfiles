@@ -8,6 +8,8 @@ elif [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
+trap "exit" INT
+
 function process_warn {
     if [[ $( pgrep -f $1 ) ]]; then
         echo "$1 should not be running during backup, please exit it now." 2>&1
