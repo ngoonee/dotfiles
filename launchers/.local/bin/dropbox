@@ -1,0 +1,3 @@
+#!/bin/bash
+
+LD_PRELOAD=/home/ngoonee/.local/lib/dropbox-filesystem-fix/libdropbox_fs_fix.so exec /usr/bin/dropbox "$@"
