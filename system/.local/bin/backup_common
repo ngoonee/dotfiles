@@ -37,6 +37,38 @@ function enable_services {
     systemctl start nextcloud-client@ngoonee
 }
 
+function backup_envy {
+    echo "Backing up Envy to $BORG_REPO at $LOCATION"
+    echo "Backing up Envy's /etc to $BORG_REPO at $LOCATION"
+    borg create -s -p ::etc-{now:%Y-%m-%d-%H-%M} /etc
+    # paclist and pacman -Slq aurrepo to backup list of packages
+    for DIR in Archive dotfiles Dropbox Files Unsorted .netrc .fonts; do
+        echo "Backing up /home/ngoonee/$DIR to $BORG_REPO at $LOCATION"
+        borg create -s -p ::home-$DIR-{now:%Y-%m-%d-%H-%M} /home/ngoonee/$DIR
+    done
+    echo "Pruning old archives from $BORG_REPO at $LOCATION"
+    for PREFIX in etc home-Archive home-dotfiles home-Dropbox home-Files home-Unsorted home-.netrc home-.fonts; do
+        echo "Pruning $PREFIX from $BORG_REPO at $LOCATION"
+        borg prune -s --list --keep-within 2d --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
+    done
+}
+
+function backup_envy_test {
+    echo "Testing Backing up Envy to $BORG_REPO at $LOCATION"
+    echo "Testing Backing up Envy's /etc to $BORG_REPO at $LOCATION"
+    borg create -n --list --filter=AME ::etc-{now:%Y-%m-%d-%H-%M} /etc
+    # paclist and pacman -Slq aurrepo to backup list of packages
+    for DIR in Archive dotfiles Dropbox Files Unsorted .netrc .fonts; do
+        echo "Testing Backing up /home/ngoonee/$DIR to $BORG_REPO at $LOCATION"
+        borg create -n --list --filter=AME ::home-$DIR-{now:%Y-%m-%d-%H-%M} /home/ngoonee/$DIR
+    done
+    echo "Testing Pruning old archives from $BORG_REPO at $LOCATION"
+    for PREFIX in etc home-Archive home-dotfiles home-Dropbox home-Files home-Unsorted home-.netrc home-.fonts; do
+        echo "Testing Pruning $PREFIX from $BORG_REPO at $LOCATION"
+        borg prune -n -v --list --keep-within 2d --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
+    done
+}
+
 #check_browsers
 if [ "$(basename $0)" = "backup_home" ]; then
     disable_services
@@ -46,36 +78,29 @@ fi
 export BORG_PASSPHRASE=5qmQNoZPravcNjeTp07kbUcS
 if [ "$(basename $0)" = "backup_home" ]; then
     export BORG_REPO='home_laptop:/mnt/WD3TB/repos/envy'
-    echo "Backing up Envy"
-    echo "Backing up /etc"
-    borg create -s -p ::etc-{now:%Y-%m-%d-%H-%M} /etc
-    # paclist and pacman -Slq aurrepo to backup list of packages
-    for DIR in Archive dotfiles Dropbox Files Unsorted .netrc .fonts; do
-        echo "Backing up /home/ngoonee/$DIR"
-        borg create -s -p ::home-$DIR-{now:%Y-%m-%d-%H-%M} /home/ngoonee/$DIR
-    done
-    echo "Pruning old archives"
-    for PREFIX in etc home-Archive home-dotfiles home-Dropbox home-Files home-Unsorted home-.netrc home-.fonts; do
-        echo "Pruning $PREFIX"
-        borg prune -s --list --keep-within 2d --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
-    done
+    export LOCATION='home external drive'
+    backup_envy
+    export BORG_REPO='home_laptop:/mnt/borg/repos/envy'
+    export LOCATION='home internal drive'
+    backup_envy
 elif [ "$(basename $0)" = "backup_home_test" ]; then
     export BORG_REPO='home_laptop:/mnt/WD3TB/repos/envy'
-    echo "Testing Backing up Envy"
-    echo "Testing Backing up /etc"
-    borg create -n --list --filter=AME ::etc-{now:%Y-%m-%d-%H-%M} /etc
-    # paclist and pacman -Slq aurrepo to backup list of packages
-    for DIR in Archive dotfiles Dropbox Files Unsorted .netrc .fonts; do
-        echo "Testing Backing up /home/ngoonee/$DIR"
-        borg create -n --list --filter=AME ::home-$DIR-{now:%Y-%m-%d-%H-%M} /home/ngoonee/$DIR
-    done
-    echo "Testing Pruning old archives"
-    for PREFIX in etc home-Archive home-dotfiles home-Dropbox home-Files home-Unsorted home-.netrc home-.fonts; do
-        echo "Testing Pruning $PREFIX"
-        borg prune -n -v --list --keep-within 2d --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
-    done
+    export LOCATION='home external drive'
+    backup_envy_test
+    export BORG_REPO='home_laptop:/mnt/borg/repos/envy'
+    export LOCATION='home internal drive'
+    backup_envy_test
 elif [ "$(basename $0)" = "backup_uni" ]; then
-    echo "Not implemented yet"
+    #export BORG_REPO='office_pi:/mnt/UNIBACKUP/repos/envy'
+    export BORG_REPO='/media/UNIBACKUP/repos/envy'
+    export LOCATION='uni'
+    backup_envy
+elif [ "$(basename $0)" = "backup_uni_test" ]; then
+    #export BORG_REPO='office_pi:/mnt/UNIBACKUP/repos/envy'
+    #export BORG_REPO='/media/UNIBACKUP/repos/envy'
+    export BORG_REPO='office_desktop:/cygdrive/d/repos/envy'
+    export LOCATION='uni'
+    backup_envy_test
 elif [ "$(basename $0)" = "backup_asus" ]; then
     export BORG_REPO='home_laptop:/mnt/WD3TB/repos/asus'
     echo "Backing up ASUS"
