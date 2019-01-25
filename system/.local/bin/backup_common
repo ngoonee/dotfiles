@@ -93,14 +93,11 @@ elif [ "$(basename $0)" = "backup_home_test" ]; then
     export LOCATION='home internal drive'
     backup_envy_test
 elif [ "$(basename $0)" = "backup_uni" ]; then
-    #export BORG_REPO='office_pi:/mnt/UNIBACKUP/repos/envy'
-    export BORG_REPO='/media/UNIBACKUP/repos/envy'
+    export BORG_REPO='office_pi:/mnt/UNIBACKUP/repos/envy'
     export LOCATION='uni'
     backup_envy
 elif [ "$(basename $0)" = "backup_uni_test" ]; then
-    #export BORG_REPO='office_pi:/mnt/UNIBACKUP/repos/envy'
-    #export BORG_REPO='/media/UNIBACKUP/repos/envy'
-    export BORG_REPO='office_desktop:/cygdrive/d/repos/envy'
+    export BORG_REPO='office_pi:/mnt/UNIBACKUP/repos/envy'
     export LOCATION='uni'
     backup_envy_test
 elif [ "$(basename $0)" = "backup_asus" ]; then
