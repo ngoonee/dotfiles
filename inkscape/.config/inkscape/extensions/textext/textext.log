@@ -1,0 +1,124 @@
+[2019-02-08 23:40:16,799][DEBUG   ]: First run of TexText. Enforcing DEBUG mode.          //  __init__.py:140  
+[2019-02-08 23:40:16,799][DEBUG   ]: TexText initialized          //  __init__.py:149  
+[2019-02-08 23:40:16,799][DEBUG   ]: TexText version = '0.9.1' (md5sum = 1509629f6ce6416c9b37fff23cab3793)          //  __init__.py:151  
+[2019-02-08 23:40:16,799][DEBUG   ]: platform.system() = 'Linux'          //  __init__.py:153  
+[2019-02-08 23:40:16,799][DEBUG   ]: platform.release() = '4.20.7-arch1-1-ARCH'          //  __init__.py:154  
+[2019-02-08 23:40:16,800][DEBUG   ]: platform.version() = '#1 SMP PREEMPT Wed Feb 6 18:42:40 UTC 2019'          //  __init__.py:155  
+[2019-02-08 23:40:16,800][DEBUG   ]: platform.machine() = 'x86_64'          //  __init__.py:157  
+[2019-02-08 23:40:16,800][DEBUG   ]: platform.uname() = ('Linux', 'ngoonee-envy', '4.20.7-arch1-1-ARCH', '#1 SMP PREEMPT Wed Feb 6 18:42:40 UTC 2019', 'x86_64', '')          //  __init__.py:158  
+[2019-02-08 23:40:16,800][DEBUG   ]: platform.mac_ver() = ('', ('', '', ''), '')          //  __init__.py:159  
+[2019-02-08 23:40:16,800][DEBUG   ]: sys.executable = '/usr/bin/python2'          //  __init__.py:161  
+[2019-02-08 23:40:16,800][DEBUG   ]: sys.version = '2.7.15 (default, Jan 10 2019, 23:20:52) \n[GCC 8.2.1 20181127]'          //  __init__.py:162  
+[2019-02-08 23:40:16,800][DEBUG   ]: os.environ = {'ESCDELAY': '25', 'XDG_GREETER_DATA_DIR': '/var/lib/lightdm-data/ngoonee', 'http_proxy': 'http://127.0.0.1:3128', 'WINEDLLOVERRIDES': 'winemenubuilder.exe=d', 'XDG_SESSION_TYPE': 'x11', 'LOGNAME': 'ngoonee', 'XDG_SEAT': 'seat0', 'PATH': '/home/ngoonee/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/opt/android-sdk/platform-tools:/opt/cuda/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl', 'XDG_VTNR': '7', 'HOME': '/home/ngoonee', 'POWERLINE_COMMAND': 'powerline', 'DISPLAY': ':0', 'XDG_SESSION_DESKTOP': 'awesome', 'TERM': 'screen-256color', 'SHELL': '/bin/fish', 'XDG_SESSION_PATH': '/org/freedesktop/DisplayManager/Session0', 'XAUTHORITY': '/home/ngoonee/.Xauthority', 'no_proxy': 'localhost,127.0.0.1,localaddress,.localdomain.com', 'HG': '/usr/bin/hg', 'https_proxy': 'http://127.0.0.1:3128', 'WINDOWID': '25165827', 'EDITOR': '/usr/bin/vim', 'PACKAGE_LOCALE_DIR': '/usr/share/locale', 'XDG_SESSION_CLASS': 'user', 'LANG': 'en_GB.utf8', 'XDG_RUNTIME_DIR': '/run/user/1000', 'RANGER_LEVEL': '1', 'PYTHONPATH': '/usr/share/inkscape/extensions', 'SSH_AUTH_SOCK': '/run/user/1000/ssh-agent.socket', 'VTE_VERSION': '5402', 'ftp_proxy': 'http://127.0.0.1:3128', 'MOZ_PLUGIN_PATH': '/usr/lib/mozilla/plugins', 'GDMSESSION': 'awesome', 'TMUX': '/tmp//tmux-1000/default,6179,0', 'XDG_SEAT_PATH': '/org/freedesktop/DisplayManager/Seat0', 'XDG_SESSION_ID': '1', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', '_': '/usr/bin/inkscape', 'VIRTUALFISH_HOME': '/home/ngoonee/Files/Code/venvs', 'DESKTOP_SESSION': 'awesome', 'GTK_MODULES': 'canberra-gtk-module', 'is_vim': "ps -o state= -o comm= -t '#{pane_tty}'     | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'", 'GDM_LANG': 'en_GB.utf8', 'SHLVL': '4', 'PWD': '/home/ngoonee/Files/Work/UTAR/Kinematics/Finals', 'COLORTERM': 'truecolor', 'MAIL': '/var/spool/mail/ngoonee', 'PAGER': 'less', 'TMUX_PANE': '%0', 'USER': 'ngoonee'}          //  __init__.py:163  
+[2019-02-08 23:40:17,132][SUCCESS ]: + [Succ] TexText requirements          //  requirements_check.py:757  
+[2019-02-08 23:40:17,132][SUCCESS ]: /-and-* [Succ] Detect inkscape          //  requirements_check.py:332  
+[2019-02-08 23:40:17,132][SUCCESS ]: |      `inkscape` is found at `/usr/bin`          //  requirements_check.py:332  
+[2019-02-08 23:40:17,132][SUCCESS ]: |      `inkscape` is found at `/bin`          //  requirements_check.py:332  
+[2019-02-08 23:40:17,132][SUCCESS ]: /-and-* [Succ] Detect `python2.7`          //  requirements_check.py:332  
+[2019-02-08 23:40:17,133][SUCCESS ]: |      python2.7 is found at `/usr/bin/python2`          //  requirements_check.py:332  
+[2019-02-08 23:40:17,133][SUCCESS ]: /-and-+ [Succ] Detect *latex          //  requirements_check.py:332  
+[2019-02-08 23:40:17,133][SUCCESS ]: |     /--or-* [Succ] `pdflatex` is found at `/usr/bin`          //  requirements_check.py:332  
+[2019-02-08 23:40:17,133][SUCCESS ]: |     |      `pdflatex` is found at `/bin`          //  requirements_check.py:332  
+[2019-02-08 23:40:17,133][SUCCESS ]: |     /--or-* [Succ] `lualatex` is found at `/usr/bin`          //  requirements_check.py:332  
+[2019-02-08 23:40:17,133][SUCCESS ]: |     |      `lualatex` is found at `/bin`          //  requirements_check.py:332  
+[2019-02-08 23:40:17,133][SUCCESS ]: |     /--or-* [Succ] `xelatex` is found at `/usr/bin`          //  requirements_check.py:332  
+[2019-02-08 23:40:17,133][SUCCESS ]: |            `xelatex` is found at `/bin`          //  requirements_check.py:332  
+[2019-02-08 23:40:17,134][SUCCESS ]: /-and-+ [Succ] Detect GUI library          //  requirements_check.py:332  
+[2019-02-08 23:40:17,134][SUCCESS ]: |     /--or-* [Succ] PyGTK2 is found          //  requirements_check.py:332  
+[2019-02-08 23:40:17,134][SUCCESS ]: |     /--or-* [Succ] TkInter is found          //  requirements_check.py:332  
+[2019-02-08 23:40:17,134][SUCCESS ]: /-and-+ [Succ] Detect pdf->svg conversion utility          //  requirements_check.py:332  
+[2019-02-08 23:40:17,134][INFO    ]:       /--or-+ [Fail] Detect compatible pstoedit+ghostscript versions          //  requirements_check.py:332  
+[2019-02-08 23:40:17,134][INFO    ]:       |      Please follow installation instructions at           //  requirements_check.py:332  
+[2019-02-08 23:40:17,134][INFO    ]:       |             [94m[4mhttps://textext.github.io/textext/install/linux.html#linux-install-pstoedit[0m          //  requirements_check.py:332  
+[2019-02-08 23:40:17,134][SUCCESS ]:       |     /-and-+ [Succ]           //  requirements_check.py:332  
+[2019-02-08 23:40:17,134][INFO    ]:       |     |     /-not-+ [Fail] Detect incompatible versions of pstoedit+ghostscript          //  requirements_check.py:332  
+[2019-02-08 23:40:17,135][INFO    ]:       |     |           /-and-* [Fail] pstoedit=3.70 is not found          //  requirements_check.py:332  
+[2019-02-08 23:40:17,135][INFO    ]:       |     |           /-and-* [Fail] ghostscript=9.22 is not found          //  requirements_check.py:332  
+[2019-02-08 23:40:17,135][INFO    ]:       |     /-and-* [Fail] pstoedit is not found          //  requirements_check.py:332  
+[2019-02-08 23:40:17,135][INFO    ]:       |     |      Please follow installation instructions at           //  requirements_check.py:332  
+[2019-02-08 23:40:17,135][INFO    ]:       |     |             [94m[4mhttps://textext.github.io/textext/install/linux.html#linux-install-pstoedit[0m          //  requirements_check.py:332  
+[2019-02-08 23:40:17,135][INFO    ]:       |     |      If pstoedit is installed in custom location, specify it via           //  requirements_check.py:332  
+[2019-02-08 23:40:17,135][INFO    ]:       |     |             --pstoedit-executable=<path-to-pstoedit>          //  requirements_check.py:332  
+[2019-02-08 23:40:17,135][INFO    ]:       |     |      and run setup.py again          //  requirements_check.py:332  
+[2019-02-08 23:40:17,135][INFO    ]:       |     /-and-* [Fail] ghostscript is not found          //  requirements_check.py:332  
+[2019-02-08 23:40:17,135][INFO    ]:       |            Please follow installation instructions at           //  requirements_check.py:332  
+[2019-02-08 23:40:17,135][INFO    ]:       |                   [94m[4mhttps://textext.github.io/textext/install/linux.html#linux-install-pstoedit[0m          //  requirements_check.py:332  
+[2019-02-08 23:40:17,136][INFO    ]:       |            If ghostscript is installed in custom location, specify it via           //  requirements_check.py:332  
+[2019-02-08 23:40:17,136][INFO    ]:       |                   --ghostscript-executable=<path-to-ghostscript>          //  requirements_check.py:332  
+[2019-02-08 23:40:17,136][INFO    ]:       |            and run setup.py again          //  requirements_check.py:332  
+[2019-02-08 23:40:17,136][SUCCESS ]:       /--or-* [Succ] Detect pdf2svg:          //  requirements_check.py:332  
+[2019-02-08 23:40:17,136][SUCCESS ]:              `pdf2svg` is found at `/usr/bin`          //  requirements_check.py:332  
+[2019-02-08 23:40:17,136][SUCCESS ]:              `pdf2svg` is found at `/bin`          //  requirements_check.py:332  
+[2019-02-08 23:40:17,244][DEBUG   ]: TexText.effect          //  __init__.py:236  
+[2019-02-08 23:40:17,244][DEBUG   ]:   Pdf2SvgPlotSvg is usable          //  __init__.py:245  
+[2019-02-08 23:40:17,244][DEBUG   ]:   Can't adjust scale to account node transformations done in inkscape. May result in loss of scale.          //  __init__.py:269  
+[2019-02-08 23:40:17,245][DEBUG   ]:   Using default node alignment `middle center`          //  __init__.py:278  
+[2019-02-08 23:40:17,245][DEBUG   ]:   Using default tex converter `pdflatex`           //  __init__.py:290  
+[2019-02-08 23:40:17,245][DEBUG   ]:   Using default preamble file `default_packages.tex`          //  __init__.py:299  
+[2019-02-08 23:40:17,245][DEBUG   ]:   Run TexText GUI          //  __init__.py:339  
+[2019-02-08 23:40:32,064][DEBUG   ]:     TexText.preview          //  __init__.py:372  
+[2019-02-08 23:40:32,064][DEBUG   ]:       args:          //  __init__.py:373  
+[2019-02-08 23:40:32,064][DEBUG   ]:         converter = <__main__.Pdf2SvgPlotSvg object at 0x7f22a3199ad0>          //  __init__.py:375  
+[2019-02-08 23:40:32,064][DEBUG   ]:         preamble_file = '/home/ngoonee/dotfiles/inkscape/.config/inkscape/extensions/textext/default_packages.tex'          //  __init__.py:375  
+[2019-02-08 23:40:32,065][DEBUG   ]:         text = 'X_B'          //  __init__.py:375  
+[2019-02-08 23:40:32,065][DEBUG   ]:         tex_command = 'pdflatex'          //  __init__.py:375  
+[2019-02-08 23:40:32,065][DEBUG   ]:         image_setter = <bound method AskTextGTKSource.set_preview_image_from_file of <asktext.AskTextGTKSource object at 0x7f229edcb790>>          //  __init__.py:375  
+[2019-02-08 23:40:32,065][DEBUG   ]:         tex_executable = '/usr/bin/pdflatex'          //  __init__.py:375  
+[2019-02-08 23:40:32,065][DEBUG   ]:         self = <__main__.TexText instance at 0x7f22a674dea8>          //  __init__.py:375  
+[2019-02-08 23:40:32,065][DEBUG   ]:       args: done          //  __init__.py:375  
+[2019-02-08 23:40:32,069][DEBUG   ]:       Converting tex to pdf          //  __init__.py:385  
+[2019-02-08 23:40:32,069][DEBUG   ]:         Converting .tex to .pdf          //  __init__.py:594  
+[2019-02-08 23:40:32,225][DEBUG   ]:           Parsing LaTeX log file          //  __init__.py:632  
+[2019-02-08 23:40:32,245][DEBUG   ]:           Parsing LaTeX log file done          //  __init__.py:652  
+[2019-02-08 23:40:32,245][DEBUG   ]:         Converting .tex to .pdf failed          //  __init__.py:624  
+[2019-02-08 23:40:32,245][DEBUG   ]:       Converting tex to pdf failed          //  __init__.py:404  
+[2019-02-08 23:40:32,246][DEBUG   ]:     TexText.preview failed          //  __init__.py:404  
+[2019-02-08 23:40:41,945][DEBUG   ]:     TexText.preview          //  __init__.py:372  
+[2019-02-08 23:40:41,945][DEBUG   ]:       args:          //  __init__.py:373  
+[2019-02-08 23:40:41,945][DEBUG   ]:         converter = <__main__.Pdf2SvgPlotSvg object at 0x7f22a3199ad0>          //  __init__.py:375  
+[2019-02-08 23:40:41,945][DEBUG   ]:         preamble_file = '/home/ngoonee/dotfiles/inkscape/.config/inkscape/extensions/textext/default_packages.tex'          //  __init__.py:375  
+[2019-02-08 23:40:41,946][DEBUG   ]:         text = '$X_B$'          //  __init__.py:375  
+[2019-02-08 23:40:41,946][DEBUG   ]:         tex_command = 'pdflatex'          //  __init__.py:375  
+[2019-02-08 23:40:41,946][DEBUG   ]:         image_setter = <bound method AskTextGTKSource.set_preview_image_from_file of <asktext.AskTextGTKSource object at 0x7f229edcb790>>          //  __init__.py:375  
+[2019-02-08 23:40:41,946][DEBUG   ]:         tex_executable = '/usr/bin/pdflatex'          //  __init__.py:375  
+[2019-02-08 23:40:41,946][DEBUG   ]:         self = <__main__.TexText instance at 0x7f22a674dea8>          //  __init__.py:375  
+[2019-02-08 23:40:41,946][DEBUG   ]:       args: done          //  __init__.py:375  
+[2019-02-08 23:40:41,947][DEBUG   ]:       Converting tex to pdf          //  __init__.py:385  
+[2019-02-08 23:40:41,947][DEBUG   ]:         Converting .tex to .pdf          //  __init__.py:594  
+[2019-02-08 23:40:42,087][DEBUG   ]:         Converting .tex to .pdf done          //  __init__.py:624  
+[2019-02-08 23:40:42,088][DEBUG   ]:         Converting .pdf to .svg          //  __init__.py:779  
+[2019-02-08 23:40:42,134][DEBUG   ]:         Converting .pdf to .svg done          //  __init__.py:785  
+[2019-02-08 23:40:42,838][DEBUG   ]:       Converting tex to pdf done          //  __init__.py:404  
+[2019-02-08 23:40:42,839][DEBUG   ]:     TexText.preview done          //  __init__.py:404  
+[2019-02-08 23:40:46,420][DEBUG   ]:     TexText.do_convert          //  __init__.py:423  
+[2019-02-08 23:40:46,421][DEBUG   ]:       args:          //  __init__.py:424  
+[2019-02-08 23:40:46,421][DEBUG   ]:         converter = <__main__.Pdf2SvgPlotSvg object at 0x7f22a3199ad0>          //  __init__.py:426  
+[2019-02-08 23:40:46,421][DEBUG   ]:         original_scale = None          //  __init__.py:426  
+[2019-02-08 23:40:46,421][DEBUG   ]:         text = '$X_B$'          //  __init__.py:426  
+[2019-02-08 23:40:46,421][DEBUG   ]:         tex_command = 'pdflatex'          //  __init__.py:426  
+[2019-02-08 23:40:46,421][DEBUG   ]:         preamble_file = '/home/ngoonee/dotfiles/inkscape/.config/inkscape/extensions/textext/default_packages.tex'          //  __init__.py:426  
+[2019-02-08 23:40:46,422][DEBUG   ]:         user_scale_factor = 1.0          //  __init__.py:426  
+[2019-02-08 23:40:46,422][DEBUG   ]:         old_svg_ele = None          //  __init__.py:426  
+[2019-02-08 23:40:46,422][DEBUG   ]:         tex_executable = '/usr/bin/pdflatex'          //  __init__.py:426  
+[2019-02-08 23:40:46,422][DEBUG   ]:         self = <__main__.TexText instance at 0x7f22a674dea8>          //  __init__.py:426  
+[2019-02-08 23:40:46,422][DEBUG   ]:         alignment = 'middle center'          //  __init__.py:426  
+[2019-02-08 23:40:46,422][DEBUG   ]:       args: done          //  __init__.py:426  
+[2019-02-08 23:40:46,423][DEBUG   ]:       Converting tex to svg          //  __init__.py:440  
+[2019-02-08 23:40:46,423][DEBUG   ]:         Converting .tex to svg element          //  __init__.py:658  
+[2019-02-08 23:40:46,423][DEBUG   ]:           Converting .tex to .pdf          //  __init__.py:594  
+[2019-02-08 23:40:46,566][DEBUG   ]:           Converting .tex to .pdf done          //  __init__.py:624  
+[2019-02-08 23:40:46,566][DEBUG   ]:           Converting .pdf to .svg          //  __init__.py:779  
+[2019-02-08 23:40:46,601][DEBUG   ]:           Converting .pdf to .svg done          //  __init__.py:785  
+[2019-02-08 23:40:46,602][DEBUG   ]:           Groupping resulting svg          //  __init__.py:800  
+[2019-02-08 23:40:46,603][DEBUG   ]:           Groupping resulting svg done          //  __init__.py:847  
+[2019-02-08 23:40:46,603][DEBUG   ]:         Converting .tex to svg element done          //  __init__.py:668  
+[2019-02-08 23:40:46,603][DEBUG   ]:       Converting tex to svg done          //  __init__.py:441  
+[2019-02-08 23:40:46,607][DEBUG   ]:       Adding new node to document          //  __init__.py:460  
+[2019-02-08 23:40:46,614][DEBUG   ]:       Adding new node to document done          //  __init__.py:469  
+[2019-02-08 23:40:46,614][DEBUG   ]:       Saving global settings          //  __init__.py:482  
+[2019-02-08 23:40:46,615][DEBUG   ]:       Saving global settings done          //  __init__.py:495  
+[2019-02-08 23:40:46,615][DEBUG   ]:     TexText.do_convert done          //  __init__.py:495  
+[2019-02-08 23:40:46,624][DEBUG   ]:   Run TexText GUI done          //  __init__.py:340  
+[2019-02-08 23:40:46,624][DEBUG   ]:   Saving global GUI settings          //  __init__.py:342  
+[2019-02-08 23:40:46,625][DEBUG   ]:   Saving global GUI settings done          //  __init__.py:344  
+[2019-02-08 23:40:46,625][DEBUG   ]: TexText.effect done          //  __init__.py:356  
