@@ -60,6 +60,7 @@ Run git rm -rf [path-to-module]
 Remove it from .git/modules/vim/.vim/bundle/[projectname]
 
 
+
 Links:-
 [1] http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen/
 [2] http://www.nils-haldenwang.de/frameworks-and-tools/git/how-to-ignore-changes-in-git-submodules
