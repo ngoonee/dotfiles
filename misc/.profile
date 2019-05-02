@@ -25,8 +25,9 @@ vt=$(fgconsole 2>/dev/null)
 (( vt == 1 )) && exec startx -- vt$vt &> ~/.xlog
 unset vt
 
-setxkbmap -option altwin:swap_alt_win
-
-if which xhost >/dev/null 2>&1; then
-    xhost +local:
+if [[ $DISPLAY ]] ; then
+    setxkbmap -option altwin:swap_alt_win
+    if which xhost >/dev/null 2>&1; then
+        xhost +local:
+    fi
 fi
