@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 COUNTER=9
 until [ $COUNTER -lt 1 ]; do
   #twmnc -c "$(mpc | sed 's\&\and\')" -d 1
