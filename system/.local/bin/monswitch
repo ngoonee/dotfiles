@@ -17,6 +17,9 @@ if [ "$essid" = "MalaysianOfficial1" ]; then
     EXTOUTPUT=$(xrandr |awk '/^DP-[1-2] connected/ {print $1}')
     if [ -z "$EXTOUTPUT" ]; then
         xrandr --output eDP-1 --auto --output DP-1 --off --output DP-2 --off
+        xrandr --delmode DP-1 1366x768_59.8
+        xrandr --delmode DP-2 1366x768_59.8
+        xrandr --rmmode 1366x768_59.8
     else
         # cvt 1280 1024 to get the modeline
         xrandr --newmode "1366x768_59.8" 85.00 1368 1440 1576 1784 768 771 781 798 -hsync +vsync
