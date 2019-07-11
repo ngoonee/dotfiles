@@ -1,0 +1,32 @@
+#!/usr/bin/python
+# Run 'convertpdf $source $dest' followed by 'sherlock -t 20% -e txt $dest $library'
+
+import subprocess
+import sys
+from os import path, listdir
+
+def print_help():
+    print("Usage: convertpdf SOURCE_DIR DEST_DIR")
+    print("convertpdf converts PDFs in SOURCE_DIR to text files in DEST_DIR.")
+
+def do_convert(source_dir, dest_dir):
+    filtered_source = [f for f in listdir(source_dir) if f.endswith('.pdf')]
+    for f in filtered_source:
+        filepath = path.join(source_dir, f)
+        targetpath = path.join(dest_dir, f)
+        targetpath = targetpath[:-3] + 'txt'
+        subprocess.Popen(['pdftotext', filepath, targetpath])
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print_help()
+    else:
+        _, source_dir, dest_dir = sys.argv
+        if not (path.isdir(source_dir) and path.isdir(dest_dir)):
+            print_help()
+            if not path.isdir(source_dir):
+                print("{} is not a valid directory".format(source_dir))
+            if not path.isdir(dest_dir):
+                print("{} is not a valid directory".format(dest_dir))
+        else:
+            do_convert(source_dir, dest_dir)
