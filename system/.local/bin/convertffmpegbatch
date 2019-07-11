@@ -3,7 +3,7 @@
 #process files, just replace the ffmpeg line
 
 
-for f in ./*.mp4;
+for f in ./*/*.pdf;
 do
   echo "Processing $f"
   #ffmpeg -i "$f" -qscale 0 -ab 192k "${f/.mp4}.mpg"
@@ -14,12 +14,12 @@ do
 #  ffmpeg -i "$f" -ab 128k -map_meta_data "${f}.mp3":"$f" "${f}.mp3"
   #ffmpeg -i "$f" -ab 192k "${f/.m4a}.mp3"
 #  ffmpeg -i "$f" "${f}.flac"
-  if [ -e "${f/.mp4}.mpg" ] ; then
+  if [ -e "${f/.pdf}.png" ] ; then
     echo "Already processed"
   else
-    #convert -verbose -quality 100 -density 150 "$f" "${f/.pdf}.png"
+    convert -verbose -quality 100 -density 150 "$f" "${f/.pdf}.png"
     #ffmpeg -i "$f" "${f/.mp4}.mp3"
-    ffmpeg -i "$f" -qscale 0 -ab 192k "${f/.mp4}.mpg"
+    #ffmpeg -i "$f" -qscale 0 -ab 192k "${f/.mp4}.mpg"
   fi
   #ffmpeg -i "$f" -qscale 30 -ab 192k -vf scale=320:-1 "${f}.mp4"
 
