@@ -29,7 +29,9 @@ done
 #ffmpeg -i video.mpg -vf "transpose=1" out.mpg
 #ffmpeg -i theplaceswelive.avi -vf crop=35:131:1208:806 -ss 00:00:05.3 -sameq -ab 128k theplaceswelive.mpg
 #ffmpeg -i Video.mpg -s 480x270 -c:a copy out.mpg
-#ffmpeg -i Video.mpg -filter:v 'setpts=0.5*PTS,transpose=1' -qscale 0 SpeedByTwo.mpg
+#ffmpeg -i Video.mpg -filter:v 'setpts=0.5*PTS,transpose=1' -filter:a "atempo=2.0" -qscale 0 SpeedByTwo.mpg
 #ffmpeg -i Video.mpg -r 30 img/ffmpeg_%03d.png
 #ffmpeg -i Video.mpg -vf subtitles=subs.srt Output.mp4
 #ffmpeg -i video.mp4 -i audio.wav -c:v copy -c:a aac -strict experimental -map 0:v:0 -map 1:a:0 output.mp4
+
+#https://stackoverflow.com/questions/25870169/how-to-set-background-to-subtitle-in-ffmpeg
