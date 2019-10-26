@@ -20,6 +20,10 @@ export WINEDLLOVERRIDES='winemenubuilder.exe=d'
 #export PYTHONSTARTUP='/home/conf/pystartup'
 # Use VirtualEnvWrapper
 export VIRTUALFISH_HOME=~/Files/Code/venvs
+# For spotify-dl
+export SPOTIPY_CLIENT_ID='598fa0989e1d4087a4367e54c01241c0'
+export SPOTIPY_CLIENT_SECRET='598fa0989e1d4087a4367e54c01241c0'
+#export SPOTIPY_REDIRECT_URI='your-app-redirect-url'
 
 vt=$(fgconsole 2>/dev/null)
 (( vt == 1 )) && exec startx -- vt$vt &> ~/.xlog
