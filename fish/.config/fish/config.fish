@@ -31,6 +31,12 @@ function tmux_directory_title
     end
 end
 
+# Save history repeatedly
+function save_history --on-event fish_preexec
+    history --save
+    history --merge
+end
+
 # Use virtualfish
 #eval (/usr/bin/python -m virtualfish auto_activation)
 eval (/usr/bin/python -m virtualfish)
