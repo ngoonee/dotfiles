@@ -1,0 +1,8 @@
+#!/bin/sh
+docker run -d --name bitwarden \
+    -e ROCKET_TLS='{certs="/ssl/live/bethsimchatadonai.noip.me/fullchain.pem",key="/ssl/live/bethsimchatadonai.noip.me/privkey.pem"}' \
+    -v /etc/letsencrypt/:/ssl/ \
+    -v /home/ngoonee/bw-data/:/data/ \
+    -e LOG_FILE=/data/bitwarden.log \
+    -p 30743:80 \
+    bitwardenrs/server:latest
