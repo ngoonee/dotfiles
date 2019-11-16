@@ -41,8 +41,8 @@ XF86{Kbd,Mon}Brightness{Up,Down}
     sudo {key,back}light {up,down}
 XF86TouchpadToggle
     touchpad-toggle
-ctrl + super + a
-    keepassautotype
+#ctrl + super + a
+    #keepassautotype
 super + d
     rofi -show combi
 super + e
