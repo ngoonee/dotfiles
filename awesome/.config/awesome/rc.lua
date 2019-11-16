@@ -62,7 +62,7 @@ run_once({
     "blueman-applet",
     "nm-applet",
     "xset", "dpms 30",
-    "xidlehook", "--not-when-fullscreen --timer primary 600 lock_screen '' "
+    "xidlehook --not-when-fullscreen --timer primary 600 lock_screen '' ",
 }) -- entries must be comma-separated
 --[[
 run_once({
