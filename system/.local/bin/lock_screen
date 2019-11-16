@@ -1,2 +1,2 @@
 #!/bin/sh
-/usr/bin/physlock -p "This laptop is locked, please contact the owner at +6 012-6801326"
+/usr/bin/physlock -p "This laptop is locked, please contact the owner at +6 012-6801326 or ngoonee@gmail.com"
