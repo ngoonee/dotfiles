@@ -103,6 +103,9 @@ elif [ "$(basename $0)" = "backup_uni_test" ]; then
 elif [ "$(basename $0)" = "backup_asus" ]; then
     export BORG_REPO='home_laptop:/mnt/WD3TB/repos/asus'
     echo "Backing up ASUS"
+    echo "Backup up bitwarden"
+    sudo -u ngoonee sqlite3 /home/ngoonee/bw-data/db.sqlite3 ".backup '/home/ngoonee/bw-data/backup.sqlite3'"
+    borg create -s -p ::bitwarden-{now:%Y-%m-%d-%H-%M} /home/ngoonee/bw-data/backup.sqlite3
     echo "Backing up /etc"
     borg create -s -p ::etc-{now:%Y-%m-%d-%H-%M} /etc
     echo "Turn on maintenance mode"

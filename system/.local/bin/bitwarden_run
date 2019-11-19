@@ -1,4 +1,7 @@
 #!/bin/sh
+# You can add an ADMIN_TOKEN line as below, but remember to change it as soon as you start from the
+# admin page
+    #-e ADMIN_TOKEN=B/SqBGQKWqKils2hJ+CurfdnGr1EaIEvmVMP9deoKztRTpfV0SkzuAkWAA9rHHMI \
 docker run -d --name bitwarden \
     -e ROCKET_TLS='{certs="/ssl/live/bethsimchatadonai.noip.me/fullchain.pem",key="/ssl/live/bethsimchatadonai.noip.me/privkey.pem"}' \
     -e DOMAIN=https://bethsimchatadonai.noip.me \
