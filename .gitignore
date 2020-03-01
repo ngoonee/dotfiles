@@ -2,3 +2,4 @@ pentadactyl/.pentadactyl/info
 *.swp
 vim/.vim/.*
 vim/.vim/undodir
+spacemacs/.spacemacs.d/.spacemacs.env
