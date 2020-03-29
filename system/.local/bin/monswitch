@@ -4,19 +4,21 @@
 #
 
 # all available outputs
-OUTPUTS=$(xrandr |awk '$2 ~ /connected/ {print $1}')
+OUTPUTS=$(xrandr |awk '$2 ~ /^connected/ {print $1}')
 
 # your notebook eDP monitor
 #DEFAULT_OUTPUT=$(sed -ne 's/.*\(eDP[^ ]*\).*/\1/p' <<<$OUTPUTS)
-DEFAULT_OUTPUT=$(xrandr | awk '$3 ~ /primary/ {print $1}')
+#DEFAULT_OUTPUT=$(xrandr | awk '$3 ~ /primary/ {print $1}')
+DEFAULT_OUTPUT=$(xrandr | awk '$1 ~ /eDP/ {print $1}')
 
 # Short circuit for special case of UTAR monitor
 essid=`iwgetid -r`
 
 if [ "$essid" = "MalaysianOfficial1" ]; then
-    EXTOUTPUT=$(xrandr |awk '/^DP[1-2] connected/ {print $1}')
+    #EXTOUTPUT=$(xrandr |awk '/^DP[1-2] connected/ {print $1}')
+    EXTOUTPUT=$(xrandr | awk '/^DP.*[1-2] connected/ {print $1]')
     if [ -z "$EXTOUTPUT" ]; then
-        xrandr --output eDP1 --auto --output DP1 --off --output DP2 --off
+        xrandr --output $DEFAULT_OUTPUT --auto --output DP1 --off --output DP2 --off
         xrandr --delmode DP1 1366x768_59.8
         xrandr --delmode DP2 1366x768_59.8
         xrandr --rmmode 1366x768_59.8
@@ -24,7 +26,7 @@ if [ "$essid" = "MalaysianOfficial1" ]; then
         # cvt 1280 1024 to get the modeline
         xrandr --newmode "1366x768_59.8" 85.00 1368 1440 1576 1784 768 771 781 798 -hsync +vsync
         xrandr --addmode $EXTOUTPUT 1366x768_59.8
-        xrandr --output eDP1 --auto --output $EXTOUTPUT --mode 1366x768_59.8 --rotate normal --left-of eDP1
+        xrandr --output $DEFAULT_OUTPUT --auto --output $EXTOUTPUT --mode 1366x768_59.8 --rotate normal --left-of $DEFAULT_OUTPUT
     fi
     exit 0
 fi
