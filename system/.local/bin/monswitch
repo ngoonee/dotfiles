@@ -4,7 +4,7 @@
 #
 
 # all available outputs
-OUTPUTS=$(xrandr |awk '$2 ~ /^connected/ {print $1}')
+OUTPUTS=$(xrandr |awk '$2 ~ /connected/ {print $1}')
 
 # your notebook eDP monitor
 #DEFAULT_OUTPUT=$(sed -ne 's/.*\(eDP[^ ]*\).*/\1/p' <<<$OUTPUTS)
