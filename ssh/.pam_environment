@@ -2,4 +2,7 @@ http_proxy DEFAULT="http://127.0.0.1:3128"
 https_proxy DEFAULT="http://127.0.0.1:3128"
 ftp_proxy DEFAULT="http://127.0.0.1:3128"
 no_proxy DEFAULT="localhost,127.0.0.1,localaddress,.localdomain.com"
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
 SSH_AUTH_SOCK DEFAULT="${XDG_RUNTIME_DIR}/ssh-agent.socket"

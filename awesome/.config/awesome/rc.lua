@@ -63,7 +63,8 @@ run_once({
     "nm-applet",
     "xset", "dpms 30",
     "xidlehook --not-when-fullscreen --timer primary 600 lock_screen '' ",
-    "rambox",
+    "hamsket",
+    "fcitx",
 }) -- entries must be comma-separated
 --[[
 run_once({
