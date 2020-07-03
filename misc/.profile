@@ -28,10 +28,3 @@ export SPOTIPY_CLIENT_SECRET='598fa0989e1d4087a4367e54c01241c0'
 vt=$(fgconsole 2>/dev/null)
 (( vt == 1 )) && exec startx -- vt$vt &> ~/.xlog
 unset vt
-
-if [[ $DISPLAY ]] ; then
-    setxkbmap -option altwin:swap_alt_win
-    if which xhost >/dev/null 2>&1; then
-        xhost +local:
-    fi
-fi

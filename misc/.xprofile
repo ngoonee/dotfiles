@@ -1,0 +1,4 @@
+setxkbmap -option altwin:swap_alt_win
+if which xhost >/dev/null 2>&1; then
+    xhost +local:
+fi
