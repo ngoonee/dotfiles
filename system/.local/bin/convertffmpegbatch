@@ -14,6 +14,7 @@ do
 #  ffmpeg -i "$f" -ab 128k -map_meta_data "${f}.mp3":"$f" "${f}.mp3"
   #ffmpeg -i "$f" -ab 192k "${f/.m4a}.mp3"
 #  ffmpeg -i "$f" "${f}.flac"
+  #ffmpeg -i "$f" 2>&1 | grep Video
   if [ -e "${f/.pdf}.png" ] ; then
     echo "Already processed"
   else
