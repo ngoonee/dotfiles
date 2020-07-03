@@ -382,22 +382,7 @@ globalkeys = awful.util.table.join(
     awful.key({ altkey, modkey }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end,
               {description = "show filesystem", group = "widgets"}),
     awful.key({ altkey, modkey }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
-              {description = "show weather", group = "widgets"}),
-
-    -- Prompt
-    awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
-              {description = "run prompt", group = "launcher"}),
-
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run {
-                    prompt       = "Run Lua code: ",
-                    textbox      = awful.screen.focused().mypromptbox.widget,
-                    exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  }
-              end,
-              {description = "lua execute prompt", group = "awesome"})
+              {description = "show weather", group = "widgets"})
 )
 
 clientkeys = awful.util.table.join(
@@ -414,14 +399,25 @@ clientkeys = awful.util.table.join(
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "u",      function (c) c:move_to_screen()               end,
-              {description = "move to screen", group = "screen"}),
-    awful.key({ modkey, "Shift"   }, "i",      function (c) c:move_to_screen()               end,
-              {description = "move to screen", group = "screen"}),
+    awful.key({ modkey, "Shift"   }, "u",
+              function (c)
+                  local geo = c.screen.geometry
+                  if geo.x > 0 then
+                      c:move_to_screen(c.screen.index-1)
+                  end
+              end,
+              {description = "move to screen on left", group = "screen"}),
+    awful.key({ modkey, "Shift"   }, "i",
+              function (c)
+                  local geo = c.screen.geometry
+                  local width = root:size(1)
+                  if geo.x + geo.width < width then
+                      c:move_to_screen()
+                  end
+              end,
+              {description = "move to screen on right", group = "screen"}),
     awful.key({ modkey,           }, "o",      revelation,
               {description = "Open list of all windows", group = "layout"}),
-    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
-              {description = "toggle keep on top", group = "client"}),
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized = not c.maximized

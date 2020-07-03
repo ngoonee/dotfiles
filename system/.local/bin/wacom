@@ -12,14 +12,15 @@ DEFAULT_OUTPUT=$(xrandr | awk '$3 ~ /primary/ {print $1}')
 STATUS=/tmp/wacomtoggle
 
 if [ ! -e $STATUS ]; then
+    screen=$(xrandr | grep " connected " | grep "$DEFAULT_OUTPUT" | awk '{print $4}')
     touch $STATUS
-    xsetwacom --set "$stylus" MapToOutput "$DEFAULT_OUTPUT"
-    #xsetwacom --set "$eraser" MapToOutput "$DEFAULT_OUTPUT"
-    #xsetwacom --set "$cursor" MapToOutput "$DEFAULT_OUTPUT"
-    xsetwacom --set "$pad" MapToOutput "$DEFAULT_OUTPUT"
+    xsetwacom --set "$stylus" MapToOutput "$screen"
+    #xsetwacom --set "$eraser" MapToOutput "$screen"
+    #xsetwacom --set "$cursor" MapToOutput "$screen"
+    xsetwacom --set "$pad" MapToOutput "$screen"
 else
     rm $STATUS
-    screen=$(xrandr | grep " connected " | awk '{print $1}' | grep -v "$DEFAULT_OUTPUT")
+    screen=$(xrandr | grep " connected " | grep -v "$DEFAULT_OUTPUT" | awk '{print $3}')
     xsetwacom --set "$stylus" MapToOutput "$screen"
     #xsetwacom --set "$eraser" MapToOutput "$screen"
     #xsetwacom --set "$cursor" MapToOutput "$screen"
@@ -27,7 +28,7 @@ else
 fi
 
 xsetwacom set "$pad" Button 1 "key ctrl F6"
-xsetwacom set "$pad" Button 2 "key +alt"
+xsetwacom set "$pad" Button 2 "key f12"
 xsetwacom set "$pad" Button 3 "key +ctrl"
 xsetwacom set "$pad" Button 8 "key +shift"
 xsetwacom set "$pad" Button 9 "key shift +"

@@ -35,6 +35,8 @@ shift + Print
     scrot -e 'mv $f ~/screenshots/ 2>/dev/null'
 XF86Display
     monswitch
+F12
+    wacom
 super + p
     monswitch
 XF86{Kbd,Mon}Brightness{Up,Down}
