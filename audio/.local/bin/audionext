@@ -12,8 +12,9 @@ else
         if [[ "$?" -eq 0 ]]; then
             exaile --next
         else
-            ps -e | grep spotify > /dev/null
-            if [[ "$?" -eq 0 ]]; then
+            #ps -e | grep spotify > /dev/null
+            #if [[ "$?" -eq 0 ]]; then
+            if playerctl status | grep -q 'Playing'; then
                 playerctl next
             else
                 mpc next

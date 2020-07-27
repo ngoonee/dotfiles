@@ -1,8 +1,9 @@
 .include /etc/pulse/default.pa
 # load-module module-ladspa-sink sink_name=crossfeed master=alsa_output.pci-0000_00_1b.0.analog-stereo plugin=bs2b label=bs2b control=700,4.5
 # set-default-sink crossfeed
-load-module module-simple-protocol-tcp source=0 record=true port=12345
+load-module module-simple-protocol-tcp source=1 record=true port=12345
 load-module module-null-sink sink_name=OBSInput sink_properties=device.description=OBSInput
 load-module module-null-sink sink_name=OBSOutput sink_properties=device.description=OBSOutput
 load-module module-virtual-source source_name=OBSVirtualOutput master=OBSOutput.monitor source_properties=device.description=OBSVirtualOutput
 load-module module-loopback latency_msec=1 source=OBSInput.monitor source_dont_move=true
+load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1
