@@ -73,9 +73,10 @@ This function should only modify configuration layer settings."
      version-control
      xkcd
      javascript
-     nlinum
      (spacemacs-layouts :variables
                         layouts-enable-autosave t)
+     yaml
+     kivy
      )
 
    ;; List of additional packages that will be installed without being
