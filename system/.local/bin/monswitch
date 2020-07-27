@@ -16,7 +16,7 @@ essid=`iwgetid -r`
 
 if [ "$essid" = "MalaysianOfficial1" ]; then
     #EXTOUTPUT=$(xrandr |awk '/^DP[1-2] connected/ {print $1}')
-    EXTOUTPUT=$(xrandr | awk '/^DP.*[1-2] connected/ {print $1]')
+    EXTOUTPUT=$(xrandr | awk '/^DP.*[1-2] connected/ {print $1}')
     if [ -z "$EXTOUTPUT" ]; then
         xrandr --output $DEFAULT_OUTPUT --auto --output DP1 --off --output DP2 --off
         xrandr --delmode DP1 1366x768_59.8
