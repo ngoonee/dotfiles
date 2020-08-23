@@ -59,12 +59,9 @@ run_once({
     "sxhkd",
     "unclutter -root",
     "wmname LG3D",
-    "blueman-applet",
     "nm-applet",
     "xset", "dpms 30",
     "xidlehook --not-when-fullscreen --timer primary 600 lock_screen '' ",
-    "hamsket",
-    "fcitx",
 }) -- entries must be comma-separated
 --[[
 run_once({
