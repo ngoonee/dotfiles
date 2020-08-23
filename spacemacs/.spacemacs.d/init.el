@@ -53,7 +53,7 @@ This function should only modify configuration layer settings."
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      org
-     pdf-tools
+     pdf
      (ranger :variables
              ranger-show-preview t
              ranger-show-literal t)
