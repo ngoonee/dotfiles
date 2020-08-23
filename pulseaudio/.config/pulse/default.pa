@@ -7,3 +7,7 @@ load-module module-null-sink sink_name=OBSOutput sink_properties=device.descript
 load-module module-virtual-source source_name=OBSVirtualOutput master=OBSOutput.monitor source_properties=device.description=OBSVirtualOutput
 load-module module-loopback latency_msec=1 source=OBSInput.monitor source_dont_move=true
 load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1
+load-module module-bluetooth-discover
+load-module module-bluetooth-policy
+load-module module-bluez5-device
+load-module module-bluez5-discover
