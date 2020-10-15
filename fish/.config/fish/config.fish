@@ -39,7 +39,7 @@ end
 
 # Use virtualfish
 #eval (/usr/bin/python -m virtualfish auto_activation)
-eval (/usr/bin/python -m virtualfish)
+#eval (/usr/bin/python -m virtualfish)
 
 source /home/ngoonee/anaconda3/etc/fish/conf.d/conda.fish
 
