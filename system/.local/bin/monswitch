@@ -14,7 +14,7 @@ DEFAULT_OUTPUT=$(xrandr | awk '$1 ~ /eDP/ {print $1}')
 # Short circuit for special case of UTAR monitor
 essid=`iwgetid -r`
 
-if [ "$essid" = "MalaysianOfficial1" ]; then
+if [ "$essid" = "DMBEShared" ]; then
     #EXTOUTPUT=$(xrandr |awk '/^DP[1-2] connected/ {print $1}')
     EXTOUTPUT=$(xrandr | awk '/^DP.*[1-2] connected/ {print $1}')
     if [ -z "$EXTOUTPUT" ]; then
