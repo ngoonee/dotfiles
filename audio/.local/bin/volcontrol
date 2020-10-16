@@ -64,7 +64,7 @@ else
     fi
   fi
 fi
-echo 'theme.volume.notify()' | awesome-client
+#echo 'theme.volume.notify()' | awesome-client
 #twmnc -i $icon_name -c "$vol"% --id 1984 -s 128
 #dunstify -i $icon_name "$vol"% -r 1985
 #notify-send "$vol"% -i $icon_name -t 3

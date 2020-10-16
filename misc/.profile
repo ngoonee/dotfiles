@@ -24,7 +24,3 @@ export VIRTUALFISH_HOME=~/Files/Code/venvs
 export SPOTIFY_CLIENT_ID='598fa0989e1d4087a4367e54c01241c0'
 export SPOTIFY_CLIENT_SECRET='598fa0989e1d4087a4367e54c01241c0'
 #export SPOTIPY_REDIRECT_URI='your-app-redirect-url'
-
-vt=$(fgconsole 2>/dev/null)
-(( vt == 1 )) && exec startx -- vt$vt &> ~/.xlog
-unset vt
