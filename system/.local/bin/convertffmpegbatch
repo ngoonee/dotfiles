@@ -3,7 +3,7 @@
 #process files, just replace the ffmpeg line
 
 
-for f in ./*/*.pdf;
+for f in ./*.pdf;
 do
   echo "Processing $f"
   #ffmpeg -i "$f" -qscale 0 -ab 192k "${f/.mp4}.mpg"
@@ -15,14 +15,15 @@ do
   #ffmpeg -i "$f" -ab 192k "${f/.m4a}.mp3"
 #  ffmpeg -i "$f" "${f}.flac"
   #ffmpeg -i "$f" 2>&1 | grep Video
-  if [ -e "${f/.pdf}.png" ] ; then
-    echo "Already processed"
-  else
-    convert -verbose -quality 100 -density 150 "$f" "${f/.pdf}.png"
+  #if [ -e "${f/.pdf}.png" ] ; then
+    #echo "Already processed"
+  #else
+    #convert -verbose -quality 100 -density 150 "$f" "${f/.pdf}.png"
     #ffmpeg -i "$f" "${f/.mp4}.mp3"
     #ffmpeg -i "$f" -qscale 0 -ab 192k "${f/.mp4}.mpg"
-  fi
+  #fi
   #ffmpeg -i "$f" -qscale 30 -ab 192k -vf scale=320:-1 "${f}.mp4"
+  pdftk "$f" cat 3-end output "../trimmed/$f"
 
 done
 
@@ -32,7 +33,10 @@ done
 #ffmpeg -i Video.mpg -s 480x270 -c:a copy out.mpg
 #ffmpeg -i Video.mpg -filter:v 'setpts=0.5*PTS,transpose=1' -filter:a "atempo=2.0" -qscale 0 SpeedByTwo.mpg
 #ffmpeg -i Video.mpg -r 30 img/ffmpeg_%03d.png
-#ffmpeg -i Video.mpg -vf subtitles=subs.srt Output.mp4
+#ffmpeg -i Video.mpg -vf "subtitles=subs.srt:force_style='Fontsize=24'" Output.mp4
 #ffmpeg -i video.mp4 -i audio.wav -c:v copy -c:a aac -strict experimental -map 0:v:0 -map 1:a:0 output.mp4
+
+# Combining videos no matter the codec
+#ffmpeg -i input1.mp4 -i input2.webm -i input3.mov -filter_complex "[0:v:0][0:a:0][1:v:0][1:a:0][2:v:0][2:a:0]concat=n=3:v=1:a=1[outv][outa]" -map "[outv]" -map "[outa]" output.mkv
 
 #https://stackoverflow.com/questions/25870169/how-to-set-background-to-subtitle-in-ffmpeg
