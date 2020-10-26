@@ -75,12 +75,12 @@ function backup_desktop {
     echo "Backing up Desktop to $BORG_REPO at $LOCATION"
     echo "Backing up pictures to $BORG_REPO at $LOCATION"
     borg create -s -p ::pictures-{now:%Y-%m-%d-%H-%M} /shared/pictures
-    for DIR in Archive dotfiles Files Unsorted .netrc .fonts; do
+    for DIR in Archive dotfiles Files Unsorted; do
         echo "Backing up /home/ngoonee/$DIR to $BORG_REPO at $LOCATION"
         borg create -s -p ::home-$DIR-{now:%Y-%m-%d-%H-%M} /home/ngoonee/$DIR
     done
     echo "Pruning old archives from $BORG_REPO at $LOCATION"
-    for PREFIX in pictures home-Archive home-dotfiles home-Files home-Unsorted home-.netrc home-.fonts; do
+    for PREFIX in pictures home-Archive home-dotfiles home-Files home-Unsorted; do
         echo "Pruning $PREFIX from $BORG_REPO at $LOCATION"
         borg prune -s --list --keep-within 2d --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
     done
