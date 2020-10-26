@@ -71,6 +71,36 @@ function backup_envy_test {
     done
 }
 
+function backup_desktop {
+    echo "Backing up Desktop to $BORG_REPO at $LOCATION"
+    echo "Backing up pictures to $BORG_REPO at $LOCATION"
+    borg create -s -p ::pictures-{now:%Y-%m-%d-%H-%M} /shared/pictures
+    for DIR in Archive dotfiles Files Unsorted .netrc .fonts; do
+        echo "Backing up /home/ngoonee/$DIR to $BORG_REPO at $LOCATION"
+        borg create -s -p ::home-$DIR-{now:%Y-%m-%d-%H-%M} /home/ngoonee/$DIR
+    done
+    echo "Pruning old archives from $BORG_REPO at $LOCATION"
+    for PREFIX in pictures home-Archive home-dotfiles home-Files home-Unsorted home-.netrc home-.fonts; do
+        echo "Pruning $PREFIX from $BORG_REPO at $LOCATION"
+        borg prune -s --list --keep-within 2d --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
+    done
+}
+
+function backup_desktop_test {
+    echo "Testing Backing up Desktop to $BORG_REPO at $LOCATION"
+    echo "Testing Backing up pictures to $BORG_REPO at $LOCATION"
+    borg create -n --list --filter=AME ::pictures-{now:%Y-%m-%d-%H-%M} /shared/pictures
+    for DIR in Archive dotfiles Files Unsorted .netrc .fonts; do
+        echo "Testing Backing up /home/ngoonee/$DIR to $BORG_REPO at $LOCATION"
+        borg create -n --list --filter=AME ::home-$DIR-{now:%Y-%m-%d-%H-%M} /home/ngoonee/$DIR
+    done
+    echo "Testing Pruning old archives from $BORG_REPO at $LOCATION"
+    for PREFIX in pictures home-Archive home-dotfiles home-Files home-Unsorted home-.netrc home-.fonts; do
+        echo "Testing Pruning $PREFIX from $BORG_REPO at $LOCATION"
+        borg prune -n -v --list --keep-within 2d --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
+    done
+}
+
 #check_browsers
 if [ "$(basename $0)" = "backup_home" ]; then
     disable_services
@@ -147,6 +177,14 @@ elif [ "$(basename $0)" = "backup_asus_test" ]; then
         echo "Testing Pruning $PREFIX"
         borg prune -n -v --list --keep-within 2d --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
     done
+elif [ "$(basename $0)" = "backup_desktop_test" ]; then
+    export BORG_REPO='home_pi:/mnt/WD3TB/repos/desktop'
+    export LOCATION='home external drive'
+    backup_desktop
+elif [ "$(basename $0)" = "backup_desktop_test" ]; then
+    export BORG_REPO='home_pi:/mnt/WD3TB/repos/desktop'
+    export LOCATION='home external drive'
+    backup_desktop_test
 else
     echo "Please run the backup script using the appropriate symlinks"
 fi
