@@ -177,7 +177,7 @@ elif [ "$(basename $0)" = "backup_asus_test" ]; then
         echo "Testing Pruning $PREFIX"
         borg prune -n -v --list --keep-within 2d --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
     done
-elif [ "$(basename $0)" = "backup_desktop_test" ]; then
+elif [ "$(basename $0)" = "backup_desktop" ]; then
     export BORG_REPO='home_pi:/mnt/WD3TB/repos/desktop'
     export LOCATION='home external drive'
     backup_desktop
