@@ -85,7 +85,7 @@ function backup_desktop {
         borg prune -s --list --keep-within 2d --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
     done
     echo "Backing up root to $LOCATION"
-    rsync -aAXHv --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/home/*","/vm/*","/shared/*"} / /mnt/WD3TB/desktop_backup/root
+    rsync -aAXHv --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/home/*","/vm/*","/shared/*"} / home_pi:/mnt/WD3TB/desktop_backup/root
 }
 
 function backup_desktop_test {
@@ -102,7 +102,7 @@ function backup_desktop_test {
         borg prune -n -v --list --keep-within 2d --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --keep-yearly -1 --prefix $PREFIX
     done
     echo "Testing Backing up root to $LOCATION"
-    rsync -n -aAXHv --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/home/*","/vm/*","/shared/*"} / /mnt/WD3TB/desktop_backup/root
+    rsync -n -aAXHv --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/home/*","/vm/*","/shared/*"} / home_pi:/mnt/WD3TB/desktop_backup/root
 }
 
 #check_browsers
