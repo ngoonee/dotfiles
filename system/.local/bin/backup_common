@@ -92,6 +92,10 @@ function backup_desktop {
     done
     echo "Backing up root to $LOCATION"
     rsync -aAXHv --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/home/*","/vm/*","/shared/*"} / home_pi:/mnt/WD3TB/desktop_backup/root
+    echo "Backing up ngoonee home folder to $LOCATION"
+    rsync -aAXHv --delete --exclude={"Archive","dotfiles","Files","Unsorted",".local/share/Steam",".cache"} /home/ngoonee/ home_pi:/mnt/WD3TB/desktop_backup/home-ngoonee/
+    echo "Backing up yongkids home folder to $LOCATION"
+    rsync -aAXHv --delete --exclude={".cache",} /home/yongkids/ home_pi:/mnt/WD3TB/desktop_backup/home-yongkids/
 }
 
 function backup_desktop_test {
@@ -109,6 +113,10 @@ function backup_desktop_test {
     done
     echo "Testing Backing up root to $LOCATION"
     rsync -n -aAXHv --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/home/*","/vm/*","/shared/*"} / home_pi:/mnt/WD3TB/desktop_backup/root
+    echo "Testing Backing up ngoonee home folder to $LOCATION"
+    rsync -n -aAXHv --delete --exclude={"Archive","dotfiles","Files","Unsorted",".local/share/Steam",".cache"} /home/ngoonee/ home_pi:/mnt/WD3TB/desktop_backup/home-ngoonee/
+    echo "Testing Backing up yongkids home folder to $LOCATION"
+    rsync -n -aAXHv --delete --exclude={".cache",} /home/yongkids/ home_pi:/mnt/WD3TB/desktop_backup/home-yongkids/
 }
 
 #check_browsers
