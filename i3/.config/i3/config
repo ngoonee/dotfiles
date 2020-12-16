@@ -59,12 +59,20 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+bindsym $mod+Control+h focus output left
+bindsym $mod+Control+j workspace next_on_output
+bindsym $mod+Control+k workspace prev_on_output
+bindsym $mod+Control+l focus output right
+bindsym $mod+Shift+Control+h move container to output left
+bindsym $mod+Shift+Control+k move container to workspace prev_on_output
+bindsym $mod+Shift+Control+j move container to workspace next_on_output
+bindsym $mod+Shift+Control+l move container to output right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+#bindsym $mod+Left focus left
+#bindsym $mod+Down focus down
+#bindsym $mod+Up focus up
+#bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -73,10 +81,10 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+#bindsym $mod+Shift+Left move left
+#bindsym $mod+Shift+Down move down
+#bindsym $mod+Shift+Up move up
+#bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 #bindsym $mod+h split h
@@ -88,9 +96,9 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+#bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -216,3 +224,6 @@ no_focus [class="plasmashell" window_type="notification"]
 bindcode 64 --release exec --no-startup-id qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.activateLauncherMenu
 
 exec --no-startup-id variety
+exec --no-startup-id picom -bc
+
+bindsym $mod+e exec --no-startup-id emacsclient -a '' -c -n -e '(switch-to-buffer nil)'
