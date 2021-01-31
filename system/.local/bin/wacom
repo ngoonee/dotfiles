@@ -2,7 +2,7 @@
 
 #device="Wacom Intuos4 4x6"
 device="PenTablet"
-stylus="$device Pen stylus"
+stylus="$device stylus"
 #eraser="$device Pen eraser"
 #cursor="$device Pen cursor"
 pad="$device Pad pad"
@@ -20,7 +20,7 @@ if [ ! -e $STATUS ]; then
     xsetwacom --set "$pad" MapToOutput "$screen"
 else
     rm $STATUS
-    screen=$(xrandr | grep " connected " | grep -v "$DEFAULT_OUTPUT" | awk '{print $3}')
+    screen=$(xrandr | grep " connected " | grep -vE "$DEFAULT_OUTPUT|VIRTUAL1" | awk '{print $3}')
     xsetwacom --set "$stylus" MapToOutput "$screen"
     #xsetwacom --set "$eraser" MapToOutput "$screen"
     #xsetwacom --set "$cursor" MapToOutput "$screen"
