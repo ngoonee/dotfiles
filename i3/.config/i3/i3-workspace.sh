@@ -29,7 +29,7 @@ echo $target_workspace
 
 if [[ "$action" == "move" ]]; 
 then
-    i3-msg "move container to workspace $target_workspace"
+    i3-msg "move container to workspace $target_workspace"; sleep 0.1; i3-msg "workspace $target_workspace; focus output $focused_output"
 else
-    i3-msg "workspace $target_workspace"
+    i3-msg "workspace $target_workspace"; sleep 0.1; i3-msg "focus output $focused_output"
 fi
