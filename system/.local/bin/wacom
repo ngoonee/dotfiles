@@ -2,7 +2,7 @@
 
 #device="Wacom Intuos4 4x6"
 device="PenTablet"
-stylus="$device Pen stylus"
+stylus="$device stylus"
 #eraser="$device Pen eraser"
 #cursor="$device Pen cursor"
 pad="$device Pad pad"
