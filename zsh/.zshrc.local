@@ -1,3 +1,11 @@
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=5000
+setopt autocd
+
+autoload -Uz compinit
+compinit
+
 bindkey -v
 
 function ranger {
