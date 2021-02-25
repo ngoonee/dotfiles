@@ -16,6 +16,11 @@ function ranger {
   rm -f /tmp/chosen
 }
 bindkey -s "^O" '^qranger\n'
+prompt off
+if [[ -a /usr/share/powerline/bindings/zsh/powerline.zsh ]]; then
+    powerline-daemon -q
+    . /usr/share/powerline/bindings/zsh/powerline.zsh
+fi
 if [[ -a /home/ngoonee/anaconda3/etc/profile.d/conda.sh ]]; then
     source /home/ngoonee/anaconda3/etc/profile.d/conda.sh
 fi
