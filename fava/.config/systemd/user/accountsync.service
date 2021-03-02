@@ -1,0 +1,9 @@
+[Unit]
+Description=Automatically sync beancount Accounts
+
+[Service]
+WorkingDirectory=%h/Accounts
+ExecStart=%h/Accounts/scripts/autopull.sh
+
+[Install]
+WantedBy=default.target
