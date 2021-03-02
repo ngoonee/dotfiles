@@ -2,7 +2,7 @@
 Description=fava beancount web-app
 
 [Service]
-ExecStart=/usr/bin/fava -H 0.0.0.0 /home/ngoonee/Accounts/Accounts.beancount
+ExecStart=/usr/bin/fava -H 0.0.0.0 %h/Accounts/Accounts.beancount
 
 [Install]
 WantedBy=default.target
