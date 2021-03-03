@@ -1,3 +1,7 @@
 #! /bin/bash
 
-xrandr --addmode VIRTUAL1 1920x1080; xrandr --output VIRTUAL1 --mode 1920x1080 --right-of eDP1; xrandr
+if [[ $1 == "off" ]]; then
+    xrandr --output VIRTUAL1 --off; xrandr --delmode VIRTUAL1 1920x1080
+else
+    xrandr --addmode VIRTUAL1 1920x1080; xrandr --output VIRTUAL1 --mode 1920x1080 --right-of eDP1; xrandr
+fi
