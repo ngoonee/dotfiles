@@ -25,3 +25,14 @@ super + d
     rofi -show combi
 super + e
     emacsclient -a '' -c -n -e '(switch-to-buffer nil)'
+
+button21
+    wacom
+button23
+    xdotool keydown Ctrl key minus keyup Ctrl
+button24
+    xdotool keydown Ctrl key plus keyup Ctrl
+button27
+    xdotool keydown Ctrl key z keyup Ctrl
+button28
+    xdotool keydown Ctrl key y keyup Ctrl
