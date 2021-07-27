@@ -32,6 +32,10 @@ button23
     xdotool keydown Ctrl key minus keyup Ctrl
 button24
     xdotool keydown Ctrl key plus keyup Ctrl
+button25
+    xdotool keydown Ctrl keydown Shift key p keyup Shift keyup Ctrl
+button26
+    xdotool keydown Ctrl keydown Shift key t keyup Shift keyup Ctrl
 button27
     xdotool keydown Ctrl key z keyup Ctrl
 button28
