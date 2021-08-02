@@ -21,6 +21,15 @@ then
 elif  [[ "$focused_output" == "VIRTUAL1" ]];
 then
     active_postfix=d
+elif  [[ "$focused_output" == "DVI-D-0" ]];
+then
+    active_postfix=a
+elif  [[ "$focused_output" == "HDMI-0" ]];
+then
+    active_postfix=b
+elif  [[ "$focused_output" == "DP-0" ]];
+then
+    active_postfix=c
 fi
 
 target_workspace=${workspace}${active_postfix}
