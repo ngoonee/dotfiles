@@ -1,10 +1,10 @@
 ### Volume Control ###
-shift + super + q
-    xdotool keyup Super keyup Shift keyup q key XF86AudioRaiseVolume keydown Shift keydown Super
-shift + super + a
-    xdotool keyup Super keyup Shift keyup a key XF86AudioLowerVolume keydown Shift keydown Super
-shift + super + s
-    xdotool keyup Super keyup Shift keyup s key XF86AudioMute keydown Shift keydown Super
+#shift + super + q
+    #xdotool keyup Super keyup Shift keyup q key XF86AudioRaiseVolume keydown Shift keydown Super
+#shift + super + a
+    #xdotool keyup Super keyup Shift keyup a key XF86AudioLowerVolume keydown Shift keydown Super
+#shift + super + s
+    #xdotool keyup Super keyup Shift keyup s key XF86AudioMute keydown Shift keydown Super
 shift + super + v
     pavucontrol
 
@@ -19,11 +19,11 @@ shift + super + c
     xdotool keyup Super keyup Shift keyup c key XF86AudioNext keydown Shift keydown Super
 
 ### Shortcuts ###
-super + g
+super + Return
     termite
 super + d
     rofi -show combi
-super + e
+super + g
     emacsclient -a '' -c -n -e '(switch-to-buffer nil)'
 
 button21
