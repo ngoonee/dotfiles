@@ -44,7 +44,7 @@ floating_modifier $mod
 #bindsym $mod+Return exec termite
 
 # kill focused window
-bindsym $mod+o kill
+bindsym $mod+z kill
 
 # change focus
 bindsym $mod+h focus left
@@ -76,9 +76,9 @@ bindsym $mod+period split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+y layout stacking
-bindsym $mod+u layout tabbed
-bindsym $mod+i layout toggle split
+bindsym $mod+u layout stacking
+bindsym $mod+i layout tabbed
+bindsym $mod+o layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -99,13 +99,13 @@ set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
-set $ws6 "q"
-set $ws7 "w"
-set $ws8 "e"
-set $ws9 "r"
-set $ws10 "t"
-set $ws11 "a"
-set $ws12 "s"
+set $ws6 "6: q"
+set $ws7 "7: w"
+set $ws8 "8: e"
+set $ws9 "9: r"
+set $ws10 "10: t"
+set $ws11 "11: a"
+set $ws12 "12: s"
 
 # switch to workspace
 #bindsym $mod+1 workspace number $ws1
