@@ -80,6 +80,7 @@ This function should only modify configuration layer settings."
                         layouts-enable-autosave t)
      yaml
      kivy
+     ipython-notebook
      )
 
    ;; List of additional packages that will be installed without being
@@ -590,4 +591,5 @@ before packages are loaded."
   (unless (file-exists-p (concat spacemacs-cache-directory "undo"))
     (make-directory (concat spacemacs-cache-directory "undo")))
   (load custom-file)
+  (setenv "WORKON_HOME" "/home/ngoonee/.local/anaconda3/envs")
   )

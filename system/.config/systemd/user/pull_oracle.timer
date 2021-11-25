@@ -1,0 +1,10 @@
+[Unit]
+Description=Pull from oracle daily
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+Unit=pull_oracle.service
+
+[Install]
+WantedBy=timers.target

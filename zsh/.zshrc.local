@@ -1,6 +1,24 @@
+
+__conda_setup="$('/home/ngoonee/.local/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/ngoonee/.local/anaconda3/etc/profile.d/conda.sh" ]; then
+        echo hi
+        . "/home/ngoonee/.local/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/ngoonee/.local/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=5000
+HISTSIZE=10000
+SAVEHIST=10000
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt EXTENDED_HISTORY
 setopt autocd
 
 autoload -Uz compinit
@@ -20,9 +38,6 @@ prompt off
 if [[ -a /usr/share/powerline/bindings/zsh/powerline.zsh ]]; then
     powerline-daemon -q
     . /usr/share/powerline/bindings/zsh/powerline.zsh
-fi
-if [[ -a /home/ngoonee/anaconda3/etc/profile.d/conda.sh ]]; then
-    source /home/ngoonee/anaconda3/etc/profile.d/conda.sh
 fi
 if [[ -a /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh

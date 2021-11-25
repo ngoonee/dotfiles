@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#if [ "$(basename $0)" = "backup_common" ]; then
+#  echo "Please run the backup script using the backup_uni/back_home symlinks"
+#  exit 1
+#elif [[ $EUID -ne 0 ]]; then
+#  echo "You must be a root user" 2>&1
+#  exit 1
+#fi
+
+trap "exit" INT
+
+ssh oracle "sudo tar -zcvf bitwarden_backup.tar.gz bw-data"
+rsync oracle:/home/ubuntu/bitwarden_backup.tar.gz /home/ngoonee/Files/Code/bitwarden_backup.tar.gz
+ssh oracle "rm bitwarden_backup.tar.gz"
+
+exit 0

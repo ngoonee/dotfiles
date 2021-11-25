@@ -1,0 +1,9 @@
+[Unit]
+Description=Pull backup from oracle
+
+[Service]
+Type=simple
+ExecStart=/home/ngoonee/.local/bin/pull_oracle
+ExecStartPre=/bin/sleep 60
+KillMode=process
+

@@ -20,9 +20,10 @@ shift + super + c
 
 ### Shortcuts ###
 super + Return
-    termite
+    alacritty
 super + d
-    rofi -show combi
+    qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.activateLauncherMenu
+    #rofi -show combi
 super + g
     emacsclient -a '' -c -n -e '(switch-to-buffer nil)'
 
