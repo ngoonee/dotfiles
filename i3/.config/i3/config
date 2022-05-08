@@ -232,6 +232,14 @@ focus_follows_mouse yes
 # mouse_warping output|none
 mouse_warping output
 
+# You can also use any non-zero value if you'd like to have a border
+for_window [class=".*"] border pixel 2
+
+gaps inner 5
+gaps outer 0
+#smart_gaps on
+smart_gaps inverse_outer
+
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [title="Desktop — Plasma"] kill; floating enable; border none
