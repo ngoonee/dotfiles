@@ -36,6 +36,9 @@ done
 #ffmpeg -i Video.mpg -vf "subtitles=subs.srt:force_style='Fontsize=24'" Output.mp4
 #ffmpeg -i video.mp4 -i audio.wav -c:v copy -c:a aac -strict experimental -map 0:v:0 -map 1:a:0 output.mp4
 
+# Merge multiple audio inputs to one (OBS output)
+#ffmpeg -i input.mkv -filter_complex amerge=inputs=2 -ac 1 -map 0:v -map "a" -c:v copy output.mp4
+
 # Combining videos no matter the codec
 #ffmpeg -i input1.mp4 -i input2.webm -i input3.mov -filter_complex "[0:v:0][0:a:0][1:v:0][1:a:0][2:v:0][2:a:0]concat=n=3:v=1:a=1[outv][outa]" -map "[outv]" -map "[outa]" output.mkv
 
