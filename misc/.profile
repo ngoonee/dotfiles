@@ -24,4 +24,7 @@ export VIRTUALFISH_HOME=~/Files/Code/venvs
 export SPOTIFY_CLIENT_ID='598fa0989e1d4087a4367e54c01241c0'
 export SPOTIFY_CLIENT_SECRET='598fa0989e1d4087a4367e54c01241c0'
 #export SPOTIPY_REDIRECT_URI='your-app-redirect-url'
+if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+        export MOZ_ENABLE_WAYLAND=1
+fi
 export BW_SESSION="mSYnbrcY5p5c+YbA+mrPTihv3ttahjHFnUF1hGkF0SwhTLrxkNIbQdWhTLu9WvNbfz8Yi96ReJuRZ4nYPqeqYw=="
