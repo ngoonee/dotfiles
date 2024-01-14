@@ -23,7 +23,8 @@ do
     #ffmpeg -i "$f" -qscale 0 -ab 192k "${f/.mp4}.mpg"
   #fi
   #ffmpeg -i "$f" -qscale 30 -ab 192k -vf scale=320:-1 "${f}.mp4"
-  pdftk "$f" cat 3-end output "../trimmed/$f"
+  #pdftk "$f" cat 3-end output "../trimmed/$f"
+  pdftotext "$f"
 
 done
 
