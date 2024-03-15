@@ -44,3 +44,12 @@ done
 #ffmpeg -i input1.mp4 -i input2.webm -i input3.mov -filter_complex "[0:v:0][0:a:0][1:v:0][1:a:0][2:v:0][2:a:0]concat=n=3:v=1:a=1[outv][outa]" -map "[outv]" -map "[outa]" output.mkv
 
 #https://stackoverflow.com/questions/25870169/how-to-set-background-to-subtitle-in-ffmpeg
+
+# Download webpage with links
+#wget -r -l 1 -p -k -H -D example1.com,example2.com http://example.com/page/in/domain
+#-r recursive (follow links)
+#-l depth of recursion (0 is infinity)
+#-p get all images and etc. all needed to display HTML pages
+#-k convert links of js,css stuff to local links
+#-H go to foreign hosts when recursive
+#-D comma-separated list of accepted domains
